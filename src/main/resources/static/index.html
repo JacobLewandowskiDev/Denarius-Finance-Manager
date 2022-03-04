@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="../images/dollar.png">
+    <link rel="stylesheet" href="../static/css/main-css.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rambla:wght@700&display=swap" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+    <title>Denarius - Financial Manager</title>
+</head>
+<body>
+        <!-- Navigation bar -->    
+            <nav>
+                <!-- Webapp Logo -->
+                <div id="nav-image-container">
+                    <img id="nav-image" src="../images/dollar.png">
+                    <div id="project-name">DENARIUS</div>
+                </div>
+
+                <div id="mobile-menu">
+                    <i class="fa fa-bars fa-3x" aria-hidden="true"></i>
+                </div>
+
+                <div id="mobile-close">
+                    <i class="fa fa-times fa-4x" aria-hidden="true"></i>
+                </div>
+
+                <!-- Links -->
+                <ul id="nav-links">
+                    <li>
+                        <a href="#main-viewport">Home</a>
+                    </li>
+    
+                    <li>
+                        <a href="#info-section">Finance manager</a>
+                    </li>
+
+                    <li>
+                        <a target="" href="#">Sign in</a>
+                    </li>
+    
+                    <li>
+                        <a target="" href="#">Contact</a>
+                    </li>
+                </ul>
+            </nav>
+       
+
+    <!-- Main welcome viewport -->
+    <div id="main-viewport">
+            <div id="welcome-view">
+
+                <div id="rotating-coin">
+                    <img src="../images/dollar.png">
+                </div>
+
+                <div id="greeting-text">
+                    <h1>Welcome to Denarius</h1>
+                    <h3>The only <span id="usecase-word">spending</span> manager you'll ever need.</h3>
+
+                    <div id="sing-in-section">
+                        <button id="sign-in-button">Sign in</button>
+                    </div>
+
+                </div>
+
+
+            </div>
+    </div>
+ 
+    <!-- Info section of the webapp -->
+    <div class="info-section" id="info-section">
+            <h1 class="why-denarius">Why use Denarius?</h1>
+
+        <!-- Information grid -->
+        <div id="info-container">  
+            <!-- Information icons-->
+            <div class="nested-grid">
+                <div class="information-1">
+                    <p> Denarius will teach you the key principles of saving money, cost cutting, and finance tracking using a simple interface.</p>
+                    <img class="info-image" src="../images/money-512x512.png">
+                </div>
+        
+                <div class="information-2">
+                    <img class="info-image" src="../images/piggy-bank.png">
+                    <p> Stop your unnecessary spending thanks to our spending tracker. Save all that money, that would otherwise go to a waste.</p>
+                </div>  
+        
+                <div class="information-1">
+                    <p> Learn how to better your money budgeting skills for the upcoming months by listing and keeping track of all your costs.</p>
+                    <img class="info-image" src="../images/budget.png">
+                </div>
+        
+                <div class="information-2">
+                    <img class="info-image" src="../images/profits.png">
+                    <p> Watch your bank account grow exponentially by simply reducing the amounts you waste on stuff you don't need.</p>
+                </div>
+            </div>
+        
+            <!-- Main info image -->
+            <div class="info-main-image">
+                <img src="../images/man-laptop-relax.png">
+            </div>
+        </div>
+    </div>
+ 
+
+    <!-- Contact section -->
+    <div class="contact-section" id="contact-section">
+        <h1 class="contact-me">Contact form</h1>
+        <form id="contact-form" action="https://formsubmit.co/mockemail6996@gmail.com" method="POST">
+            <input type="text" name="Name" placeholder="Name" required>
+            <br>
+            <input type="text" name="Email" placeholder="Email" required>
+            <br>
+            <textarea name="Message" placeholder="Message" required></textarea>
+            <br>
+            <button type="submit">Send</button>
+        </form>
+    </div>
+
+    <!-- User prompt section -->
+    <!-- <div id="add-cost-prompt">
+        <label>Cost description</label>
+        <input id="cost-description" type="text" placeholder="Your financial cost description">
+
+        <br>
+        <br>
+
+        <label>Enter the value of the financial cost</label>
+        <input id="cost-value" type="number" step="0.01" min="0" placeholder="$">
+
+        <br>
+        <br>
+
+        <label>Enter the date of the purchase </label>
+        <input id="purchase-date" type="date">
+
+        <br>
+        <br>
+
+        <button>Add cost</button>
+    </div> -->
+
+    <script src="../static/js/main-js.js" defer></script>
+</body>
+</html>
