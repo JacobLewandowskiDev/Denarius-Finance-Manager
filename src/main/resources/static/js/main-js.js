@@ -26,28 +26,26 @@ const mainImage = document.querySelector('.info-main-image');
 var mobileMenuOpened = false;
 document.getElementById('mobile-menu').onclick=function() {
     if(mobileMenuOpened == false) {
-        document.getElementById('nav-links').style.animation='.5s openMobile forwards ease-in-out';
-        document.getElementById('mobile-close').style.animation='.5s openMobile forwards ease-in-out';
+        document.getElementById('nav-links').style.animation='.7s openMobile forwards ease-in-out';
+        document.getElementById('mobile-close').style.animation='.7s openMobile forwards ease-in-out';
         mobileMenuOpened = true;
         console.log('Mobile menu opened');
     }
-    else if(mobileMenuOpened == true) {
-        document.getElementById('nav-links').style.animation='.5s closeMobile forwards ease-in-out';
-        document.getElementById('mobile-close').style.animation='.5s closeMobile forwards ease-in-out';
-        mobileMenuOpened = false;
-        console.log('Mobile menu closed');
-    }
 }
 
-// Close mobile menu
-var mobileMenuOpened = false;
-document.getElementById('mobile-close').onclick=function() {
-    if(mobileMenuOpened == true) {
-        document.getElementById('nav-links').style.animation='.5s closeMobile forwards ease-in-out';
-        document.getElementById('mobile-close').style.animation='.5s closeMobile forwards ease-in-out';
+// Close mobile menu function
+    function closeMobile() {
+        document.getElementById('nav-links').style.animation='.7s closeMobile forwards ease-in-out';
+        document.getElementById('mobile-close').style.animation='.7s closeMobile forwards ease-in-out';
         mobileMenuOpened = false;
         console.log('Mobile menu closed');
     }
+
+// Close mobile menu when links are clicked or 'X' button
+    document.getElementById('mobile-close').onclick=() => {
+        if(mobileMenuOpened == true) {
+            closeMobile();
+        }
 }
 
 
