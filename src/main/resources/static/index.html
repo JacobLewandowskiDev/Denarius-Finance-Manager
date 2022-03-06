@@ -31,7 +31,7 @@
                 <!-- Links -->
                 <ul id="nav-links">
                     <li>
-                        <a href="index.html" onclick="closeMobile()">Home</a>
+                        <a href="#" onclick="closeMobile()">Home</a>
                     </li>
     
                     <li>
@@ -39,7 +39,7 @@
                     </li>
 
                     <li>
-                        <a target="" href="#" onclick="closeMobile()">Sign in</a>
+                        <a href="#" onclick="closeMobile(), showSignInView()">Sign in</a>
                     </li>
     
                     <li>
@@ -51,24 +51,48 @@
 
     <!-- Main welcome viewport -->
     <div id="main-viewport">
-            <div id="welcome-view">
+        <div id="welcome-view">
 
-                <div id="rotating-coin">
-                    <img src="../images/dollar.png">
-                </div>
+            <div id="rotating-coin">
+                <img src="../images/dollar.png">
+            </div>
 
-                <div id="greeting-text">
-                    <h1>Welcome to Denarius</h1>
-                    <h3>The only <span id="usecase-word">spending</span> manager you'll ever need.</h3>
+            <div id="greeting-text">
+                <h1>Welcome to Denarius</h1>
+                <h3>The only <span id="usecase-word">spending</span> manager you'll ever need.</h3>
 
-                    <div id="sing-in-section">
-                        <button id="sign-in-button">Sign in</button>
+                <button id="sign-in-button" onclick="showSignInView()" >Sign in</button>
+
+            </div>
+
+            <!-- Sign in box -> Opens when sign in button is clicked -->
+            <div id="sign-in-screen">
+                <div id="sign-in-container">
+
+                    <!-- Close sign in section -->
+                    <div id="sign-in-close">
+                        <i class="fa fa-times fa-4x" aria-hidden="true" onclick="closeSignIn()"></i>
+                    </div>
+
+                    <h3>Sign into your account</h3>
+
+                    <div class="sign-in-input">
+                        <input type="text" name="username" placeholder="Username" required>
+                    </div>   
+
+                    <div class="sign-in-input">
+                        <input type="password" name="password" placeholder="Password" required>
+                    </div>
+                    
+                    <div class="sign-in-input">
+                        <button type="submit" id="log-in-button">Log in</button>
                     </div>
 
                 </div>
 
-
             </div>
+
+        </div>
     </div>
  
     <!-- Info section of the webapp -->
@@ -110,7 +134,7 @@
 
     <!-- Contact section -->
     <div class="contact-section" id="contact-section">
-        <h1 class="contact-me">Contact form</h1>
+        <h1 class="contact-me">Contact us form</h1>
         <br>
         <form id="contact-form" action="https://formsubmit.co/mockemail6996@gmail.com" method="POST">
             <input type="text" name="Name" placeholder="Name" required>

@@ -64,6 +64,7 @@ nav {
     -ms-user-select: none;
 }
 
+/* Nav link list properties */
 nav ul {
     display: flex;
     height: 100%;
@@ -72,6 +73,7 @@ nav ul {
     margin-right: 5vw;
 }
 
+/* Nav link list item properties */
 nav ul li {
     height: 100%;
     width: 100%;
@@ -81,6 +83,7 @@ nav ul li {
     text-align: center;
 }
 
+/* Nav link <a> tag properties within a list item*/
 nav ul li a {
     height: 100%;
     width: 100%;
@@ -95,14 +98,17 @@ nav ul li a {
     font-weight: bold;
 }
 
+/* Nav link <a> tag hover properties */
 nav ul li a:hover {
     background-color: rgba(168, 206, 230, 0.767);
 }
 
+/* Nav link <a> tag active properties */
 nav ul li a:active {
-    color: #000000;
+    color: rgb(23, 135, 204);
 }
 
+/* Mobile menu burger bars*/
 #mobile-menu {
     display: none;
     position: absolute;
@@ -111,10 +117,11 @@ nav ul li a:active {
     padding: 10px;
     color: #ffffff;
     cursor: pointer;
-    /* z-index: 90; */
 }
 
+/* Mobile menu close menu cross*/
 #mobile-close {
+    display: none;
     position: absolute;
     right: 5vw;
     padding: 10px;
@@ -122,6 +129,10 @@ nav ul li a:active {
     color: #ffffff;
     cursor: pointer;
     top:-100vh;
+}
+
+#mobile-close:hover, #sign-in-close:hover {
+    color: rgb(23, 135, 204);
 }
 
 /* Nav bar css - end */
@@ -191,12 +202,8 @@ h3 {
     position: relative;
     text-align: center;
 }
-#sing-in-section {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+
+/* Sign in button properties */
 #sign-in-button {
     cursor: pointer;
     font-size: 2em;
@@ -209,11 +216,94 @@ h3 {
     font-weight: bold;
 }
 
+/* Sign in button hover properties */
 #sign-in-button:hover {
     background-color: #ffbf35;
     color:rgb(23, 135, 204);
 }
 /* Main Greeting viewport - End*/
+
+/* Sign in view overlay properties */
+#sign-in-screen {
+    visibility: hidden;
+    display: flex;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    background-color: #000000de;
+    opacity: 0;
+    z-index: 10000;
+}
+
+/* Sign in input container */
+#sign-in-container {
+    display: block;
+    width: 30vw;
+    max-width: 400px;
+    min-width: 260px;
+    height: fit-content;
+    border: 2px #7dcdff double;
+    border-radius: 5px;
+    background-color: #2884bdbb;
+    text-align: center;
+}
+
+/* Sign in container <h3> tag properties*/
+#sign-in-container h3 {
+    margin-top: 20px;
+}
+
+/* Sign in "X" close button position */
+#sign-in-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: #ffffff;
+    margin-right: 3.5vw;
+    margin-top: 1.5vw;
+    padding: 10px;
+    cursor: pointer;
+}
+
+/* Sign in input positioning */
+.sign-in-input {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px auto;
+}
+
+/* Sign in <input> tag properties*/
+.sign-in-input > input {
+    width: 25vw;
+    height: 2vw;
+    min-height: 30px;
+    max-width: 300px;
+    min-width: 200px;
+    text-align: center;
+    font-size: 1.2em;
+}
+
+/* Log in button properties */
+#log-in-button {
+    cursor: pointer;
+    font-size: calc(1em + .2vw);
+    margin-top: 10px;
+    background-color: #eebd53;
+    border: 3px solid #ffc23e;
+    color:#ffffff;
+    padding: 2.5px;
+    border-radius: 10px;
+    font-weight: bold;
+}
+
+/* Log in button active property */
+#log-in-button:active {
+    color: rgb(23, 135, 204);
+}
 
 /* Finance manager webapp information section - Start */
 .info-section {
@@ -237,22 +327,26 @@ h3 {
     opacity: 0;
 }
 
+/* Fade in class for .why-denarius class */
 .fade-in {
     animation: fade-in 2s .5s forwards ease-in-out;
 }
 
+/* Display of information in the container - In the form of a grid */
 #info-container {
     display: grid;
     grid-template-columns: 1.5fr 1fr;
     margin: 0 10vw;
 }
 
+/* The nested information properties - Display in the form of a grid */
 .nested-grid {
     display: grid;
     margin-top: 30px;
     grid-auto-rows: 1fr;
 }
 
+/* Nested grid div properties */
 .nested-grid > div {
     position: relative;
     border: 4px solid #7dcdff;
@@ -260,21 +354,26 @@ h3 {
     min-width: 380px;
 }
 
+/* Nested grid even numbered div properties */
 .nested-grid > div:nth-child(even) {
     background-color:#3199da;
     right: -150%;
     opacity: 0;
 }
+
+/* Slide in from right animation for even numbered divs*/
 .from-right {
     animation: slide-from-right 2s forwards ease-in-out;
 }
 
+/* Nested grid odd numbered div properties */
 .nested-grid > div:nth-child(odd) {
     border: 4px solid #ffbf35;
     left: -150%;
     opacity: 0;
 }
 
+/* Slide in from left animation for odd numbered divs*/
 .from-left {
     animation: slide-from-left 2s forwards ease-in-out;
 }
@@ -307,10 +406,12 @@ h3 {
     text-align: center;
 }
 
+/* Information of type 1 class <p> tag properties*/
 .information-1 p {
     margin: 5px 10px 5px 35px;
 }
 
+/* Information of type 2 class <p> tag properties*/
 .information-2 p {
     margin: 5px 35px 5px 10px;
 }
@@ -327,6 +428,7 @@ h3 {
     box-shadow: 0px 10px 13px -7px #000000, 5px 5px 15px 5px rgba(0,0,0,0);
 }
 
+/* Contact me page section */
 .contact-section {
     background-color: #3199da;
     width: 100vw;
@@ -335,10 +437,12 @@ h3 {
     border-top: 2px solid #7dcdff;
 }
 
+/* Contact me <h1> tag property */
 .contact-section h1 {
    padding-top: 30px;
 }
 
+/* Contact me form properties */
 #contact-form {
     display: block;
     width: 260px;
@@ -348,6 +452,7 @@ h3 {
     padding-bottom: 60px;
 }
 
+/* Contact me form <input> tag properties */
 #contact-form > input, textarea {
     min-height: 50px;
     height: 20%;
@@ -360,12 +465,14 @@ h3 {
     font-family: 'Rambla', 'Times New Roman', sans-serif;
 }
 
+/* Contact me text area property */
 #contact-form textarea {
     text-align: center;
     min-height: 150px;
     font-size: 1.2em;
 }
 
+/* Contact me send email button properties */
 #contact-form button {
     cursor: pointer;
     font-size: 1.2em;
@@ -380,6 +487,7 @@ h3 {
     margin: 0 auto;
 }
 
+/* Contact me send email button active properties */
 #contact-form button:hover {
     background-color: #ffbf35;
     color:rgb(23, 135, 204);
@@ -455,6 +563,32 @@ h3 {
     }
 }
 
+/* Fade the sign in viewport onto the screen */
+@keyframes fadeSignIn {
+    from {
+        visibility: hidden;
+        opacity: 0;
+    }
+
+    to {
+        visibility: visible;
+        opacity: 1;
+    }
+}
+
+/* Fade the sign out from the screen */
+@keyframes fadeSigninOut {
+    from {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    to {
+        visibility: hidden;
+        opacity: 0;
+    }
+}
+
 /* Remove relax dude from view and change grid design when window width beneath 710px */
 @media screen and (max-width:710px) {
     .info-main-image {
@@ -467,13 +601,14 @@ h3 {
     }
 }
 
-/* Mobile menu */
+/* Mobile menu properties */
 @media screen and (max-width:768px) {
 
     #mobile-menu {
         display: block;
     }
 
+    /* Change nav bar <ul> properties */
     nav ul {
         all: initial;
         position: fixed;
@@ -486,6 +621,7 @@ h3 {
         background-color: rgb(23, 135, 204);
     }
 
+    /* Move nav links out of view when mobile menu is not opened */
     #nav-links {
         top: -100vh;
     }
@@ -502,8 +638,12 @@ h3 {
         background-color: transparent;
     } 
 
+    #mobile-close {
+        display: block;
+    }
 }
 
+/* Adjust elements of the page to fit the viewport */
 @media screen and (max-width: 430px) {
     #nav-image {
         display: none;
@@ -513,7 +653,6 @@ h3 {
         font-size: 2rem;
 
     }
-
     
     .nested-grid > div {
         position: relative;
