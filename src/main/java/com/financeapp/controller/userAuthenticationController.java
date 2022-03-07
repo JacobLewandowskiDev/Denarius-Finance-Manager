@@ -9,7 +9,7 @@ public class userAuthenticationController {
 
     @GetMapping("/index.html")
     public String home() {
-        return ("index.html");
+        return "hello";
     }
 
     @GetMapping("/user")

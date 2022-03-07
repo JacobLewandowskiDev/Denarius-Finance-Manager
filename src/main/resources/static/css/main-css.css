@@ -326,6 +326,7 @@ h3 {
     color: rgb(23, 135, 204);
     text-shadow: 2px 1px #000000;
     opacity: 0;
+    visibility: hidden;
 }
 
 /* Fade in class for .why-denarius class */
@@ -385,6 +386,7 @@ h3 {
     position: relative;
     right: -150%;
     opacity: 0;
+    visibility: hidden;
 }
 
 /* Relaxed dude image properties */
@@ -398,6 +400,7 @@ h3 {
     display: flex;
     align-items: center;
     z-index: 90;
+    visibility: hidden;
 }
 
 /* Text inside information icon div tag */
@@ -508,11 +511,13 @@ h3 {
 /* Slide in the relaxed dude image and odd numbered information icons into the viewport */
 @keyframes slide-from-right {
     from {
+        visibility: hidden;
         opacity: 0;
         right: -150%;
     }
 
     to {
+        visibility: visible;
         opacity: 1;
         right: 0;
     }
@@ -521,10 +526,12 @@ h3 {
 /* Fade in the Information vieport <h1> tag*/
 @keyframes fade-in {
     0% {
+        visibility: hidden;
         opacity: 0;
     }
 
     100% {
+        visibility: visible;
         opacity: 1;
     }
 }
@@ -532,11 +539,13 @@ h3 {
 /* Slide in even information icons into the viewport */
 @keyframes slide-from-left {
     from {
+        visibility: hidden;
         opacity: 0;
         left: -150%;
     }
 
     to {
+        visibility: visible;
         opacity: 1;
         left: 0;
     }

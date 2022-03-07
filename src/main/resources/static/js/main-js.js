@@ -17,7 +17,7 @@ const mainImage = document.querySelector('.info-main-image');
                 return; 
               }
         }); 
-    }, {threshold: .5});
+    }, {threshold: .7});
     
     observer.observe(document.querySelector('.info-section'));
 
