@@ -75,19 +75,19 @@
                     </div>
 
                     <h3>Sign into your account</h3>
-
-                    <div class="sign-in-input">
-                        <input type="text" name="username" placeholder="Username" required>
-                    </div>   
-
-                    <div class="sign-in-input">
-                        <input type="password" name="password" placeholder="Password" required>
-                    </div>
-                    
-                    <div class="sign-in-input">
-                        <button type="submit" id="log-in-button">Log in</button>
-                    </div>
-
+                    <form action="login" method="POST">
+                        <div class="sign-in-input">
+                            <input type="text" name="username" placeholder="Username" required>
+                        </div>   
+    
+                        <div class="sign-in-input">
+                            <input type="password" name="password" placeholder="Password" required>
+                        </div>
+                        
+                        <div class="sign-in-input">
+                            <button type="submit" id="log-in-button" value="login">Log in</button>
+                        </div>
+                    </form>
                 </div>
 
             </div>
