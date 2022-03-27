@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="images/dollar.png">
+    <link rel="stylesheet" href="css/main-css.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rambla:wght@700&display=swap" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+    <title>Denarius - User Interface</title>
+</head>
+<body>
+    <!-- Navigation bar -->    
+        <nav>
+            <!-- Webapp Logo -->
+            <div id="nav-image-container">
+                <img id="nav-image" src="images/dollar.png">
+                <div id="project-name">DENARIUS</div>
+            </div>
+
+            <!-- Burger menu icon -->
+            <div id="mobile-menu">
+                <i class="fa fa-bars fa-3x" aria-hidden="true"></i>
+            </div>
+
+            <!-- Close menu icon-->
+            <div id="mobile-close">
+                <i class="fa fa-times fa-4x" aria-hidden="true"></i>
+            </div>
+
+            <!-- Links -->
+            <ul id="nav-links">
+                <li>
+                    <a href="#" onclick="closeMobile()">Home</a>
+                </li>
+
+                <li>
+                    <a href="#info-section" onclick="closeMobile()">Finance manager</a>
+                </li>
+
+                <li>
+                    <a href="#" onclick="closeMobile(), showSignInView()">Sign in</a>
+                </li>
+
+                <li>
+                    <a href="#contact-section" onclick="closeMobile()">Contact</a>
+                </li>
+            </ul>
+        </nav>
+
+
+        <!-- Main welcome viewport -->
+    <div id="main-viewport">
+        <div id="welcome-view">
+
+            <div id="greeting-text">
+                <h1>Welcome to the User Interface</h1>
+                <h3>Let us <span id="usecase-word">help</span> you save some money.</h3>
+
+                
+                    <form action="/logout" METHOD="GET">
+                        <button id="sign-in-button" type="submit">Logout</button>
+                    </form>
+            </div>
+        </div>
+    </div>
+
+
+</body>
+</html>

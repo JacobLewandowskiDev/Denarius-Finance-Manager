@@ -165,6 +165,14 @@ h3 {
     text-shadow: 2px 1px #000000;
 }
 
+h4 {
+    color:#eebd53;
+    font-family: 'Rambla', 'Times New Roman', sans-serif;
+    font-size: calc(12px + .5vw);
+    font-weight: bold;
+    text-shadow: 2px 1px #000000; 
+}
+
 /* The main greeting viewport*/
 #welcome-view {
     display: flex;
@@ -246,7 +254,7 @@ h3 {
     max-width: 400px;
     min-width: 260px;
     height: fit-content;
-    border: 2px #7dcdff double;
+    border: 2px #7dcdff solid;
     border-radius: 5px;
     background-color: #2884bdbb;
     text-align: center;
@@ -288,6 +296,20 @@ h3 {
     font-size: 1.2em;
 }
 
+/* Remember-me container */
+#remember-container {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+}
+
+#remember-container input {
+    margin-left: 10px;
+    width: calc(15px + .3vw);
+    height: calc(15px + .3vw);
+}
+
 /* Log in button properties */
 #log-in-button {
     cursor: pointer;
@@ -296,7 +318,7 @@ h3 {
     background-color: #eebd53;
     border: 3px solid #ffc23e;
     color:#ffffff;
-    padding: 2.5px;
+    padding: 7px;
     border-radius: 10px;
     font-weight: bold;
 }
@@ -304,6 +326,30 @@ h3 {
 /* Log in button active property */
 #log-in-button:active {
     color: rgb(23, 135, 204);
+}
+
+/* List of available users */
+#list-of-users {
+    position: absolute;
+    display: block;
+    border: 2px #7dcdff solid;
+    border-radius: 5px;
+    background-color: #2884bdbb;
+    width: fit-content;
+    text-align: left;
+    word-wrap: break-word;
+    width: 30vw;
+    max-width: 400px;
+    min-width: 260px;
+    bottom: 5vh;
+    margin: 0 auto;
+    color:#ffc955;
+    font-size: calc(14px + .2vw);
+}
+
+#list-of-users ul {
+    padding: 5px;
+    margin: 0 20px;
 }
 
 /* Finance manager webapp information section - Start */
@@ -391,7 +437,7 @@ h3 {
 
 /* Relaxed dude image properties */
 .info-main-image img { 
-    width: 100%;
+    width: 30vw;
     min-width: 260px;
 }
 

@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="icon" href="../images/dollar.png">
-    <link rel="stylesheet" href="../static/css/main-css.css">
+    <link rel="icon" href="images/dollar.png">
+    <link rel="stylesheet" href="css/main-css.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rambla:wght@700&display=swap" rel="stylesheet">
@@ -16,14 +16,16 @@
             <nav>
                 <!-- Webapp Logo -->
                 <div id="nav-image-container">
-                    <img id="nav-image" src="../images/dollar.png">
+                    <img id="nav-image" src="images/dollar.png">
                     <div id="project-name">DENARIUS</div>
                 </div>
 
-                <div id="mobile-menu">
-                    <i class="fa fa-bars fa-3x" aria-hidden="true"></i>
+               <!-- Burger menu icon -->
+               <div id="mobile-menu">
+                <i class="fa fa-bars fa-3x" aria-hidden="true"></i>
                 </div>
 
+                <!-- Close menu icon-->
                 <div id="mobile-close">
                     <i class="fa fa-times fa-4x" aria-hidden="true"></i>
                 </div>
@@ -54,15 +56,14 @@
         <div id="welcome-view">
 
             <div id="rotating-coin">
-                <img src="../images/dollar.png">
+                <img src="images/dollar.png">
             </div>
 
             <div id="greeting-text">
                 <h1>Welcome to Denarius</h1>
                 <h3>The only <span id="usecase-word">spending</span> manager you'll ever need.</h3>
 
-                <button id="sign-in-button" onclick="showSignInView()" >Sign in</button>
-
+                <button type="submit" id="sign-in-button" onclick="showSignInView()">Sign in</button>
             </div>
 
             <!-- Sign in box -> Opens when sign in button is clicked -->
@@ -74,6 +75,23 @@
                         <i class="fa fa-times fa-4x" aria-hidden="true" onclick="closeSignIn()"></i>
                     </div>
 
+                    <div id="list-of-users">
+                        <p style="font-weight: bold; text-align: center;">For testing purposes please use one of the user credentials listed below:</p>
+                        <ul>
+                            <li>
+                                <span style="font-weight: bold">USER ROLE:</span>
+                                Username: <span style="font-weight: bold">user</span>,
+                                Password: <span style="font-weight: bold">pass</span>
+                            </li>
+                            <br>
+                            <li>
+                                <span style="font-weight: bold">ADMIN ROLE:</span>
+                                Username: <span style="font-weight: bold">admin</span>,
+                                Password: <span style="font-weight: bold">pass</span>
+                            </li>
+                        </ul>
+                    </div>
+
                     <h3>Sign into your account</h3>
                     <form action="login" method="POST">
                         <div class="sign-in-input">
@@ -83,9 +101,14 @@
                         <div class="sign-in-input">
                             <input type="password" name="password" placeholder="Password" required>
                         </div>
+
+                        <div id="remember-container">
+                            <h4>Remember me</h4>
+                            <input type="checkbox" name="remember-me">
+                        </div>
                         
                         <div class="sign-in-input">
-                            <button type="submit" id="log-in-button" value="login">Log in</button>
+                            <button type="submit" id="log-in-button">Log in</button>
                         </div>
                     </form>
                 </div>
@@ -105,28 +128,28 @@
             <div class="nested-grid">
                 <div class="information-1">
                     <p> Denarius will teach you the key principles of saving money, cost cutting, and finance tracking using a simple interface.</p>
-                    <img class="info-image" src="../images/money-512x512.png">
+                    <img class="info-image" src="images/money-512x512.png">
                 </div>
         
                 <div class="information-2">
-                    <img class="info-image" src="../images/piggy-bank.png">
+                    <img class="info-image" src="images/piggy-bank.png">
                     <p> Stop your unnecessary spending thanks to our spending tracker. Save all that money, that would otherwise go to a waste.</p>
                 </div>  
         
                 <div class="information-1">
                     <p> Learn how to better your money budgeting skills for the upcoming months by listing and keeping track of all your costs.</p>
-                    <img class="info-image" src="../images/budget.png">
+                    <img class="info-image" src="images/budget.png">
                 </div>
         
                 <div class="information-2">
-                    <img class="info-image" src="../images/profits.png">
+                    <img class="info-image" src="images/profits.png">
                     <p> Watch your bank account grow exponentially by simply reducing the amounts you waste on stuff you don't need.</p>
                 </div>
             </div>
         
             <!-- Main info image -->
             <div class="info-main-image">
-                <img src="../images/man-laptop-relax.png">
+                <img src="images/man-laptop-relax.png">
             </div>
         </div>
     </div>
@@ -137,9 +160,9 @@
         <h1 class="contact-me">Contact us form</h1>
         <br>
         <form id="contact-form" action="https://formsubmit.co/mockemail6996@gmail.com" method="POST">
-            <input type="text" name="Name" placeholder="Name" required>
+            <input type="text" name="email-name" placeholder="Name" required>
             <br>
-            <input type="text" name="Email" placeholder="Email" required>
+            <input type="text" name="email" placeholder="Email" required>
             <br>
             <textarea name="Message" placeholder="Message" required></textarea>
             <br>
@@ -170,6 +193,6 @@
         <button>Add cost</button>
     </div> -->
 
-    <script src="../static/js/main-js.js" defer></script>
+    <script src="js/main-js.js" defer></script>
 </body>
 </html>
