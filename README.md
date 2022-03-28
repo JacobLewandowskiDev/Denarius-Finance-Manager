@@ -1,1 +1,2 @@
-# Finance-Manager
+# DENARIUS - Personal Finance Manager
+
