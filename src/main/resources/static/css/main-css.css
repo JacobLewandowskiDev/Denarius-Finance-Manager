@@ -101,6 +101,7 @@ nav ul li a {
 /* Nav link <a> tag hover properties */
 nav ul li a:hover {
     background-color: rgba(168, 206, 230, 0.767);
+    transition: .2s ease-in-out;
 }
 
 /* Nav link <a> tag active properties */
@@ -173,6 +174,39 @@ h4 {
     text-shadow: 2px 1px #000000; 
 }
 
+#main-error {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    background-color: #3199da;
+}
+
+#error-message {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 0 30px;
+}
+
+#error-message button a{
+    color: #ffffff;
+    text-decoration: none;
+}
+
+#something-wrong-img {
+    width: 50vw;
+    position: relative;
+    display: flex;
+    opacity: .6;
+    justify-content: center;
+    animation: patrick 3s infinite linear;
+}
+
+
 /* The main greeting viewport*/
 #welcome-view {
     display: flex;
@@ -223,6 +257,7 @@ h4 {
     padding: 10px;
     border-radius: 10px;
     font-weight: bold;
+    transition: .2s ease-in-out;
 }
 
 /* Sign in button hover properties */
@@ -308,6 +343,7 @@ h4 {
     margin-left: 10px;
     width: calc(15px + .3vw);
     height: calc(15px + .3vw);
+    color: #3199da;
 }
 
 /* Log in button properties */
@@ -321,6 +357,13 @@ h4 {
     padding: 7px;
     border-radius: 10px;
     font-weight: bold;
+    transition: .2s ease-in-out;
+}
+
+/* Log in button hover properties */
+#log-in-button:hover {
+    background-color: #ffbf35;
+    color:rgb(23, 135, 204);
 }
 
 /* Log in button active property */
@@ -542,6 +585,22 @@ h4 {
     background-color: #ffbf35;
     color:rgb(23, 135, 204);
 }
+
+/* Error Patrick animation */
+@keyframes patrick {
+    0% {
+        transform:translateY(0px);
+    }
+
+    50% {
+        transform:translateY(-15px);
+    }
+
+    100% {
+        transform:translateY(0px);
+    }
+}
+
 
 /* Rotating coin animation */
 @keyframes rotate-coin {

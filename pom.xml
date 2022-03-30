@@ -10,11 +10,11 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 
-	<groupId>com.financeapp</groupId>
+	<groupId>com.denarius</groupId>
 	<artifactId>financeManager</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>financeManager</name>
-	<description>Demo project for Spring Boot</description>
+	<name>Denarius</name>
+	<description>A personal finance manager web-app</description>
 
 	<properties>
 		<java.version>11</java.version>
