@@ -1,28 +1,57 @@
 package com.denarius.model;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 
 @Entity
-public class User {
+@Table(name = "user")
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     @Column(name = "username", nullable = false, length = 64)
     private String username;
 
-    @Column(name = "password", nullable = false, length = 120)
+    @Column(name = "password", nullable = false, length = 250)
     private String password;
 
     @Column(name = "role", nullable = false, length = 24)
     private String role;
 
-    public Long getId() {
+    private boolean isAccountNonExpired;
+    private boolean isAccountNonLocked;
+    private boolean isCredentialsNonExpired;
+    private boolean isEnabled;
+
+
+    public User() {
+    }
+
+    public User(int id, String username, String password, String role,
+                boolean isAccountNonExpired, boolean isAccountNonLocked,
+                boolean isCredentialsNonExpired, boolean isEnabled) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.role = role;
+        this.isAccountNonExpired = isAccountNonExpired;
+        this.isAccountNonLocked = isAccountNonLocked;
+        this.isCredentialsNonExpired = isCredentialsNonExpired;
+        this.isEnabled = isEnabled;
+    }
+
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -32,10 +61,6 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
     }
 
     public void setPassword(String password) {
@@ -48,5 +73,33 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of();
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return isAccountNonExpired;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return isAccountNonLocked;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return isCredentialsNonExpired;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return isEnabled;
     }
 }

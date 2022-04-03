@@ -1,8 +1,10 @@
 package com.denarius.config;
 
-import com.denarius.service.DetailService;
+import com.denarius.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -15,16 +17,15 @@ import java.util.concurrent.TimeUnit;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private DetailService detailService;
-
     // Password encoder variable
     private final PasswordEncoder passwordEncoder;
+    private UserService userService;
 
     // Instantiate the password encoder via constructor
     @Autowired
-    public SecurityConfig(PasswordEncoder passwordEncoder, DetailService detailService) {
+    public SecurityConfig(PasswordEncoder passwordEncoder, UserService userService) {
         this.passwordEncoder = passwordEncoder;
-        this.detailService = detailService;
+        this.userService = userService;
     }
 
     // Spring security configuration for the web-app
@@ -33,7 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/", "/index", "/error/**", "/css/**", "/js/**", "/images/**").permitAll() // Allow all users to freely access <index.html> page
+                .antMatchers("/", "/test/**", "/index", "/error/**", "/css/**", "/js/**", "/images/**").permitAll() // Allow all users to freely access <index.html> page
             .and()
                 .authorizeRequests()
                 .anyRequest()
@@ -63,6 +64,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(detailService);
+        auth.authenticationProvider(daoAuthenticationProvider());
     }
+
+    @Bean
+    public DaoAuthenticationProvider daoAuthenticationProvider() {
+        DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        provider.setPasswordEncoder(passwordEncoder);
+        provider.setUserDetailsService(userService);
+        return provider;
+    }
+
 }
