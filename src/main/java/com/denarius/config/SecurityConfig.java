@@ -44,12 +44,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/user-login")    // Change default login page to custom login popup on <index.html>
                 .permitAll()
                 .defaultSuccessUrl("/userinterface.html", true) // Set <userinterface.html> as the default success url after a correct login attempt
-                .failureForwardUrl("/index.html")
+                .failureForwardUrl("/index.html") // In case of a invalid username or password redirect back to <index.html>
                 .usernameParameter("username")
                 .passwordParameter("password")
             .and()
             .rememberMe()
-                .tokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(1))
+                .tokenValiditySeconds((int) TimeUnit.DAYS.toSeconds(1)) // Validate the remember me token for a whole day
                 .key("something secure placeholder")
                 .rememberMeParameter("remember-me")
             .and()

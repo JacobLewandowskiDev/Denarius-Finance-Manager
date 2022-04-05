@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="images/dollar.png">
-    <link rel="stylesheet" href="css/main-css.css">
     <link rel="stylesheet" href="css/interface-css.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,61 +12,48 @@
     <title>Denarius - User Interface</title>
 </head>
 <body>
-    <!-- Navigation bar -->    
-        <nav>
+    <!-- Logout bar -->    
             <!-- Webapp Logo -->
-            <div id="nav-image-container">
-                <img id="nav-image" src="images/dollar.png">
-                <div id="project-name">DENARIUS</div>
+            <div>
+                <div id="logout-bar">
+                    <div id="project-info-container">
+                        <img id="project-logo" src="images/dollar.png">
+                        <div id="project-name">DENARIUS</div>
+                    </div>
+    
+                    <!-- Logout button -->
+                    <div id="log-out-container">
+                        <form action="/logout" METHOD="GET">
+                            <button id="log-out-button" type="submit"><i class="fa fa-sign-out" aria-hidden="true"></i> <span>Log out</span></button>
+                        </form>
+                    </div>
+                </div>
+      
+    
+                <div id="burger-menu" onclick="toggleInterfaceMenu();">
+                    <i class="fa fa-bars fa-3x" aria-hidden="true"></i>
+                </div>
+    
+                <div id="user-menu-container">
+                    <div id="menu">
+                        <div>
+                            <h4>User interface</h4>
+                        </div>
+                    </div>
+               
+     
+                    <div id="interface-options">
+                        <ul>
+    
+                        </ul>
+                    </div>
+                </div>  
+    
+                <div id="user-dashboard">
+                    
+                </div>
             </div>
-
-            <!-- Burger menu icon -->
-            <div id="mobile-menu">
-                <i class="fa fa-bars fa-3x" aria-hidden="true"></i>
-            </div>
-
-            <!-- Close menu icon-->
-            <div id="mobile-close">
-                <i class="fa fa-times fa-4x" aria-hidden="true"></i>
-            </div>
-
-            <!-- Links -->
-            <ul id="nav-links">
-                <li>
-                    <a href="#" onclick="closeMobile()">Home</a>
-                </li>
-
-                <li>
-                    <a href="#info-section" onclick="closeMobile()">Finance manager</a>
-                </li>
-
-                <li>
-                    <a href="#" onclick="closeMobile(), showSignInView()">Sign in</a>
-                </li>
-
-                <li>
-                    <a href="#contact-section" onclick="closeMobile()">Contact</a>
-                </li>
-            </ul>
-        </nav>
-
-
-        <!-- Main welcome viewport -->
-    <div id="main-viewport">
-        <div id="welcome-view">
-
-            <div id="greeting-text">
-                <h1>Welcome to the User Interface</h1>
-                <h3>Let us <span id="usecase-word">help</span> you save some money.</h3>
-
-                
-                    <form action="/logout" METHOD="GET">
-                        <button id="sign-in-button" type="submit">Logout</button>
-                    </form>
-            </div>
-        </div>
-    </div>
-
-
+           
+        <script src="js/userinterface-js.js" defer></script>
 </body>
 </html>
