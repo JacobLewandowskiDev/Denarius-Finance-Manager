@@ -9,6 +9,7 @@ function toggleInterfaceMenu() {
     if(isMenuOpen == false) {
         interfaceMenuPosition.style.left = '0';
         burgerButtonPosition.style.left = '250px';
+        burgerButtonPosition.innerHTML = '<i class="fa fa-times fa-3x" aria-hidden="true"></i>';
         burgerButtonPosition.style.transition = '.5s ease-in-out';
         interfaceMenuPosition.style.transition = '.5s ease-in-out';
         toggleDashboardWidth();
@@ -18,6 +19,7 @@ function toggleInterfaceMenu() {
     else if(isMenuOpen == true) {
         interfaceMenuPosition.style.left = '-256px';
         burgerButtonPosition.style.left = '0px';
+        burgerButtonPosition.innerHTML = '<i class="fa fa-bars fa-3x" aria-hidden="true"></i>';
         interfaceMenuPosition.style.transition = '.5s ease-in-out';
         burgerButtonPosition.style.transition = '.5s ease-in-out';
         toggleDashboardWidth();

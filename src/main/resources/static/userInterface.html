@@ -30,10 +30,12 @@
                 </div>
       
     
+                <!-- User interface menu button -->
                 <div id="burger-menu" onclick="toggleInterfaceMenu();">
-                    <i class="fa fa-bars fa-3x" aria-hidden="true"></i>
+                    <i class="fa fa-times fa-3x" aria-hidden="true"></i>
                 </div>
     
+                <!-- User interface menu container -->
                 <div id="user-menu-container">
                     <div id="menu">
                         <div>
@@ -41,19 +43,23 @@
                         </div>
                     </div>
                
-     
+                    <!-- These are the user interface menu options -->
                     <div id="interface-options">
                         <ul id="user-options">
+                            <li>
+                                <button id="user-dashboard-button"><i class="fa fa-tachometer" aria-hidden="true"></i> User Dashboard</button> <!-- Endpoint to /userinterface -->
+                            </li>
+
                             <li>
                                 <button class="accordion"><i class="fa fa-exchange" aria-hidden="true"></i> Transactions</button>
                                 <div class="panel">
                                     <ul class="panel-options-menu">
                                         <li>
-                                            <a><i class="fa fa-minus-circle" aria-hidden="true"></i> Expenses</a>
+                                            <a><i class="fa fa-minus-circle" aria-hidden="true"></i> Expenses</a> <!-- Endpoint to .../transactions/expenses -->
                                         </li>
 
                                         <li>
-                                            <a><i class="fa fa-plus-circle" aria-hidden="true"></i> Income</a>
+                                            <a><i class="fa fa-plus-circle" aria-hidden="true"></i> Income</a> <!-- Endpoint to .../transactions/income -->
                                         </li>
                                     </ul>
                                 </div>
@@ -64,11 +70,11 @@
                                 <div class="panel">
                                     <ul class="panel-options-menu">
                                         <li>
-                                            <a><i class="fa fa-calendar" aria-hidden="true"></i> Saving Goals</a>
+                                            <a><i class="fa fa-calendar" aria-hidden="true"></i> Saving Goals</a> <!-- Endpoint to .../savings/goals -->
                                         </li>
 
                                         <li>
-                                            <a><i class="fa fa-usd" aria-hidden="true"></i> Piggy Bank</a>
+                                            <a><i class="fa fa-usd" aria-hidden="true"></i> Piggy Bank</a> <!-- Endpoint to .../savings/piggybank -->
                                         </li>
                                     </ul>
                                 </div>
@@ -79,11 +85,11 @@
                                 <div class="panel">
                                     <ul class="panel-options-menu">
                                         <li>
-                                            <a><i class="fa fa-btc" aria-hidden="true"></i> Cryptocurrency</a>
+                                            <a><i class="fa fa-btc" aria-hidden="true"></i> Cryptocurrency</a> <!-- Endpoint to .../investments/crypto-->
                                         </li>
 
                                         <li>
-                                            <a><i class="fa fa-line-chart" aria-hidden="true"></i> Stocks</a>
+                                            <a><i class="fa fa-line-chart" aria-hidden="true"></i> Stocks</a> <!-- Endpoint to .../investments/stocks-->
                                         </li>
                                     </ul>
                                 </div>
@@ -92,8 +98,45 @@
                     </div>
                 </div>  
     
+                <!-- This is the user dashboard viewport -->
                 <div id="user-dashboard">
-                    
+                    <h3> Account overview</h3>
+                    <div id="quick-acc-overview">
+                        <ul>
+                            <li class="overview-container">
+                                <div class="overview-img-section">
+                                    <i class="fa fa-balance-scale fa-3x" aria-hidden="true"></i>
+                                </div>
+
+                                <div class="overview-text">
+                                    <p> Balance:</p>
+                                    <p id="balance-overview"> 0.00 $</p>  <!-- Add JS code to change this value -->
+                                </div>
+                            </li>
+
+                            <li class="overview-container">
+                                <div class="overview-img-section">
+                                    <i class="fa fa-money fa-3x" aria-hidden="true"></i>
+                                </div>
+
+                                <div class="overview-text">
+                                    <p> Piggy Bank:</p>
+                                    <p id="savings-overview"> 0.00 $</p>  <!-- Add JS code to change this value -->
+                                </div>
+                            </li>
+
+                            <li class="overview-container">
+                                <div class="overview-img-section">
+                                    <i class="fa fa-database fa-3x" aria-hidden="true"></i>
+                                </div>
+
+                                <div class="overview-text">
+                                    <p> Crypto Portfolio:</p>
+                                    <p id="crypto-overview"> 0.00 $</p>  <!-- Add JS code to change this value -->
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </div>
            

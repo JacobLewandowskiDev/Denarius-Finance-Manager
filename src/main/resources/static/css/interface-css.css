@@ -51,6 +51,8 @@ h4 {
     align-items: center;
     background-color: rgb(23, 135, 204);
     z-index: 100;
+    -webkit-box-shadow: 1px 10px 15px -2px rgba(0,0,0,0.23); 
+    box-shadow: 1px 10px 15px -2px rgba(0,0,0,0.23);
 }
 
 /* Project logo and text container */
@@ -130,8 +132,8 @@ h4 {
 }
 /* LOG OUT BAR - END */
 
-/* USER INTERFACE - START */
-/* User interface main properties */
+/* USER INTERFACE MENU - START */
+/* User interface menu container properties */
 #user-menu-container {
     position: fixed;
     height: calc(100vh - 60px);
@@ -145,6 +147,7 @@ h4 {
     -webkit-box-shadow: 2px 8px 19px 1px rgba(0,0,0,0.3); 
     box-shadow: 2px 8px 19px 1px rgba(0,0,0,0.3);
     left: 0;
+    z-index: 100;
 }
 
 /* User interface top text position */
@@ -222,7 +225,7 @@ h4 {
 }
 
 /* User interface menu options accordion class */
-.accordion {
+.accordion, #user-dashboard-button {
     background-color: transparent;
     color: #ffffff;
     cursor: pointer;
@@ -237,7 +240,7 @@ h4 {
   }
   
   /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
-  .active, .accordion:hover {
+  .active, .accordion:hover, #user-dashboard-button:hover {
     background-color: rgba(116, 194, 241, 0.849);
   }
   
@@ -253,6 +256,7 @@ h4 {
     text-align: center;
   }
 
+  /* <a> tag within the interface menu option buttons*/
   .panel-options-menu a {
       cursor: pointer;
       padding: 10px;
@@ -261,20 +265,109 @@ h4 {
       transition: .2s ease-in-out;
   }
 
+  /* hover over menu buttons sub menu <a> tag */
   .panel-options-menu a:hover {
     color: #ffbf35;
     background-color: #7dcdff52;
   }
-
-/*USER INTERFACE - END */
+/*USER INTERFACE MENU - END */
 
 /* USER DASHBOARD - START */
 /* User dashboard viewport */
 #user-dashboard {
-    border: 2px solid red;
     width: calc(100vw - 262px);
     float: right;
     margin-top: 60px;
     height: calc(100vh - 60px);
     background-color: #54b0e9;
+    z-index: -100;
+    overflow-x: hidden;
+}
+
+/* Account overview <h3> tag */
+#user-dashboard h3{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+/* Account overview balance, savings, and crypto section container */
+#quick-acc-overview {
+    width: 100%;
+    height: 65px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    float: right;
+    margin-top: 30px;
+}
+
+/* Account overview <ul> properties */
+#quick-acc-overview ul {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content:space-evenly;
+    flex-wrap: wrap;
+    list-style: none;
+}
+
+/* Balance, savings, crypto overview container div properties */
+.overview-container {
+    border: 3px #7dcdff solid;
+    background-color: #1e94dd;
+    height: 100%;
+    width: 25%;
+    min-width: 260px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+    -webkit-box-shadow: 1px 6px 15px -2px rgba(0,0,0,0.58); 
+    box-shadow: 1px 6px 15px -2px rgba(0,0,0,0.58);
+}
+
+/* Balance, savings, crypto overview image section properties */
+.overview-img-section {
+    width: 25%;
+    height: 100%;
+    float: left;
+    border-right: 2px solid #5abefcb2;
+    text-align: center;
+    color: #ffffff;
+}
+
+/* Balance, savings, crypto overview logo properties */
+.overview-img-section i {
+    margin-top: 5px;
+    padding: 0 5px;
+
+}
+
+/* Balance, savings, crypto overview text properties */
+.overview-text {
+    width: 75%;
+    height: 100%;
+    float: right;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    background-color: #3ca3e4;
+}
+
+/* Balance, savings, crypto overview description <p> tag properties */
+.overview-text p {
+    font-size: 20px;
+    padding: 0 20px;
+}
+
+/* Balance, savings, crypto overview description <p> name of div tag properties */
+.overview-text p:first-child {
+    color:#ffbf35;
+    text-shadow: 2px 1px #000000; 
+    text-decoration: underline;
+    text-underline-offset: 1px;
 }
