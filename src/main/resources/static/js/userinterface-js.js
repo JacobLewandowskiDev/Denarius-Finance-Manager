@@ -70,28 +70,131 @@ for (i = 0; i < accordions.length; i++) {
 }
 
 
-
-// Expenses page - expense donut chart creator - Active only if the current page url ends with '/expenses.html'
+// EXPENSES PAGE - These functions will run only if the current URL ends with '/expenses.html'
 if(page == 'expenses.html') {
+
+    // Each category of expenses total
+    let housingTotal = 0.00;
+    let transportationTotal = 0.00;
+    let foodTotal = 0.00;
+    let utilitiesTotal = 0.00;
+    let healthcareTotal = 0.00;
+    let personalTotal = 0.00;
+    let totalExpenses = 0.00;
+
+    // Calculate each categories expense total & total expenses
+    expenseCalculator();
+    function expenseCalculator() {
+      let table = document.getElementById('expenses-table');
+      for(let row = 1, rows = table.rows.length; row < rows; row++) {
+
+        // This is the const for the expense cost column values
+        const expenseCost = parseFloat(table.rows[row].cells[3].innerHTML);
+
+        // This is the const for the expense category column values
+        const expenseCategory = table.rows[row].cells[4].innerHTML;
+        
+        // Check if expense is of type housing category --> If yes, then proceed to add its cost to the appropriate total
+        if(expenseCategory == 'Housing') {
+          housingTotal += expenseCost;
+        }
+
+        // Check if expense is of type transportation category --> If yes, then proceed to add its cost to the appropriate total
+        else if(expenseCategory == 'Transportation') {
+          transportationTotal += expenseCost;
+        }
+
+        // Check if expense is of type food category --> If yes, then proceed to add its cost to the appropriate total
+        else if(expenseCategory == 'Food') {
+          foodTotal += expenseCost;
+        }
+
+        // Check if expense is of type utilities category --> If yes, then proceed to add its cost to the appropriate total
+        else if(expenseCategory == 'Utilities') {
+          utilitiesTotal += expenseCost;
+        }
+
+        // Check if expense is of type healthCare category --> If yes, then proceed to add its cost to the appropriate total
+        else if(expenseCategory == 'HealthCare') {
+          healthcareTotal += expenseCost;
+        }
+
+        // Check if expense is of type personal category --> If yes, then proceed to add its cost to the appropriate total
+        else if(expenseCategory == 'Personal') {
+          personalTotal += expenseCost;
+        }
+
+        // Add all of the expense category totals to one
+        totalExpenses += expenseCost;
+      }
+
+      // Proceed to update the expense totals within the <div id="sum-table">
+      document.getElementById('housingTotal').innerHTML = housingTotal + ' $';
+      document.getElementById('transportationTotal').innerHTML = transportationTotal + ' $';
+      document.getElementById('foodTotal').innerHTML = foodTotal + ' $';
+      document.getElementById('utilitiesTotal').innerHTML = utilitiesTotal + ' $';
+      document.getElementById('healthcareTotal').innerHTML = healthcareTotal + ' $';
+      document.getElementById('personalTotal').innerHTML = personalTotal + ' $';
+      document.getElementById('totalExpenses').innerHTML = totalExpenses + ' $';
+    }
+
+    function addNewExpense() {
+      expenseCalculator();
+    }
+
+
+    // Add expense view status
+    let addExpenseOpen = false;
+
+    // Open add expense view
+    function showAddExpenseView() {
+        document.getElementById('add-expense-container').style.visibility='visible';
+        document.getElementById('add-expense-container').style.opacity='1';
+        document.getElementById('add-expense-container').style.transition='.5s ease-in-out';
+        addExpenseOpen = true;
+        console.log('Add expense view opened');
+    }
+
+    // Close add expense view
+    function closeAddExpenseView() {
+        if(addExpenseOpen == true) {
+          document.getElementById('add-expense-container').style.visibility='hidden';
+          document.getElementById('add-expense-container').style.opacity='0';
+          document.getElementById('add-expense-container').style.transition='.5s ease-in-out';
+            addExpenseOpen = false;
+            console.log('Add expense view closed');
+        }
+    }
+
+
+    // Delete row inside expenses table if appropriate delete button is clicked
+    function deleteExpense(row) {
+    let i = row.parentNode.parentNode.rowIndex;
+      document.getElementById("expenses-table").deleteRow(i);
+      
+    }
+
+    // Expenses page - expense donut chart creator
     google.charts.load("current", {packages:["corechart"]});
     google.charts.setOnLoadCallback(drawExpenseChart);
     function drawExpenseChart() {
       let data = google.visualization.arrayToDataTable([
         ['Expense', 'Expenses by Category'],
-        ['Housing', 11],
-        ['Transportation', 2],
-        ['Food', 2],
-        ['Utilities', 2],
-        ['Healthcare', 7],
-        ['Personal', 7]
+        ['Housing', parseInt(housingTotal)],
+        ['Transportation', parseInt(transportationTotal)],
+        ['Food', parseInt(foodTotal)],
+        ['Utilities', parseInt(utilitiesTotal)],
+        ['Healthcare', parseInt(healthcareTotal)],
+        ['Personal', parseInt(personalTotal)]
       ]);
 
       let options = {
         fontName:'Rambla',
-        fontSize:'14',
+        fontSize:'15',
         legend: {alignment: 'center', textStyle: {color: 'white'}},
         chartArea: {width:'95%',height:'95%'},
         backgroundColor: '#1e94dd',
+        colors: ['#BFBFBF', '#e8b248', '#80aaff', '#f1c232', '#236D9C', '#838383'],
         pieHole: 0.4,
       };
       function resize () {

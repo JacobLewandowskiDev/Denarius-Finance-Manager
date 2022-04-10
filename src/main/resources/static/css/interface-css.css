@@ -11,6 +11,7 @@ html {
 
 body {
     background-color: #3199da;
+    counter-reset: Serial;   
 }
 
 /* All <a> tag properties in the project */
@@ -303,10 +304,17 @@ h4 {
 }
 
 /* Account overview <h3> tag */
-#user-dashboard h3{
+#user-dashboard h3 {
     display: flex;
     justify-content: center;
     margin-top: 20px;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+}
+
+#user-dashboard h4 {
+    display: flex;
+    justify-content: center;
     text-decoration: underline;
     text-underline-offset: 2px;
 }
@@ -393,19 +401,98 @@ h4 {
 }
 
     /* EXPENSES SITE CSS - START */
+/* Add new expense to table view */
+#add-expense-container {
+    position: absolute;
+    display: flex;
+    visibility: hidden;
+    opacity: 0;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    background-color: #152a47ad;
+    z-index: 1000;
+    border: 2px solid yellow;
+}
+
+/* Add expense form container */
+#add-expense {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 30vw;
+    max-width: 400px;
+    min-width: 260px;
+    border: 2px #7dcdff solid;
+    border-radius: 5px;
+    background-color: #2884bdbb;
+}
+
+/* Remove <h3> margins from the add expenses container */
+#add-expense h3 {
+    margin: 0;
+}
+
+/* Close add expense viewport */
+#add-expense-close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    color: #ffffff;
+    margin-right: 3.5vw;
+    margin-top: 1.5vw;
+    padding: 10px;
+    cursor: pointer;
+    transition: .2s ease-in-out;
+}
+
+/* Hover over close add new expense close view button */
+#add-expense-close:hover {
+    color: #ffbf35;
+}
+
+/* Form layout properties */
+#add-expense form {
+    width: 80%;
+    margin: 25px 0;
+    text-align: center;
+}
+
+/* Add expenses inputs and select tag properties */
+#add-expense form input, select {
+    text-align: center;
+    width: 100%;
+    height: 40px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    border: none;
+    font-size: calc(12px + .2vw);
+}
+
+/* Add expenses submit button properites */
+#add-expense form button {
+    font-size: calc(14px + .2vw);
+    width: fit-content;
+    padding: 10px;
+}
+
+
 
 /* The sum of the users expenses table container properties */
 #sum-table {
     width: 100%;
     text-align: center;
     margin: 0 auto;
-    font-size: calc(10px + .5vw);
+    font-size: calc(15px + .5vw);
     color: #ffffff;
 }
 
 /* The sum of the users expenses table properties */
 #sum-table table {
     width: 90%;
+    margin-top: 10px;
     text-align: center;
 }
 
@@ -420,6 +507,7 @@ h4 {
 #expenses-container {
     display: flex;
     flex-wrap: wrap;
+    justify-content: space-evenly;
 }
 
 /* Expenses Donut Chart, and expenses sum containers */
@@ -427,7 +515,7 @@ h4 {
     margin: 0 auto;
     width: 30%;
     height: 40%;
-    min-height: 260px;
+    min-height: 300px;
     min-width: 260px;
     max-width: 700px;
     max-height: 700px;
@@ -456,11 +544,6 @@ h4 {
     font-family: 'Dosis','Times New Roman', sans-serif;
 }
 
-/* Set the border bottom of expense tracker container table <th> tag */
-#expense-table-container table th {
-    border-bottom: 3px #7dcdff  solid;
-}
-
 #expense-table-container table tr:nth-child(odd) {
     background-color: #1e94dd;
 }
@@ -475,6 +558,12 @@ h4 {
     color:#ffbf35;
     text-shadow: 2px 1px #000000;
 }
+
+/* Increment the number of the table row with each one */
+#expense-table-container table tr td:first-child:before{
+    counter-increment: Serial;      /* Increment the Serial counter */
+    content:counter(Serial);        /* Display the counter */
+  }
 
 /* Clickable edit, delete, and add new expense button properties*/
 .button, #new-expense-button {

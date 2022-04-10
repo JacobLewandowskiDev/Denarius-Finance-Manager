@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@300;500&display=swap" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <title>Denarius - User Interface</title>
+    <title>Denarius - Transactions</title>
 </head>
 <body>
     <!-- Logout bar -->    
@@ -26,6 +26,36 @@
                     <div id="log-out-container">
                         <form action="/logout" METHOD="GET">
                             <button id="log-out-button" type="submit"><i class="fa fa-sign-out" aria-hidden="true"></i> <span>Log out</span></button>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Add new expense to table viewport -->
+                <div id="add-expense-container">
+
+                    <div id="add-expense-close">
+                        <i class="fa fa-times fa-4x" aria-hidden="true" onclick="closeAddExpenseView()"></i>
+                    </div>
+
+                    <div id="add-expense">
+                        <h3>Add a new Expense</h3>
+                        <form action="add-new-expense" method="POST">
+                            <input name="expense-date" type="date">
+                            <br>
+                            <input name="expense-name" type="text" maxlength="30" placeholder="Expense name">
+                            <br>
+                            <input name="expense-cost" type="number" step="0.01"  min="0.00" placeholder="Cost $">
+                            <br>
+                            <select name="expense-category" id="expense-category-select">
+                                <option value="housing">Housing</option>
+                                <option value="transportation">Transportation</option>
+                                <option value="food">Food</option>
+                                <option value="utilities">Utilities</option>
+                                <option value="healthcare">Healthcare</option>
+                                <option value="personal">Personal</option>
+                            </select>
+                            <br>
+                            <button class="button" type="submit" onclick="addNewExpense()">Add expense</button>
                         </form>
                     </div>
                 </div>
@@ -102,12 +132,13 @@
                 
                 <!-- This is the user dashboard viewport -->
                 <div id="user-dashboard">
+
                     <h3>Expense tracker</h3>
                     <div id="expenses-container">
                         <div id="donut-chart"></div>
 
                         <div id="expenses-sum">
-                            <h3>Total spending sum:</h3>
+                            <h4>Total spending sum:</h4>
 
                             <div id="sum-table">
                                 <table>
@@ -118,37 +149,37 @@
     
                                     <tr>
                                         <td>Housing</td>
-                                        <td>0.00 $</td>    
+                                        <td id="housingTotal">0.00 $</td>    
                                     </tr>
     
                                     <tr>
                                         <td>Transportation</td>
-                                        <td>0.00 $</td>    
+                                        <td id="transportationTotal">0.00 $</td>    
                                     </tr>
     
                                     <tr>
                                         <td>Food</td>
-                                        <td>0.00 $</td>    
+                                        <td id="foodTotal">0.00 $</td>    
                                     </tr>
     
                                     <tr>
                                         <td>Utilities</td>
-                                        <td>0.00 $</td>    
+                                        <td id="utilitiesTotal">0.00 $</td>    
                                     </tr>
     
                                     <tr>
                                         <td>Healthcare</td>
-                                        <td>0.00 $</td>    
+                                        <td id="healthcareTotal">0.00 $</td>    
                                     </tr>
     
                                     <tr>
                                         <td>Personal</td>
-                                        <td>0.00 $</td>    
+                                        <td id="personalTotal">0.00 $</td>    
                                     </tr>
 
                                     <tr>
                                         <td>TOTAL</td>
-                                        <td>0.00 $</td>    
+                                        <td id="totalExpenses">0.00 $</td>    
                                     </tr>
                                 </table>
                             </div>
@@ -157,13 +188,13 @@
      
                     <br>
 
-                    <h3> List Of Your Expenses</h3>
+                    <h4> List Of Your Expenses</h4>
 
                     <div id="expense-table-container">
 
-                        <div id="new-expense"><button id="new-expense-button">Add new Expense</button></div>
+                        <div id="new-expense"><button id="new-expense-button" onclick="showAddExpenseView()">Add new Expense</button></div>
 
-                       <table>
+                       <table id="expenses-table">
                            <tr>
                                <th>No.</th>
                                <th>Date</th>
@@ -174,50 +205,74 @@
                            </tr>
 
                            <tr>
-                               <td>1</td>
+                               <td></td>
                                <td>09.04.2022</td>
-                               <td>Coffee</td>
-                               <td>2.99</td>
+                               <td>Coffee & Lunch</td>
+                               <td>25.99</td>
                                <td>Food</td>
                                <td>
                                 <button class="button">Edit</button>
-                                <button class="button">Delete</button>
+                                <button class="button" onclick="deleteExpense(this)">Delete</button>
                                </td>
                            </tr>
 
                            <tr>
-                            <td>2</td>
-                            <td>01.01.2022</td>
-                            <td>Gym membership</td>
-                            <td>29.99</td>
-                            <td>Personal</td>
-                            <td>
-                                <button class="button">Edit</button>
-                                <button class="button">Delete</button>
-                            </td>
+                                <td></td>
+                                <td>01.01.2022</td>
+                                <td>Gym membership</td>
+                                <td>59.99</td>
+                                <td>Personal</td>
+                                <td>
+                                    <button class="button">Edit</button>
+                                    <button class="button" onclick="deleteExpense(this)">Delete</button>
+                                </td>
+                           </tr>
+
+                           <tr>
+                                <td></td>
+                                <td>04.05.2022</td>
+                                <td>Amazon Prime</td>
+                                <td>14.99</td>
+                                <td>Utilities</td>
+                                <td>
+                                    <button class="button">Edit</button>
+                                    <button class="button" onclick="deleteExpense(this)">Delete</button>
+                                </td>
+                           </tr>
+
+                           <tr>
+                                <td></td>
+                                <td>18.01.2022</td>
+                                <td>Gasoline</td>
+                                <td>135.73</td>
+                                <td>Transportation</td>
+                                <td>
+                                    <button class="button">Edit</button>
+                                    <button class="button" onclick="deleteExpense(this)">Delete</button>
+                                </td>
                            </tr>
 
                             <tr>
-                                <td>3</td>
+                                <td></td>
                                 <td>05.02.2022</td>
                                 <td>Ice cream</td>
-                                <td>4.99</td>
-                                <td>Food</td>
+                                <td>125.50</td>
+                                <td>HealthCare</td>
                                 <td>
                                     <button class="button">Edit</button>
-                                    <button class="button">Delete</button>
+                                    <button class="button" onclick="deleteExpense(this)">Delete</button>
                                 </td>
                             </tr>
 
                             <tr>
-                                <td>4</td>
+                                <td></td>
                                 <td>10.03.2022</td>
                                 <td>Rent</td>
-                                <td>899</td>
+                                <td>499</td>
                                 <td>Housing</td>
                                 <td>
                                    <button class="button">Edit</button>
-                                   <button class="button">Delete</button>
+                                   <button class="button" onclick="deleteExpense(this)">Delete</button>
                                 </td>
                             </tr>
                        </table> 
