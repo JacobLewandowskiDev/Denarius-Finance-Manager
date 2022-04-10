@@ -8,7 +8,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rambla:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@300;500&display=swap" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <title>Denarius - User Interface</title>
 </head>
 <body>
@@ -97,40 +99,131 @@
                         </ul>
                     </div>
                 </div>  
-    
-
+                
                 <!-- This is the user dashboard viewport -->
                 <div id="user-dashboard">
-                    <h3> Account overview</h3>
-                    <div id="quick-acc-overview">
-                        <ul>
-                            <li class="overview-container">
-                                <div class="overview-img-section">
-                                    <i class="fa fa-balance-scale fa-4x" aria-hidden="true"></i>
-                                </div>
+                    <h3>Expense tracker</h3>
+                    <div id="expenses-container">
+                        <div id="donut-chart"></div>
 
-                                <div class="overview-text">
-                                    <p> Balance:</p>
-                                    <br>
-                                    <p id="balance-overview"> 0.00 $</p>  <!-- Add JS code to change this value -->
-                                </div>
-                            </li>
+                        <div id="expenses-sum">
+                            <h3>Total spending sum:</h3>
 
-                            <li class="overview-container">
-                                <div class="overview-img-section">
-                                    <i class="fa fa-money fa-4x" aria-hidden="true"></i>
-                                </div>
+                            <div id="sum-table">
+                                <table>
+                                    <tr>
+                                        <th>Category</th>
+                                        <th>Total</th>
+                                    </tr>
+    
+                                    <tr>
+                                        <td>Housing</td>
+                                        <td>0.00 $</td>    
+                                    </tr>
+    
+                                    <tr>
+                                        <td>Transportation</td>
+                                        <td>0.00 $</td>    
+                                    </tr>
+    
+                                    <tr>
+                                        <td>Food</td>
+                                        <td>0.00 $</td>    
+                                    </tr>
+    
+                                    <tr>
+                                        <td>Utilities</td>
+                                        <td>0.00 $</td>    
+                                    </tr>
+    
+                                    <tr>
+                                        <td>Healthcare</td>
+                                        <td>0.00 $</td>    
+                                    </tr>
+    
+                                    <tr>
+                                        <td>Personal</td>
+                                        <td>0.00 $</td>    
+                                    </tr>
 
-                                <div class="overview-text">
-                                    <p> Piggy Bank:</p>
-                                    <br>
-                                    <p id="savings-overview"> 0.00 $</p>  <!-- Add JS code to change this value -->
-                                </div>
-                            </li>
-                        </ul>
+                                    <tr>
+                                        <td>TOTAL</td>
+                                        <td>0.00 $</td>    
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+     
+                    <br>
+
+                    <h3> List Of Your Expenses</h3>
+
+                    <div id="expense-table-container">
+
+                        <div id="new-expense"><button id="new-expense-button">Add new Expense</button></div>
+
+                       <table>
+                           <tr>
+                               <th>No.</th>
+                               <th>Date</th>
+                               <th>Expense</th>
+                               <th>Cost $</th>
+                               <th>Category</th>
+                               <th>Action</th>
+                           </tr>
+
+                           <tr>
+                               <td>1</td>
+                               <td>09.04.2022</td>
+                               <td>Coffee</td>
+                               <td>2.99</td>
+                               <td>Food</td>
+                               <td>
+                                <button class="button">Edit</button>
+                                <button class="button">Delete</button>
+                               </td>
+                           </tr>
+
+                           <tr>
+                            <td>2</td>
+                            <td>01.01.2022</td>
+                            <td>Gym membership</td>
+                            <td>29.99</td>
+                            <td>Personal</td>
+                            <td>
+                                <button class="button">Edit</button>
+                                <button class="button">Delete</button>
+                            </td>
+                           </tr>
+
+                            <tr>
+                                <td>3</td>
+                                <td>05.02.2022</td>
+                                <td>Ice cream</td>
+                                <td>4.99</td>
+                                <td>Food</td>
+                                <td>
+                                    <button class="button">Edit</button>
+                                    <button class="button">Delete</button>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>4</td>
+                                <td>10.03.2022</td>
+                                <td>Rent</td>
+                                <td>899</td>
+                                <td>Housing</td>
+                                <td>
+                                   <button class="button">Edit</button>
+                                   <button class="button">Delete</button>
+                                </td>
+                            </tr>
+                       </table> 
                     </div>
                 </div>
-
+                
         <script src="js/userinterface-js.js" defer></script>
 </body>
 </html>

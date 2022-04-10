@@ -12,9 +12,9 @@ package com.denarius.model;
 //
 //import java.util.List;
 //
-
+//
 //@Component
-//public class DBOperationRunner implements CommandLineRunner {
+//public class DefaultDbOperationRunner implements CommandLineRunner {
 //
 //    @Autowired
 //    private UserRepositoryDao userRepositoryDao;

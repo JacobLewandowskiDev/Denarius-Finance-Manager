@@ -13,6 +13,24 @@ body {
     background-color: #3199da;
 }
 
+/* All <a> tag properties in the project */
+a {
+    text-decoration: none;
+    color: #000000;
+}
+
+a:hover {
+    color: #eebd53;
+}
+
+a:visited {
+    color: #000000;
+}
+
+a:active {
+    color: #ffffff;
+}
+
 h1 {
     color: #ffffff;
     font-weight: bolder;
@@ -296,7 +314,7 @@ h4 {
 /* Account overview balance, savings, and crypto section container */
 #quick-acc-overview {
     width: 100%;
-    height: 65px;
+    height: 120px;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -329,9 +347,12 @@ h4 {
 
 /* Balance, savings, crypto overview image section properties */
 .overview-img-section {
-    width: 25%;
+    width: 90px;
     height: 100%;
     float: left;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border-right: 2px solid #5abefcb2;
     text-align: center;
     color: #ffffff;
@@ -341,16 +362,16 @@ h4 {
 .overview-img-section i {
     margin-top: 5px;
     padding: 0 5px;
-
 }
 
 /* Balance, savings, crypto overview text properties */
 .overview-text {
-    width: 75%;
+    width: calc(100% - 90px);
     height: 100%;
     float: right;
     text-align: center;
     display: flex;
+    flex-wrap: nowrap;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -360,8 +381,7 @@ h4 {
 
 /* Balance, savings, crypto overview description <p> tag properties */
 .overview-text p {
-    font-size: 20px;
-    padding: 0 20px;
+    font-size: 30px;
 }
 
 /* Balance, savings, crypto overview description <p> name of div tag properties */
@@ -371,3 +391,124 @@ h4 {
     text-decoration: underline;
     text-underline-offset: 1px;
 }
+
+    /* EXPENSES SITE CSS - START */
+
+/* The sum of the users expenses table container properties */
+#sum-table {
+    width: 100%;
+    text-align: center;
+    margin: 0 auto;
+    font-size: calc(10px + .5vw);
+    color: #ffffff;
+}
+
+/* The sum of the users expenses table properties */
+#sum-table table {
+    width: 90%;
+    text-align: center;
+}
+
+/* Change first and last child <tr> of the sum table */
+#sum-table table tr:last-child, #sum-table table tr:first-child {
+    font-weight: bold;
+    color:#ffbf35;
+    text-shadow: 2px 1px #000000;
+}
+
+/* The exense overviews container properties */
+#expenses-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* Expenses Donut Chart, and expenses sum containers */
+#donut-chart, #expenses-sum {
+    margin: 0 auto;
+    width: 30%;
+    height: 40%;
+    min-height: 260px;
+    min-width: 260px;
+    max-width: 700px;
+    max-height: 700px;
+    margin-top: 30px;
+    border: 4px #7dcdff  solid;
+    background-color: #1e94dd;
+    border-radius: 10px;
+    -webkit-box-shadow: 1px 6px 15px -2px rgba(0,0,0,0.58); 
+    box-shadow: 1px 6px 15px -2px rgba(0,0,0,0.58);
+}
+
+/* Expense tracker Table properties */
+#expense-table-container table {
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+    font-size: calc(12px + .4vw);
+    border: 3px #7dcdff  solid;
+    color: #ffffff;
+    -webkit-box-shadow: 1px 6px 15px -2px rgba(0,0,0,0.58); 
+    box-shadow: 1px 6px 15px -2px rgba(0,0,0,0.58);
+}
+
+/* Change font to 'DOSIS' in expense tracker table */
+#expense-table-container table th, td, tr {
+    font-family: 'Dosis','Times New Roman', sans-serif;
+}
+
+/* Set the border bottom of expense tracker container table <th> tag */
+#expense-table-container table th {
+    border-bottom: 3px #7dcdff  solid;
+}
+
+#expense-table-container table tr:nth-child(odd) {
+    background-color: #1e94dd;
+}
+
+#expense-table-container table tr:nth-child(even) {
+    background-color: #54b0e9;
+}
+
+/* Change the first child <tr> tag of the expense tracker table */
+#expense-table-container table tr:first-child {
+    background-color: rgb(1, 139, 224);
+    color:#ffbf35;
+    text-shadow: 2px 1px #000000;
+}
+
+/* Clickable edit, delete, and add new expense button properties*/
+.button, #new-expense-button {
+    cursor: pointer;
+    font-size: calc(12px + .2vw);
+    width: 30%;
+    min-width: 50px;
+    margin: 0 2.5%;
+    background-color: #eebd53;
+    border: 3px solid #ffc23e;
+    color:#ffffff;
+    padding: 1px;
+    border-radius: 10px;
+    font-weight: bold;
+    transition: .2s ease-in-out;
+}
+
+.button:hover, #new-expense-button:hover {
+    background-color: #ffbf35;
+    color:rgb(23, 135, 204);
+}
+
+/* Change width of add new expense button container and center it */
+#new-expense {
+    width: fit-content;
+    margin: 0 auto;
+}
+
+/* Set the width of the add new button and its font properties */
+#new-expense-button {
+    width: 200px;
+    font-size: calc(18px + .2vw);
+    padding: 10px;
+    margin: 20px 0;
+}
+
+
