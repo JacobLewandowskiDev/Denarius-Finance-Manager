@@ -39,7 +39,7 @@ h1 {
     font-size: calc(52px + .5vw);
 }
 
-h3 {
+h3, h4, h5 {
     color:#eebd53;
     font-family: 'Rambla', 'Times New Roman', sans-serif;
     font-size: calc(22px + .5vw);
@@ -48,11 +48,14 @@ h3 {
 }
 
 h4 {
-    color:#eebd53;
-    font-family: 'Rambla', 'Times New Roman', sans-serif;
     font-size: calc(18px + .5vw);
-    font-weight: bold;
-    text-shadow: 2px 1px #000000; 
+}
+
+h5 {
+    color: #ffffff;
+    font-size: calc(25px + .5vw);
+    text-align: center;
+    margin-top: 70px;
 }
 
 /* LOG OUT BAR - START */
@@ -301,6 +304,7 @@ h4 {
     background-color: #54b0e9;
     z-index: -100;
     overflow-x: hidden;
+    border: 3px solid yellow;
 }
 
 /* Account overview <h3> tag */
@@ -600,4 +604,65 @@ h4 {
     margin: 20px 0;
 }
 
+/* SAVING GOALS CSS -START */
+/* Container for all the inputs, sliders etc for '/saving-goals.html */
+#saving-goals-container {
+    width: 90%;
+    height: fit-content;
+    margin: 0 auto;
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
 
+#saving-goals-container p {
+    font-size: 30px;
+    text-decoration: underline;
+    color:#eebd53;
+    font-family: 'Rambla', 'Times New Roman', sans-serif;
+    text-shadow: 2px 1px #000000;
+}
+
+/* The slider itself */
+.slider {
+    -webkit-appearance: none;  /* Override default CSS styles */
+    appearance: none;
+    width: 80%;
+    height: 25px;
+    margin-top: 10px;
+    background: #ffffff; /* Grey background */
+    outline: 3px #7accff solid;
+    border-radius: 15px;
+    opacity: .9; /* Set transparency (for mouse-over effects on hover) */
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+    -webkit-box-shadow: 1px 6px 15px -2px rgba(0,0,0,0.58); 
+    box-shadow: 1px 6px 15px -2px rgba(0,0,0,0.58);
+  }
+  
+  /* Mouse-over effects */
+  .slider:hover {
+    opacity: 1; /* Fully shown on mouse-over */
+  }
+  
+  /* The slider handles (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+  .slider::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Override default look */
+    appearance: none;
+    width: 40px; 
+    height: 25px;
+    border-radius: 15px;
+    background: #ffcc5d;
+    cursor: pointer; 
+  }
+  
+  /* The slider handles -moz- (Firefox) to override default look) */
+  .slider::-moz-range-thumb {
+    width: 40px; 
+    height: 25px; 
+    border-radius: 15px;
+    background: #ffcc5d; 
+    cursor: pointer;
+  }

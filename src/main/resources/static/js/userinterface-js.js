@@ -85,6 +85,16 @@ if(page == 'expenses.html') {
     // Calculate each categories expense total & total expenses
     expenseCalculator();
     function expenseCalculator() {
+
+      // Reset the amounts to zero to avoid counting expenses twice or more
+       housingTotal = 0.00;
+       transportationTotal = 0.00;
+       foodTotal = 0.00;
+       utilitiesTotal = 0.00;
+       healthcareTotal = 0.00;
+       personalTotal = 0.00;
+       totalExpenses = 0.00;
+
       let table = document.getElementById('expenses-table');
       for(let row = 1, rows = table.rows.length; row < rows; row++) {
 
@@ -171,7 +181,8 @@ if(page == 'expenses.html') {
     function deleteExpense(row) {
     let i = row.parentNode.parentNode.rowIndex;
       document.getElementById("expenses-table").deleteRow(i);
-      
+      expenseCalculator();  // Recalculate the expenses totals
+      drawExpenseChart(); // Redraw the chart if row is deleted
     }
 
     // Expenses page - expense donut chart creator
@@ -205,5 +216,17 @@ if(page == 'expenses.html') {
       window.onload = resize();
       window.onresize = resize;
     }
+}
+
+
+// SAVING-GOALS PAGE JAVASCRIPT - START
+
+if(page == 'saving-goals.html') {
+  let sliderValue = document.getElementById('current-slider-range');
+  let sliderValueDisplay = document.getElementById('slider-goal-value');
+
+  function updateSliderGoalValue() {
+    sliderValueDisplay.innerHTML = sliderValue.value + ' $';
+  }
 }
 
