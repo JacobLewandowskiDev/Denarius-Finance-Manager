@@ -70,7 +70,7 @@ for (i = 0; i < accordions.length; i++) {
 }
 
 
-// EXPENSES PAGE - These functions will run only if the current URL ends with '/expenses.html'
+// EXPENSES PAGE JAVASCRIPT START - These functions will run only if the current URL ends with '/expenses.html'
 if(page == 'expenses.html') {
 
     // Each category of expenses total
@@ -103,7 +103,7 @@ if(page == 'expenses.html') {
 
         // This is the const for the expense category column values
         const expenseCategory = table.rows[row].cells[4].innerHTML;
-        
+
         // Check if expense is of type housing category --> If yes, then proceed to add its cost to the appropriate total
         if(expenseCategory == 'Housing') {
           housingTotal += expenseCost;
@@ -217,16 +217,39 @@ if(page == 'expenses.html') {
       window.onresize = resize;
     }
 }
-
+// EXPENSES PAGE - END
 
 // SAVING-GOALS PAGE JAVASCRIPT - START
-
 if(page == 'saving-goals.html') {
+
+  // Set the <p> tag value to whatever the sliders range indicates
   let sliderValue = document.getElementById('current-slider-range');
   let sliderValueDisplay = document.getElementById('slider-goal-value');
 
   function updateSliderGoalValue() {
     sliderValueDisplay.innerHTML = sliderValue.value + ' $';
   }
+
+  // Input type date - set min value of today's month and year
+  let dateControl = document.getElementById('saving-goal-date');
+  let today = new Date();
+  let month = today.getMonth() + 1;
+  let year = today.getFullYear();
+  
+  // If the month is less then October than add a '0' before the number of the month
+  if(month < 10 && month > 0) {
+    today =  year +"-0" + month; 
+  }
+  // Else keep it as is
+  else {
+    today =  year +"-" + month; 
+  }
+
+  // Set the min value & current value to todays date - Until user changes it to his desired date
+  dateControl.setAttribute('min',today);
+  dateControl.setAttribute('value',today);
+  document.getElementById('saving-date-value').innerHTML = today;
 }
+// SAVING-GOALS PAGE JAVASCRIPT - END
+
 

@@ -39,14 +39,14 @@
 
                     <div id="add-expense">
                         <h3>Add a new Expense</h3>
-                        <form action="add-new-expense" method="POST">
-                            <input name="expense-date" type="date">
+                        <form action="add-new-expense" method="POST">   <!-- Todo - Connect this endpoint -->
+                            <input name="expense-date" type="date" required>
                             <br>
-                            <input name="expense-name" type="text" maxlength="30" placeholder="Expense name">
+                            <input name="expense-name" type="text" maxlength="30" placeholder="Expense name" required>
                             <br>
-                            <input name="expense-cost" type="number" step="0.01"  min="0.00" placeholder="Cost $">
+                            <input name="expense-cost" type="number" step="0.01"  min="0.00" placeholder="Cost $" required>
                             <br>
-                            <select name="expense-category" id="expense-category-select">
+                            <select name="expense-category" id="expense-category-select" required>
                                 <option value="housing">Housing</option>
                                 <option value="transportation">Transportation</option>
                                 <option value="food">Food</option>

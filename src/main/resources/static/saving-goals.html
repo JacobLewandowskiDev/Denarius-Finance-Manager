@@ -47,7 +47,7 @@
     <div id="interface-options">
         <ul id="user-options">
             <li>
-                <a href="userinterface.html" id="user-dashboard-button"><i class="fa fa-tachometer" aria-hidden="true"></i> User Dashboard</a> <!-- Endpoint to /userinterface -->
+                <a href="userinterface.html" id="user-dashboard-button"><i class="fa fa-tachometer" aria-hidden="true"></i> User Dashboard</a>
             </li>
 
             <li>
@@ -55,11 +55,11 @@
                 <div class="panel">
                     <ul class="panel-options-menu">
                         <li>
-                            <a href="expenses.html"><i class="fa fa-minus-circle" aria-hidden="true"></i> Expenses</a> <!-- Endpoint to .../transactions/expenses -->
+                            <a href="expenses.html"><i class="fa fa-minus-circle" aria-hidden="true"></i> Expenses</a> 
                         </li>
 
                         <li>
-                            <a href="income.html"><i class="fa fa-plus-circle" aria-hidden="true"></i> Income</a> <!-- Endpoint to .../transactions/income -->
+                            <a href="income.html"><i class="fa fa-plus-circle" aria-hidden="true"></i> Income</a>
                         </li>
                     </ul>
                 </div>
@@ -70,11 +70,11 @@
                 <div class="panel">
                     <ul class="panel-options-menu">
                         <li>
-                            <a href="saving-goals.html"><i class="fa fa-calendar" aria-hidden="true"></i> Saving Goals</a> <!-- Endpoint to .../savings/goals -->
+                            <a href="saving-goals.html"><i class="fa fa-calendar" aria-hidden="true"></i> Saving Goals</a>
                         </li>
 
                         <li>
-                            <a href="piggy-bank.html"><i class="fa fa-usd" aria-hidden="true"></i> Piggy Bank</a> <!-- Endpoint to .../savings/piggybank -->
+                            <a href="piggy-bank.html"><i class="fa fa-usd" aria-hidden="true"></i> Piggy Bank</a>
                         </li>
                     </ul>
                 </div>
@@ -85,11 +85,11 @@
                 <div class="panel">
                     <ul class="panel-options-menu">
                         <li>
-                            <a href="crypto.html"><i class="fa fa-btc" aria-hidden="true"></i> Cryptocurrency</a> <!-- Endpoint to .../investments/crypto-->
+                            <a href="crypto.html"><i class="fa fa-btc" aria-hidden="true"></i> Cryptocurrency</a>
                         </li>
 
                         <li>
-                            <a href="stocks.html"><i class="fa fa-line-chart" aria-hidden="true"></i> Stocks</a> <!-- Endpoint to .../investments/stocks-->
+                            <a href="stocks.html"><i class="fa fa-line-chart" aria-hidden="true"></i> Stocks</a>
                         </li>
                     </ul>
                 </div>
@@ -103,14 +103,22 @@
 <div id="user-dashboard">
     <h5>Saving goals - How much would you like to save up?</h5>
 
-    <div id="saving-goals-container">
-        <p id="slider-goal-value">0.00 $</p>
-        <input type="range" min="0" max="50000" value="0" class="slider" id="current-slider-range" oninput="updateSliderGoalValue()">
-    </div>
+    <form id="saving-goals-form" action="saving-goals" method="POST">   <!-- To do - Connect this endpoint -->
 
-    <div id="goal-reach-date">
+        <p id="slider-goal-value">0.00 $</p>
+        <input type="range" min="0" max="50000" value="0" class="slider" id="current-slider-range" oninput="updateSliderGoalValue()" required>
+
         <h5>By when do you want to reach this desired amount?</h5>
-        <input type="date" id="saving-goal-date">
+        <input type="month" id="saving-goal-date" required>
+
+        <h5>Check how much you need to be saving each month</h5>
+        <button class="button" type="submit">Calculate</button>
+    </form>
+
+    <div id="saving-goal-result">
+        <h5>You need to save <span class="important-text" id="saving-goal-result-amount">0.00 $</span>  <!-- Todo - Add JS to pull result -->
+            every month to reach your goal by <span class="important-text" id="saving-date-value"></span>.
+        </h5>
     </div>
 </div>
 

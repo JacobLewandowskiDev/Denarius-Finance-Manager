@@ -405,7 +405,7 @@ h5 {
 }
 
     /* EXPENSES SITE CSS - START */
-/* Add new expense to table view */
+/* Expenses - Add new expense to table view */
 #add-expense-container {
     position: absolute;
     display: flex;
@@ -420,7 +420,7 @@ h5 {
     border: 2px solid yellow;
 }
 
-/* Add expense form container */
+/* Expenses - Add expense form container */
 #add-expense {
     display: flex;
     flex-direction: column;
@@ -434,12 +434,12 @@ h5 {
     background-color: #2884bdbb;
 }
 
-/* Remove <h3> margins from the add expenses container */
+/* Expenses - Remove <h3> margins from the add expenses container */
 #add-expense h3 {
     margin: 0;
 }
 
-/* Close add expense viewport */
+/* Expenses - Close add expense viewport */
 #add-expense-close {
     position: absolute;
     top: 0;
@@ -452,19 +452,19 @@ h5 {
     transition: .2s ease-in-out;
 }
 
-/* Hover over close add new expense close view button */
+/* Expenses - Hover over close add new expense close view button */
 #add-expense-close:hover {
     color: #ffbf35;
 }
 
-/* Form layout properties */
+/* Expenses - Form layout properties */
 #add-expense form {
     width: 80%;
     margin: 25px 0;
     text-align: center;
 }
 
-/* Add expenses inputs and select tag properties */
+/* Expenses - Add expenses inputs and select tag properties */
 #add-expense form input, select {
     text-align: center;
     width: 100%;
@@ -475,16 +475,14 @@ h5 {
     font-size: calc(12px + .2vw);
 }
 
-/* Add expenses submit button properites */
+/* Expenses - Add expenses submit button properites */
 #add-expense form button {
     font-size: calc(14px + .2vw);
     width: fit-content;
     padding: 10px;
 }
 
-
-
-/* The sum of the users expenses table container properties */
+/* Expenses - The sum of the users expenses table container properties */
 #sum-table {
     width: 100%;
     text-align: center;
@@ -493,28 +491,28 @@ h5 {
     color: #ffffff;
 }
 
-/* The sum of the users expenses table properties */
+/* Expenses - The sum of the users expenses table properties */
 #sum-table table {
     width: 90%;
     margin-top: 10px;
     text-align: center;
 }
 
-/* Change first and last child <tr> of the sum table */
+/* Expenses - Change first and last child <tr> of the sum table */
 #sum-table table tr:last-child, #sum-table table tr:first-child {
     font-weight: bold;
     color:#ffbf35;
     text-shadow: 2px 1px #000000;
 }
 
-/* The exense overviews container properties */
+/* Expenses - The exense overviews container properties */
 #expenses-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
 }
 
-/* Expenses Donut Chart, and expenses sum containers */
+/* Expenses - Expenses Donut Chart, and expenses sum containers */
 #donut-chart, #expenses-sum {
     margin: 0 auto;
     width: 30%;
@@ -531,7 +529,7 @@ h5 {
     box-shadow: 1px 6px 15px -2px rgba(0,0,0,0.58);
 }
 
-/* Expense tracker Table properties */
+/* Expenses - Expense tracker Table properties */
 #expense-table-container table {
     width: 90%;
     margin: 0 auto;
@@ -543,7 +541,7 @@ h5 {
     box-shadow: 1px 6px 15px -2px rgba(0,0,0,0.58);
 }
 
-/* Change font to 'DOSIS' in expense tracker table */
+/* Expenses - Change font to 'DOSIS' in expense tracker table */
 #expense-table-container table th, td, tr {
     font-family: 'Dosis','Times New Roman', sans-serif;
 }
@@ -556,20 +554,20 @@ h5 {
     background-color: #54b0e9;
 }
 
-/* Change the first child <tr> tag of the expense tracker table */
+/* Expenses - Change the first child <tr> tag of the expense tracker table */
 #expense-table-container table tr:first-child {
     background-color: rgb(1, 139, 224);
     color:#ffbf35;
     text-shadow: 2px 1px #000000;
 }
 
-/* Increment the number of the table row with each one */
+/* Expenses - Increment the number of the table row with each one */
 #expense-table-container table tr td:first-child:before{
     counter-increment: Serial;      /* Increment the Serial counter */
     content:counter(Serial);        /* Display the counter */
   }
 
-/* Clickable edit, delete, and add new expense button properties*/
+/* Expenses - Clickable edit, delete, and add new expense button properties*/
 .button, #new-expense-button {
     cursor: pointer;
     font-size: calc(12px + .2vw);
@@ -584,19 +582,19 @@ h5 {
     font-weight: bold;
     transition: .2s ease-in-out;
 }
-
+/*  Expenses - button hover */
 .button:hover, #new-expense-button:hover {
     background-color: #ffbf35;
     color:rgb(23, 135, 204);
 }
 
-/* Change width of add new expense button container and center it */
+/* Expenses - Change width of add new expense button container and center it */
 #new-expense {
     width: fit-content;
     margin: 0 auto;
 }
 
-/* Set the width of the add new button and its font properties */
+/* Expenses - Set the width of the add new button and its font properties */
 #new-expense-button {
     width: 200px;
     font-size: calc(18px + .2vw);
@@ -604,9 +602,12 @@ h5 {
     margin: 20px 0;
 }
 
+    /* EXPENSES SITE CSS - END */
+
+
 /* SAVING GOALS CSS -START */
-/* Container for all the inputs, sliders etc for '/saving-goals.html */
-#saving-goals-container {
+/* Saving goals - Container for all the inputs, sliders etc for '/saving-goals.html */
+#saving-goals-form {
     width: 90%;
     height: fit-content;
     margin: 0 auto;
@@ -617,15 +618,44 @@ h5 {
     flex-direction: column;
 }
 
-#saving-goals-container p {
-    font-size: 30px;
+/* Saving goals - Amount of money user wants to save up <p> tag */
+#saving-goals-form p {
+    font-size: 40px;
     text-decoration: underline;
     color:#eebd53;
     font-family: 'Rambla', 'Times New Roman', sans-serif;
     text-shadow: 2px 1px #000000;
 }
 
-/* The slider itself */
+/* Saving goals - Form submit button properties */
+#saving-goals-form button {
+    width: fit-content;
+    font-size: calc(30px + .1vw);
+    margin-top: 30px;
+    padding: 10px;
+}
+
+/* Saving goals - Date picker properties */
+#saving-goal-date {
+    width: fit-content;
+    height: 50px;
+    font-size: calc(15px + .1vw);
+    border-radius: 5px;
+    margin-top: 20px;
+    text-align: center;
+    -webkit-box-shadow: 1px 6px 15px -2px rgba(0,0,0,0.58); 
+    box-shadow: 1px 6px 15px -2px rgba(0,0,0,0.58);
+}
+
+/* Saving goals - Change important text properties */
+.important-text {
+    color:#eebd53;
+    font-family: 'Rambla', 'Times New Roman', sans-serif;
+    text-shadow: 2px 1px #000000;
+}
+
+
+/* Saving goals - The slider itself */
 .slider {
     -webkit-appearance: none;  /* Override default CSS styles */
     appearance: none;
@@ -642,27 +672,31 @@ h5 {
     box-shadow: 1px 6px 15px -2px rgba(0,0,0,0.58);
   }
   
-  /* Mouse-over effects */
+  /* Saving goals - Mouse-over effects */
   .slider:hover {
     opacity: 1; /* Fully shown on mouse-over */
   }
   
-  /* The slider handles (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+  /* Saving goals - The slider handles (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
   .slider::-webkit-slider-thumb {
     -webkit-appearance: none; /* Override default look */
     appearance: none;
     width: 40px; 
     height: 25px;
     border-radius: 15px;
-    background: #ffcc5d;
+    background: rgb(23, 135, 204);
+    outline: 3px #bbe5ff solid;
     cursor: pointer; 
   }
   
-  /* The slider handles -moz- (Firefox) to override default look) */
+  /* Saving goals - The slider handles -moz- (Firefox) to override default look) */
   .slider::-moz-range-thumb {
     width: 40px; 
     height: 25px; 
     border-radius: 15px;
-    background: #ffcc5d; 
+    background: rgb(23, 135, 204); 
+    outline: 3px #bbe5ff solid;
     cursor: pointer;
   }
+
+    /* SAVING GOALS CSS - END */
