@@ -57,7 +57,6 @@ for (i = 0; i < accordions.length; i++) {
     /* Toggle between adding and removing the "active" class,
     to highlight the button that controls the panel */
     this.classList.toggle("active");
-    
 
     /* Toggle between hiding and showing the active panel */
     let panel = this.nextElementSibling;
@@ -95,6 +94,7 @@ if(page == 'expenses.html') {
        personalTotal = 0.00;
        totalExpenses = 0.00;
 
+       // Calculate the expenses loop
       let table = document.getElementById('expenses-table');
       for(let row = 1, rows = table.rows.length; row < rows; row++) {
 
@@ -148,10 +148,10 @@ if(page == 'expenses.html') {
       document.getElementById('totalExpenses').innerHTML = totalExpenses + ' $';
     }
 
+    // Funcition to be implemented
     function addNewExpense() {
       expenseCalculator();
     }
-
 
     // Add expense view status
     let addExpenseOpen = false;

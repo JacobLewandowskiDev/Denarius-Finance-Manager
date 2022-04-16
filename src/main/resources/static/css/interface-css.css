@@ -639,12 +639,20 @@ h5 {
 #saving-goal-date {
     width: fit-content;
     height: 50px;
-    font-size: calc(15px + .1vw);
+    font-size: calc(17px + .1vw);
+    border: 3px solid #ffc23e;
     border-radius: 5px;
     margin-top: 20px;
     text-align: center;
-    -webkit-box-shadow: 1px 6px 15px -2px rgba(0,0,0,0.58); 
-    box-shadow: 1px 6px 15px -2px rgba(0,0,0,0.58);
+    background-color:#eebd53;
+    color: #ffffff;
+    cursor: pointer;
+    transition: .3s ease-in-out;
+}
+
+#saving-goal-date:hover {
+    background-color: #ffbf35;
+    color:rgb(23, 135, 204);
 }
 
 /* Saving goals - Change important text properties */

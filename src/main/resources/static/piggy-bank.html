@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="images/dollar.png">
+  <link rel="stylesheet" href="css/interface-css.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rambla:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@300;500&display=swap" rel="stylesheet">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
+  <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+  <title>Denarius - Piggy bank</title>
+</head>
+<body>
+<!-- Logout bar -->
+<!-- Webapp Logo -->
+<div id="logout-bar">
+  <div id="project-info-container">
+    <img id="project-logo" src="images/dollar.png">
+    <div id="project-name">DENARIUS</div>
+  </div>
+
+  <!-- Logout button -->
+  <div id="log-out-container">
+    <form action="/logout" METHOD="GET">
+      <button id="log-out-button" type="submit"><i class="fa fa-sign-out" aria-hidden="true"></i> <span>Log out</span></button>
+    </form>
+  </div>
+</div>
+
+<!-- User interface menu button -->
+<div id="burger-menu" onclick="toggleInterfaceMenu();">
+  <i class="fa fa-times fa-3x" aria-hidden="true"></i>
+</div>
+
+<!-- User interface menu container -->
+<div id="user-menu-container">
+  <div id="menu">
+    <div>
+      <h4>User interface</h4>
+    </div>
+  </div>
+
+  <!-- These are the user interface menu options -->
+  <div id="interface-options">
+    <ul id="user-options">
+      <li>
+        <a href="userinterface.html" id="user-dashboard-button"><i class="fa fa-tachometer" aria-hidden="true"></i> User Dashboard</a>
+      </li>
+
+      <li>
+        <button class="accordion"><i class="fa fa-exchange" aria-hidden="true"></i> Transactions</button>
+        <div class="panel">
+          <ul class="panel-options-menu">
+            <li>
+              <a href="expenses.html"><i class="fa fa-minus-circle" aria-hidden="true"></i> Expenses</a>
+            </li>
+
+            <li>
+              <a href="income.html"><i class="fa fa-plus-circle" aria-hidden="true"></i> Income</a>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <li>
+        <button class="accordion"><i class="fa fa-university" aria-hidden="true"></i> Savings</button>
+        <div class="panel">
+          <ul class="panel-options-menu">
+            <li>
+              <a href="saving-goals.html"><i class="fa fa-calendar" aria-hidden="true"></i> Saving Goals</a>
+            </li>
+
+            <li>
+              <a href="piggy-bank.html"><i class="fa fa-usd" aria-hidden="true"></i> Piggy Bank</a>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+      <li>
+        <button class="accordion"><i class="fa fa-money" aria-hidden="true"></i> Investments</button>
+        <div class="panel">
+          <ul class="panel-options-menu">
+            <li>
+              <a href="crypto.html"><i class="fa fa-btc" aria-hidden="true"></i> Cryptocurrency</a>
+            </li>
+
+            <li>
+              <a href="stocks.html"><i class="fa fa-line-chart" aria-hidden="true"></i> Stocks</a>
+            </li>
+          </ul>
+        </div>
+      </li>
+
+    </ul>
+  </div>
+</div>
+
+<!-- This is the user dashboard viewport -->
+<div id="user-dashboard">
+
+</div>
+
+<script src="js/userinterface-js.js" defer></script>
+</body>
+</html>
