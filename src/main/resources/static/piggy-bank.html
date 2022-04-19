@@ -101,7 +101,25 @@
 
 <!-- This is the user dashboard viewport -->
 <div id="user-dashboard">
+  <h3>Piggy bank</h3>
 
+  <h5>How much have you managed to add to your savings account?</h5>
+  <br>
+  <form id="addToPiggy">
+    <input id="addedPiggyBankValue" type="number" step="0.01" placeholder="0.00 $" min="0.00" max="50000">
+    <br>
+    <br>
+    <button class="button" type="submit" onclick="">Add To Piggy Bank</button>
+  </form>
+
+  <h5> The percentage you have reached of your savings goal</h5>
+  <br>
+  <div id="the-piggy-bank">
+    <img src="images/piggy- bank-transparent.png">
+    <div id="percentage-container">
+      <h5 id="current-saving-percentage">0%</h5>
+    </div>
+  </div>
 </div>
 
 <script src="js/userinterface-js.js" defer></script>
