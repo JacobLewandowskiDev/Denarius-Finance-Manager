@@ -612,9 +612,14 @@ h5 {
     margin: 0 auto;
     margin-top: 30px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    flex-direction: column;
+}
+
+.savings-form-inner-container {
+    width: 40%;
+    text-align: center;
+    border: 2px solid red;
 }
 
 /* Saving goals - Amount of money user wants to save up <p> tag */
@@ -661,60 +666,86 @@ h5 {
     text-shadow: 2px 1px #000000;
 }
 
-
 /* Saving goals - The slider itself */
-.slider {
-    -webkit-appearance: none;  /* Override default CSS styles */
-    appearance: none;
-    width: 80%;
-    height: 25px;
-    margin-top: 10px;
-    background: #ffffff; /* Grey background */
-    outline: 3px #7accff solid;
-    border-radius: 15px;
-    opacity: .9; /* Set transparency (for mouse-over effects on hover) */
-    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
-    transition: opacity .2s;
-    -webkit-box-shadow: 1px 6px 15px -2px rgba(0,0,0,0.58); 
-    box-shadow: 1px 6px 15px -2px rgba(0,0,0,0.58);
-  }
+  @media screen and (-webkit-min-device-pixel-ratio:0) {
+    .slider {
+        -webkit-appearance: none;  /* Override default CSS styles */
+        appearance: none;
+        width: 100%;
+        height: 25px;
+        margin-top: 10px;
+        background: #ffffff; /* White background */
+        outline: 3px #7accff solid;
+        border-radius: 15px;
+        opacity: .9; /* Set transparency (for mouse-over effects on hover) */
+        -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+        transition: opacity .2s;
+        -webkit-box-shadow: 1px 6px 15px -2px rgba(0,0,0,0.58); 
+        box-shadow: 1px 6px 15px -2px rgba(0,0,0,0.58);
+        overflow: hidden;
+    }
   
-  /* Saving goals - Mouse-over effects */
-  .slider:hover {
-    opacity: 1; /* Fully shown on mouse-over */
-  }
-  
-  /* Saving goals - The slider handles (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
-  .slider::-webkit-slider-thumb {
-    -webkit-appearance: none; /* Override default look */
-    appearance: none;
-    width: 40px; 
-    height: 25px;
-    border-radius: 15px;
-    background: rgb(23, 135, 204);
-    outline: 3px #bbe5ff solid;
-    cursor: pointer; 
-  }
-  
-  /* Saving goals - The slider handles -moz- (Firefox) to override default look) */
-  .slider::-moz-range-thumb {
-    width: 40px; 
-    height: 25px; 
-    border-radius: 15px;
-    background: rgb(23, 135, 204); 
-    outline: 3px #bbe5ff solid;
-    cursor: pointer;
-  }
+    /* Saving goals - Mouse-over effects */
+    .slider:hover {
+        opacity: 1; /* Fully shown on mouse-over */
+    }
+    
+    /* Saving goals - The slider handles (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+    .slider::-webkit-slider-thumb {
+        -webkit-appearance: none; /* Override default look */
+        appearance: none;
+        width: 40px; 
+        height: 25px;
+        border-radius: 15px;
+        background: rgb(23, 135, 204);
+        outline: 3px #bbe5ff solid;
+        cursor: pointer; 
+    }
+    
+    /* Saving goals - The slider handles -moz- (Firefox) to override default look) */
+    .slider::-moz-range-thumb {
+        width: 40px; 
+        height: 25px; 
+        border-radius: 15px;
+        background: rgb(23, 135, 204); 
+        outline: 3px #bbe5ff solid;
+        cursor: pointer;
+    }
+    
+    input[type='range']::-webkit-slider-thumb {
+      width: 20px;
+      height: 20px;
+      -webkit-appearance: none;
+      cursor: ew-resize;
+      background: rgb(23, 135, 204);
+      box-shadow: -80000px 0 25px 80000px #eebd53;
+    }
 
-    /* SAVING GOALS CSS - END */
+    /** FF*/
+    input[type="range"]::-moz-range-progress {
+        background-color: #eebd53; 
+    }
+    input[type="range"]::-moz-range-track {  
+        background-color: #ffffff;
+    }
+    /* IE*/
+    input[type="range"]::-ms-fill-lower {
+        background-color: #eebd53; 
+    }
+    input[type="range"]::-ms-fill-upper {  
+        background-color: #ffffff;
+    }
+}
 
-    /* Piggy Bank CSS - START */
+    /* Piggy Bank CSS */
+    /* Add to the piggybank form properties */
     #addToPiggy {
         width: 70%;
         margin: 0 auto;
         text-align: center;
     }
 
+    /* Add to the piggy bank form input properties */
     #addToPiggy input {
         width: 150px;
         height: 50px;
@@ -724,6 +755,7 @@ h5 {
         border: none;
     }
 
+    /* Add to the piggy bank form button properties */
     #addToPiggy button {
         width: fit-content;
         height: fit-content;
@@ -731,7 +763,8 @@ h5 {
         padding: 5px;
     }
 
-    #the-piggy-bank {
+    /* Piggy bank container properties */
+    #piggy-bank-container {
         position: relative;
         display: flex;
         width: fit-content;
@@ -739,22 +772,33 @@ h5 {
         text-align: center;
     }
 
-    #the-piggy-bank img {
+    /* Piggy bank image z-index */
+    #piggy-image {
+        z-index: 1000;
+    }
+
+    /* Piggy bank image sizing */
+    #piggy-image img {
         min-width: 260px;
         max-width: 25vw;
     }
 
+    /* Percentage text container */
     #percentage-container {
         position: absolute;
         width: 100%;
-        height: 100%;
+        height: 95%;
+        bottom: 5%;
         display: flex;
         justify-content: center;
         align-items: center;
-        top: -1.5vw;
+        background-color: rgb(226, 223, 10);
+        z-index: 10;
     }
 
+    /* Percentage text properties */
     #percentage-container h5 {
         font-size: calc(30px + .7vw);
-
     }
+
+/* SAVING GOALS CSS - END */
