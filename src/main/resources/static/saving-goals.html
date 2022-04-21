@@ -89,36 +89,39 @@
 
 <!-- This is the user dashboard viewport -->
 <div id="user-dashboard">
-    <h3>Saving goals</h3>
+    <!-- These are the first 3 steps of saving goals -->
+    <h3>Saving goals - In 4 Easy Steps</h3>
     
-    
-
     <form id="saving-goals-form" action="saving-goals" method="POST">   <!-- To do - Connect this endpoint -->
-        <div class="savings-form-inner-container">
-            <h5>How much would you like to save up?</h5>
-            <p id="slider-goal-value">0.00 $</p>
-            <input type="range" min="0" max="50000" value="0" class="slider" id="current-slider-range" oninput="updateSliderGoalValue()" required>
-        </div>
-        
-        <div class="savings-form-inner-container">
-            <h5>By when do you want to reach this desired amount?</h5>
-            <input type="month" id="saving-goal-date" required>
-        </div>
-      
-        <div class="savings-form-inner-container">
-            <h5>Check how much you need to be saving each month</h5>
-            <button class="button" type="submit">Calculate</button>
+        <div id="steps-1-to-3"> 
+            <div class="savings-form-inner-container">
+                <h5><span class="important-text">Step 1:</span> How much would you like to save up?</h5>
+                <p id="slider-goal-value">0 $</p>
+                <input type="range" min="0" max="50000" value="0" step="100" class="slider" id="current-slider-range" oninput="updateSliderGoalValue()" required>
+            </div>
+            
+            <div class="savings-form-inner-container">
+                <h5><span class="important-text">Step 2:</span> By when do you want to reach this desired amount?</h5>
+                <input type="month" id="saving-goal-date" required>
+            </div>
+
+            <div class="savings-form-inner-container">
+                <h5><span class="important-text">Step 3:</span> Check how much you need to be saving each month</h5>
+                <button class="button" type="submit">Calculate</button>
+            </div>
         </div>
     </form>
 
-    <div id="saving-goal-result">
+    <div id="saving-goal-result"> <!-- Hidden by default, appears when form is submited and calculations have been performed -->
         <h5>You need to save <span class="important-text" id="saving-goal-result-amount">0.00 $</span>  <!-- Todo - Add JS to pull result -->
             every month to reach your goal by <span class="important-text" id="saving-date-value"></span>.
         </h5>
     </div>
 
-    <div>   
-        <h5>How much have you managed to add to your savings account?</h5>
+    <br>
+
+    <div id="the-piggy-bank">   
+        <h5><span class="important-text">Step 4:</span>How much have you managed to add to your savings account?</h5>
         <br>
         <form id="addToPiggy">
           <input id="addedPiggyBankValue" type="number" step="0.01" placeholder="0.00 $" min="0.00" max="50000">
