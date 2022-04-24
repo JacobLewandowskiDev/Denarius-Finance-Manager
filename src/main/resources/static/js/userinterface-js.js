@@ -7,11 +7,30 @@ const interfaceMenuPosition = document.getElementById('user-menu-container');
 const burgerButtonPosition = document.getElementById('burger-menu');
 const userDashboard = document.getElementById('user-dashboard');
 let isMenuOpen = true;
+let newOpenedInterfaceMenuPosition;
+let newClosedInterfaceMenuPosition;
+let newOpenedBurgerButtonPosition;
+let newClosedBurgerButtonPosition;
 
 function toggleInterfaceMenu() {
+  const windowWidth = window.innerWidth;
+    if(windowWidth > 430) {
+      newOpenedBurgerButtonPosition = '250px';
+      newClosedBurgerButtonPosition = '0px';
+      newOpenedInterfaceMenuPosition = '0px';
+      newClosedInterfaceMenuPosition = '-256px';
+    }
+
+    else if(windowWidth <= 430) {
+      newOpenedBurgerButtonPosition = '208px';
+      newClosedBurgerButtonPosition = '0px';
+      newOpenedInterfaceMenuPosition = '0px';
+      newClosedInterfaceMenuPosition = '-207px';
+    }
+
     if(isMenuOpen == false) {
-        interfaceMenuPosition.style.left = '0';
-        burgerButtonPosition.style.left = '250px';
+        interfaceMenuPosition.style.left = newOpenedInterfaceMenuPosition;
+        burgerButtonPosition.style.left = newOpenedBurgerButtonPosition;
         burgerButtonPosition.innerHTML = '<i class="fa fa-times fa-3x" aria-hidden="true"></i>';
         burgerButtonPosition.style.transition = '.5s ease-in-out';
         interfaceMenuPosition.style.transition = '.5s ease-in-out';
@@ -22,8 +41,8 @@ function toggleInterfaceMenu() {
     }
 
     else if(isMenuOpen == true) {
-        interfaceMenuPosition.style.left = '-256px';
-        burgerButtonPosition.style.left = '0px';
+        interfaceMenuPosition.style.left = newClosedInterfaceMenuPosition;
+        burgerButtonPosition.style.left = newClosedBurgerButtonPosition;
         burgerButtonPosition.innerHTML = '<i class="fa fa-bars fa-3x" aria-hidden="true"></i>';
         interfaceMenuPosition.style.transition = '.5s ease-in-out';
         burgerButtonPosition.style.transition = '.5s ease-in-out';
@@ -35,13 +54,23 @@ function toggleInterfaceMenu() {
 
     // Change the width of the user dashboard, depends on the isMenuOpen letiable
     function toggleDashboardWidth() {
+        if(windowWidth > 430) {
+          calculatedDashboardWidthOpen = 'calc(100vw - 262px)';
+          calculatedDashboardWidthClosed = 'calc(100vw - 7px)';
+        }
+        else if(windowWidth <= 430) {
+          calculatedDashboardWidthOpen = 'calc(100vw - 210px)';
+          calculatedDashboardWidthClosed = 'calc(100vw - 3px)';
+        }
+
         if(isMenuOpen == false) {
-            userDashboard.style.width = 'calc(100vw - 262px)';
+      
+            userDashboard.style.width = calculatedDashboardWidthOpen;
             userDashboard.style.transition = '.5s ease-in-out';
         }
 
         if(isMenuOpen == true) {
-            userDashboard.style.width = 'calc(100vw - 7px)';
+            userDashboard.style.width = calculatedDashboardWidthClosed;
             userDashboard.style.transition = '.5s ease-in-out';
         }
     }

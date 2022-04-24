@@ -311,7 +311,8 @@ h5 {
 #user-dashboard h3 {
     display: flex;
     justify-content: center;
-    margin-top: 20px;
+    margin-top: 60px;
+    text-align: center;
     text-decoration: underline;
     text-underline-offset: 2px;
 }
@@ -624,23 +625,25 @@ h5 {
 .savings-form-inner-container {
     width: 40%;
     min-width: 260px;
-    min-height: 100%;
-    padding: 20px;
-    margin: 0 auto;
+    padding: 10px;
+    margin: 6px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex: 1 0 50%;
+    flex: 1 0 45%;
+    border: 4px #7dcdff solid;
+    background-color: #1e94dd;
+    border-radius: 10px;
+    -webkit-box-shadow: 1px 6px 15px -2px rgb(0 0 0 / 58%);
+    box-shadow: 1px 6px 15px -2px rgb(0 0 0 / 58%);
 }
 
 /* Set the 3rd step to take up 100% of the viewport width */
 .savings-form-inner-container:nth-child(3) {
-    width: 100%;
-    min-width: 260px;
     display: flex;
-    flex-basis: 100%;
-
+    flex-basis: 80%;
+    min-width: 260px;
 }
 
 /* Saving goals - Amount of money user wants to save up <p> tag */
@@ -689,7 +692,9 @@ h5 {
     width: fit-content;
     padding: 10px;
     margin: 0 auto;
-    visibility: hidden;
+    width: 90%;
+    min-width: 260px;
+    display: none; /* Change this property with JS when a calculation request is sent */
 }
 
 /* Saving goals - Change important text properties */
@@ -773,15 +778,49 @@ h5 {
 }
 
     /* Piggy Bank CSS */
+    /* The piggy bank step container */
+    #savings-container {
+        width: 90%;
+        margin: 0 auto;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: stretch;
+        flex-wrap: wrap;
+    }
+
+    .savings-inner-container {
+        margin: 10px;
+        min-width: 260px;
+        flex: 1;
+    }
+    
+
+    .savings-inner-container:first-child {
+        border: 4px #7dcdff solid;
+        background-color: #1e94dd;
+        height: fit-content;
+        padding: 10px;
+        border-radius: 10px;
+        -webkit-box-shadow: 1px 6px 15px -2px rgb(0 0 0 / 58%);
+        box-shadow: 1px 6px 15px -2px rgb(0 0 0 / 58%);
+    }
+
+    .savings-inner-container:nth-child(2) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
     /* Add to the piggybank form properties */
-    #addToPiggy {
+    #addToSavings {
         width: 70%;
         margin: 0 auto;
         text-align: center;
     }
 
     /* Add to the piggy bank form input properties */
-    #addToPiggy input {
+    #addToSavings input {
         width: 150px;
         height: 50px;
         font-size: 25px;
@@ -791,49 +830,148 @@ h5 {
     }
 
     /* Add to the piggy bank form button properties */
-    #addToPiggy button {
+    #addToSavings button {
         width: fit-content;
         height: fit-content;
         font-size: 25px;
         padding: 5px;
     }
 
-    /* Piggy bank container properties */
-    #piggy-bank-container {
+    /* Savings percentage container */
+    #wave-container {
         position: relative;
-        display: flex;
-        width: fit-content;
-        margin: 0 auto;
-        text-align: center;
-    }
-
-    /* Piggy bank image z-index */
-    #piggy-image {
-        z-index: 1000;
-    }
-
-    /* Piggy bank image sizing */
-    #piggy-image img {
-        min-width: 260px;
-        max-width: 25vw;
-    }
-
-    /* Percentage text container */
-    #percentage-container {
-        position: absolute;
-        width: 100%;
-        height: 95%;
-        bottom: 5%;
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: rgb(226, 223, 10);
-        z-index: 10;
+        width: 15vw;
+        min-width: 240px;
+        height: 15vw;
+        min-height: 240px;
+        border-radius: 50%;
+        border: 6px #7dcdff solid;
+        background-color: #1e94dd;
+        box-shadow: 0 0 25px rgba(0, 0, 0, .5);
+        overflow: hidden;
+    }
+
+    /* Waves within the savings container */
+    .wave {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        bottom: -110%; /* This value is to be changed according to the percentage of savings in the project. */
+        /*How to calculate: 100% + bottom + 10% = actual savings level; ex. bottom:-80% --> 30% savings; bottom:-20% --> 90% savings  */
+        border-radius: 100%;
+    }
+
+    .wave::before, .wave::after {
+        content: '';
+        position: absolute;
+        width: 200%;
+        height: 200%;
+        top: 20%; 
+        left: -35%;
+        transform: translate(-50%, -75%);
+        background: #000;
+    }
+
+    .wave::before {
+        border-radius: 45%;
+        background: #ecad25e0;
+        animation: waves 12s linear infinite;
+    }
+
+    .wave::after {
+        border-radius: 45%;
+        background:  #ffbf35;
+        animation: waves 15s linear infinite;
+    }
+
+    /* Wave animation */
+    @keyframes waves {
+        0% {
+            transform: translate(-10%, -15%) rotate(0deg);
+        }
+        
+        100% {
+            transform: translate(-10%, -15%)  rotate(360deg);
+        }
+    }
+
+    /* Percentage container */
+    #percentage {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
     }
 
     /* Percentage text properties */
-    #percentage-container h5 {
-        font-size: calc(30px + .7vw);
+    #percentage p {
+        color: #ffffff;
+        text-shadow: 2px 1px #000000;
+        font-size: calc(20px + 1vw);
+        z-index: 100;
+    }
+/* SAVING GOALS CSS - END */
+
+/* MEDIA QUERIES */
+/* Change the user interface menu when viewport size smaller or equal to 430px */
+@media screen and (max-width: 430px) {
+    #user-menu-container {
+        width: 210px;
     }
 
-/* SAVING GOALS CSS - END */
+    #user-options {
+        text-align: left;
+    }
+
+    #burger-menu {
+        left: 208px;
+        width: fit-content;
+    }
+
+    #burger-menu i {
+        padding: 3px;
+    }
+
+    #user-dashboard {
+        width: calc(100vw - 210px);
+    }
+
+    .accordion, #user-dashboard-button {
+        padding: 12px;
+    }
+
+    #project-logo {
+        display: none;
+    }
+
+    #logout-text {
+        display: none;
+    }
+
+    #project-name {
+        font-size: 2rem;
+    }
+}
+
+/* Change the size of the expenses table when viewport size smaller or equal to 350px */
+@media screen and (max-width:350px) {
+
+    #expense-table-container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    #expense-table-container table {
+        margin: 0;
+        font-size: calc(10px + .1vw);
+    }
+}

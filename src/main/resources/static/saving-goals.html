@@ -25,7 +25,7 @@
     <!-- Logout button -->
     <div id="log-out-container">
         <form action="/logout" METHOD="GET">
-            <button id="log-out-button" type="submit"><i class="fa fa-sign-out" aria-hidden="true"></i> <span>Log out</span></button>
+            <button id="log-out-button" type="submit"><i class="fa fa-sign-out" aria-hidden="true"></i> <span id="logout-text">Log out</span></button>
         </form>
     </div>
 </div>
@@ -90,9 +90,9 @@
 <!-- This is the user dashboard viewport -->
 <div id="user-dashboard">
     <!-- These are the first 3 steps of saving goals -->
-    <h3>Saving goals - In 4 Easy Steps</h3>
+    <h3>Saving goals - In 5 Easy Steps</h3>
     
-    <form id="saving-goals-form" action="saving-goals" method="POST">   <!-- To do - Connect this endpoint -->
+    <div id="saving-goals-form"> 
         <div id="steps-1-to-3"> 
             <div class="savings-form-inner-container">
                 <h5><span class="important-text">Step 1:</span> How much would you like to save up?</h5>
@@ -107,10 +107,10 @@
 
             <div class="savings-form-inner-container">
                 <h5><span class="important-text">Step 3:</span> Check how much you need to be saving each month</h5>
-                <button class="button" type="submit">Calculate</button>
+                <button class="button" onclick="">Calculate</button>
             </div>
         </div>
-    </form>
+    </div>
 
     <div id="saving-goal-result"> <!-- Hidden by default, appears when form is submited and calculations have been performed -->
         <h5>You need to save <span class="important-text" id="saving-goal-result-amount">0.00 $</span>  <!-- Todo - Add JS to pull result -->
@@ -118,32 +118,32 @@
         </h5>
     </div>
 
-    <br>
+    <div id="savings-container">   
+        <div class="savings-inner-container">
+            <h5><span class="important-text">Step 4:</span> How much have you managed to add to your savings account?</h5>
+            <br>
+            <form id="addToSavings" action="add-saving" method="POST"> <!-- Connect this Endpoint -->
+                <input id="addedSavingValue" type="number" step="0.01" placeholder="0.00 $" min="0.00" max="50000">
+                <br>
+                <br>
+                <button class="button" type="submit" onclick="">Add To Your savings</button>
+              </form>
+        </div>      
+      
+        <div class="savings-inner-container">
+            <h5><span class="important-text">Step 5:</span> Your progress in achieving your savings goal</h5>
 
-    <div id="the-piggy-bank">   
-        <h5><span class="important-text">Step 4:</span>How much have you managed to add to your savings account?</h5>
-        <br>
-        <form id="addToPiggy">
-          <input id="addedPiggyBankValue" type="number" step="0.01" placeholder="0.00 $" min="0.00" max="50000">
-          <br>
-          <br>
-          <button class="button" type="submit" onclick="">Add To Piggy Bank</button>
-        </form>
-      
-        <h5> The percentage you have reached of your savings goal</h5>
-        <br>
-      
-        <div id="piggy-bank-container">
-          <div id="piggy-image">
-            <img src="images/piggy- bank-transparent.png">
-          </div>
-      
-          <div id="percentage-container">
-            <h5 id="current-saving-percentage">0%</h5>
-          </div>
+            <br> 
+
+            <div id="wave-container">
+                <div id="percentage">
+                    <p id="current-saving-percentage">0%</p>
+                </div>
+                <div class="wave"></div>
+            </div>
         </div>
-        
-      </div>
+
+    </div>
 </div>
 
 <script src="js/userinterface-js.js" defer></script>

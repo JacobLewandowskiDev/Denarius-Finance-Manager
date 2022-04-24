@@ -25,7 +25,7 @@
                     <!-- Logout button -->
                     <div id="log-out-container">
                         <form action="/logout" METHOD="GET">
-                            <button id="log-out-button" type="submit"><i class="fa fa-sign-out" aria-hidden="true"></i> <span>Log out</span></button>
+                            <button id="log-out-button" type="submit"><i class="fa fa-sign-out" aria-hidden="true"></i> <span id="logout-text">Log out</span></button>
                         </form>
                     </div>
                 </div>
@@ -180,7 +180,9 @@
 
                     <div id="expense-table-container">
 
-                        <div id="new-expense"><button id="new-expense-button" onclick="showAddExpenseView()">Add new Expense</button></div>
+                        <form action="add-expnese" method="POST"> <!-- Connect this Endpoint -->
+                            <div id="new-expense"><button id="new-expense-button" onclick="showAddExpenseView()">Add new Expense</button></div>
+                        </form>
 
                        <table id="expenses-table">
                            <tr>
