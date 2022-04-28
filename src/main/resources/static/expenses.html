@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@300;500&display=swap" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <title>Denarius - Transactions</title>
+    <title>Denarius - Expenses</title>
 </head>
 <body>
     <!-- Logout bar -->    
@@ -39,7 +39,7 @@
 
                     <div id="add-expense">
                         <h3>Add a new Expense</h3>
-                        <form action="add-new-expense" method="POST">   <!-- Todo - Connect this endpoint -->
+                        <div id="add-new-expense">
                             <input name="expense-date" type="date" required>
                             <br>
                             <input name="expense-name" type="text" maxlength="30" placeholder="Expense name" required>
@@ -55,8 +55,9 @@
                                 <option value="personal">Personal</option>
                             </select>
                             <br>
-                            <button class="button" type="submit" onclick="addNewExpense()">Add expense</button>
-                        </form>
+                            <button class="button" onclick="addNewExpense()">Add expense</button>
+                        </div>
+                         
                     </div>
                 </div>
       
@@ -108,7 +109,7 @@
                                 <div class="panel">
                                     <ul class="panel-options-menu">
                                         <li>
-                                            <a href="crypto.html"><i class="fa fa-btc" aria-hidden="true"></i> Cryptocurrency</a> <!-- Endpoint to .../investments/crypto-->
+                                            <a href="crypto.html"><i class="fa fa-btc" aria-hidden="true"></i> Price Tracker</a> <!-- Endpoint to .../investments/crypto-->
                                         </li>
                                     </ul>
                                 </div>
@@ -178,11 +179,9 @@
 
                     <h4> List Of Your Expenses</h4>
 
-                    <div id="expense-table-container">
+                    <div id="table-container">
 
-                        <form action="add-expnese" method="POST"> <!-- Connect this Endpoint -->
                             <div id="new-expense"><button id="new-expense-button" onclick="showAddExpenseView()">Add new Expense</button></div>
-                        </form>
 
                        <table id="expenses-table">
                            <tr>

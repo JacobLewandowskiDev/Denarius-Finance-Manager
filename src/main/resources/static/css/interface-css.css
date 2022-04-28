@@ -418,7 +418,6 @@ h5 {
     height: 100vh;
     background-color: #152a47ad;
     z-index: 1000;
-    border: 2px solid yellow;
 }
 
 /* Expenses - Add expense form container */
@@ -459,14 +458,14 @@ h5 {
 }
 
 /* Expenses - Form layout properties */
-#add-expense form {
+#add-new-expense {
     width: 80%;
     margin: 25px 0;
     text-align: center;
 }
 
 /* Expenses - Add expenses inputs and select tag properties */
-#add-expense form input, select {
+#add-new-expense input, select {
     text-align: center;
     width: 100%;
     height: 40px;
@@ -477,7 +476,7 @@ h5 {
 }
 
 /* Expenses - Add expenses submit button properites */
-#add-expense form button {
+#add-new-expense button {
     font-size: calc(14px + .2vw);
     width: fit-content;
     padding: 10px;
@@ -531,7 +530,7 @@ h5 {
 }
 
 /* Expenses - Expense tracker Table properties */
-#expense-table-container table {
+#table-container table {
     width: 90%;
     margin: 0 auto;
     text-align: center;
@@ -542,28 +541,30 @@ h5 {
     box-shadow: 1px 6px 15px -2px rgba(0,0,0,0.58);
 }
 
+
+
 /* Expenses - Change font to 'DOSIS' in expense tracker table */
-#expense-table-container table th, td, tr {
+#table-container table th, td, tr {
     font-family: 'Dosis','Times New Roman', sans-serif;
 }
 
-#expense-table-container table tr:nth-child(odd) {
+#table-container table tr:nth-child(odd) {
     background-color: #1e94dd;
 }
 
-#expense-table-container table tr:nth-child(even) {
+#table-container table tr:nth-child(even) {
     background-color: #54b0e9;
 }
 
 /* Expenses - Change the first child <tr> tag of the expense tracker table */
-#expense-table-container table tr:first-child {
+#table-container table tr:first-child {
     background-color: rgb(1, 139, 224);
     color:#ffbf35;
     text-shadow: 2px 1px #000000;
 }
 
 /* Expenses - Increment the number of the table row with each one */
-#expense-table-container table tr td:first-child:before{
+#table-container table tr td:first-child:before{
     counter-increment: Serial;      /* Increment the Serial counter */
     content:counter(Serial);        /* Display the counter */
   }
@@ -962,7 +963,7 @@ h5 {
 /* Change the size of the expenses table when viewport size smaller or equal to 350px */
 @media screen and (max-width:350px) {
 
-    #expense-table-container {
+    #table-container {
         width: 100%;
         display: flex;
         justify-content: center;
@@ -970,7 +971,7 @@ h5 {
         flex-direction: column;
     }
 
-    #expense-table-container table {
+    #table-container table {
         margin: 0;
         font-size: calc(10px + .1vw);
     }

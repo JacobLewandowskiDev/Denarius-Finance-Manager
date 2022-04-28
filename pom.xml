@@ -14,7 +14,7 @@
 	<artifactId>financeManager</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Denarius</name>
-	<description>A personal finance manager web-app</description>
+	<description>A personal finance manager</description>
 
 	<properties>
 		<java.version>11</java.version>
@@ -52,6 +52,16 @@
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpcore</artifactId>
+			<version>4.4.15</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5.13</version>
 		</dependency>
 	</dependencies>
 

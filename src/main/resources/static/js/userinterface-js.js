@@ -101,6 +101,33 @@ for (i = 0; i < accordions.length; i++) {
 // EXPENSES PAGE JAVASCRIPT START - These functions will run only if the current URL ends with '/expenses.html'
 if(page == 'expenses.html') {
 
+   // Add new expense to table and database
+   function addNewExpense() {
+    const url = path + "/add-new-expense";
+
+    // Get all of the users input and store them in variables
+    const inputs = document.querySelectorAll('input');
+    let expDate = inputs[0].value;
+    let expName = inputs[1].value;
+    let expCost = inputs[2].value;
+    let expCategory = document.getElementById('expense-category-select');
+    let expCategorySelectedOption = expCategory.options[expCategory.selectedIndex].value; // Get the selected option from the add expense select input
+
+    // Turn the user input for add-new-expense to JSON obj
+    const newExpense = {
+      "date": expDate,
+      "name": expName,
+      "cost": expCost,
+      "category": expCategorySelectedOption
+    };
+     
+    console.log(newExpense);
+    //TO DO - Add a fetch method for the current url and send JSON obj to server for further storage in DB
+
+
+    expenseCalculator(); // Recalculate the costs after adding the new expense to the table
+  }
+
     // Each category of expenses total
     let housingTotal = 0.00;
     let transportationTotal = 0.00;
@@ -175,11 +202,6 @@ if(page == 'expenses.html') {
       document.getElementById('healthcareTotal').innerHTML = healthcareTotal + ' $';
       document.getElementById('personalTotal').innerHTML = personalTotal + ' $';
       document.getElementById('totalExpenses').innerHTML = totalExpenses + ' $';
-    }
-
-    // Funcition to be implemented
-    function addNewExpense() {
-      expenseCalculator();
     }
 
     // Add expense view status

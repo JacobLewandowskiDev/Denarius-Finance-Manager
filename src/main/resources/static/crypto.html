@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@300;500&display=swap" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <title>Denarius - Saving Goals</title>
+    <title>Denarius - Portfolio Price Tracker</title>
 </head>
 <body>
 <!-- Logout bar -->
@@ -89,63 +89,26 @@
 
 <!-- This is the user dashboard viewport -->
 <div id="user-dashboard">
-    <!-- These are the first 3 steps of saving goals -->
-    <h3>Saving goals - In 5 Easy Steps</h3>
+    <h3>Portfolio Price Tracker</h3>
+
+    <br>
     
-    <div id="saving-goals-form"> 
-        <div id="steps-1-to-3"> 
-            <div class="savings-form-inner-container">
-                <h5><span class="important-text">Step 1:</span> How much would you like to save up?</h5>
-                <p id="slider-goal-value">0 $</p>
-                <input type="range" min="0" max="50000" value="0" step="100" class="slider" id="current-slider-range" oninput="updateSliderGoalValue()" required>
-            </div>
-            
-            <div class="savings-form-inner-container">
-                <h5><span class="important-text">Step 2:</span> By when do you want to reach this desired amount?</h5>
-                <input type="month" id="saving-goal-date" required>
-            </div>
+    <div id="table-container">
+        <table id="crypto-table">
+            <tr>
+                <th>No.</th>
+                <th>Symbol</th>
+                <th>Name</th>
+                <th>Price</th>
+                <th>24h %</th>
+                <th>Market Cap</th>
+                <th>Last 7 days</th>
+            </tr>
 
-            <div class="savings-form-inner-container">
-                <h5><span class="important-text">Step 3:</span> Check how much you need to be saving each month</h5>
-                <button class="button" onclick="">Calculate</button>
-            </div>
-        </div>
+        </table> 
     </div>
 
-    <div id="saving-goal-result"> <!-- Hidden by default, appears when form is submited and calculations have been performed -->
-        <h5>You need to save <span class="important-text" id="saving-goal-result-amount">0.00 $</span>  <!-- Todo - Add JS to pull result -->
-            every month to reach your goal by <span class="important-text" id="saving-date-value"></span>.
-        </h5>
-    </div>
-
-    <div id="savings-container">   
-        <div class="savings-inner-container">
-            <h5><span class="important-text">Step 4:</span> How much have you managed to add to your savings account?</h5>
-            <br>
-            <form id="addToSavings" action="add-saving" method="POST"> <!-- Connect this Endpoint -->
-                <input id="addedSavingValue" type="number" step="0.01" placeholder="0.00 $" min="0.00" max="50000">
-                <br>
-                <br>
-                <button class="button" type="submit" onclick="">Add To Your savings</button>
-              </form>
-        </div>      
-      
-        <div class="savings-inner-container">
-            <h5><span class="important-text">Step 5:</span> Your progress in achieving your savings goal</h5>
-
-            <br> 
-
-            <div id="wave-container">
-                <div id="percentage">
-                    <p id="current-saving-percentage">0%</p>
-                </div>
-                <div class="wave"></div>
-            </div>
-        </div>
-
-    </div>
 </div>
-
 <script src="js/userinterface-js.js" defer></script>
 </body>
 </html>

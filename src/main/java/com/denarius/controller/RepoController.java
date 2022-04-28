@@ -13,7 +13,8 @@ public class RepoController {
     private UserRepositoryDao userRepositoryDao;
 
     @GetMapping("/all")
-    public @ResponseBody Iterable<User> getAllUsers() {
+    public @ResponseBody
+    Iterable<User> getAllUsers() {
         return userRepositoryDao.findAll();
     }
 
