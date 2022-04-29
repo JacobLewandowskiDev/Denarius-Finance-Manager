@@ -100,10 +100,19 @@ for (i = 0; i < accordions.length; i++) {
 
 // EXPENSES PAGE JAVASCRIPT START - These functions will run only if the current URL ends with '/expenses.html'
 if(page == 'expenses.html') {
+  const url = path;
+
+  // Get List of all expenses
+  function getAllExpenses() {
+    
+    fetch(url + "/allexpenses", {
+      method: 'GET'
+    })
+    .then(response => response.json()
+    )};
 
    // Add new expense to table and database
    function addNewExpense() {
-    const url = path + "/add-new-expense";
 
     // Get all of the users input and store them in variables
     const inputs = document.querySelectorAll('input');
@@ -116,15 +125,23 @@ if(page == 'expenses.html') {
     // Turn the user input for add-new-expense to JSON obj
     const newExpense = {
       "date": expDate,
-      "name": expName,
+      "expenseName": expName,
       "cost": expCost,
       "category": expCategorySelectedOption
     };
-     
+
     console.log(newExpense);
-    //TO DO - Add a fetch method for the current url and send JSON obj to server for further storage in DB
-
-
+     
+    fetch(url + "/newexpense", {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(newExpense)
+    })
+    .then(response => response.json())
+    
     expenseCalculator(); // Recalculate the costs after adding the new expense to the table
   }
 
