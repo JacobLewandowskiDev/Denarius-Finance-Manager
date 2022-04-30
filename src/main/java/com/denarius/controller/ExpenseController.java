@@ -16,11 +16,13 @@ public class ExpenseController {
         this.expenseService = expenseService;
     }
 
+    // Return list of expenses to the expenses.html page
     @GetMapping("/allexpenses")
     public List<Expense> getAllExpenses() {
         return expenseService.getAllExpenses();
     }
 
+    // Add new expense to the database
     @PostMapping("/newexpense")
     public void addNewExpense(@RequestBody Expense expense) {
         expenseService.addExpense(expense);
