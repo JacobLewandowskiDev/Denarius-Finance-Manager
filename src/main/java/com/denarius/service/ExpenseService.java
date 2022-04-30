@@ -19,12 +19,12 @@ public class ExpenseService{
     }
 
     public List<Expense> getAllExpenses() {
-        System.out.println("Returned all expenses");
+        System.out.println("Returned a list of all expenses");
         return expenseRepository.findAll();
     }
 
     public void addExpense(Expense expense) {
-        System.out.println("saved it");
+        System.out.println("Saved expense: " + expense.getExpenseName() + " to the database");
         this.expenseRepository.save(expense);
     }
 }

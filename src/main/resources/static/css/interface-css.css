@@ -407,7 +407,7 @@ h5 {
 
     /* EXPENSES SITE CSS - START */
 /* Expenses - Add new expense to table view */
-#add-expense-container {
+#add-expense-container, #edit-expense-container {
     position: absolute;
     display: flex;
     visibility: hidden;
@@ -421,7 +421,7 @@ h5 {
 }
 
 /* Expenses - Add expense form container */
-#add-expense {
+#add-expense, #edit-expense {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -440,7 +440,7 @@ h5 {
 }
 
 /* Expenses - Close add expense viewport */
-#add-expense-close {
+#add-expense-close, #edit-expense-close {
     position: absolute;
     top: 0;
     right: 0;
@@ -453,19 +453,19 @@ h5 {
 }
 
 /* Expenses - Hover over close add new expense close view button */
-#add-expense-close:hover {
+#add-expense-close:hover, #edit-expense-close:hover {
     color: #ffbf35;
 }
 
 /* Expenses - Form layout properties */
-#add-new-expense {
+#add-new-expense, #edit-new-expense {
     width: 80%;
     margin: 25px 0;
     text-align: center;
 }
 
 /* Expenses - Add expenses inputs and select tag properties */
-#add-new-expense input, select {
+#add-new-expense input, select, #edit-new-expense input, select {
     text-align: center;
     width: 100%;
     height: 40px;
@@ -476,7 +476,7 @@ h5 {
 }
 
 /* Expenses - Add expenses submit button properites */
-#add-new-expense button {
+#add-new-expense button, #edit-new-expense button {
     font-size: calc(14px + .2vw);
     width: fit-content;
     padding: 10px;

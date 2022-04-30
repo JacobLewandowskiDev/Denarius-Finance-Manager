@@ -102,7 +102,7 @@ for (i = 0; i < accordions.length; i++) {
 if(page == 'expenses.html') {
   const url = path;
 
-  // Get List of all expenses
+  // Get List of all expenses from the server
   function getAllExpenses() {
     
     fetch(url + "/allexpenses", {
@@ -114,49 +114,52 @@ if(page == 'expenses.html') {
    // Add new expense to table and database
    function addNewExpense() {
 
-    // Get all of the users input and store them in variables
-    const inputs = document.querySelectorAll('input');
-    let expDate = inputs[0].value;
-    let expName = inputs[1].value;
-    let expCost = inputs[2].value;
-    let expCategory = document.getElementById('expense-category-select');
-    let expCategorySelectedOption = expCategory.options[expCategory.selectedIndex].value; // Get the selected option from the add expense select input
+      // Get all of the users input and store them in variables
+      const inputs = document.querySelectorAll('input');
+      let expDate = inputs[0].value;
+      let expName = inputs[1].value;
+      let expCost = inputs[2].value;
+      let expCategory = document.getElementById('expense-category-select');
+      let expCategorySelectedOption = expCategory.options[expCategory.selectedIndex].value; // Get the selected option from the add expense select input
 
-    // Turn the user input for add-new-expense to JSON obj
-    const newExpense = {
-      "date": expDate,
-      "expenseName": expName,
-      "cost": expCost,
-      "category": expCategorySelectedOption
-    };
+      // Turn the user input for add-new-expense to JSON obj
+      const newExpense = {
+        'date': expDate,
+        'expenseName': expName,
+        'cost': expCost,
+        'category': expCategorySelectedOption
+      };
 
-    console.log(newExpense);
-     
-    fetch(url + "/newexpense", {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(newExpense)
-    })
-    .then(response => response.json())
-    
-    expenseCalculator(); // Recalculate the costs after adding the new expense to the table
-  }
+      console.log(newExpense);
+      
+      // Post users new expense input data to the server in order to add it to the database
+      fetch(url + "/newexpense", {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newExpense)
+      })
+      .then(console.log(newExpense.expenseName + " was added to the users expense list"))
+      .catch(e => console.log(e));
 
-    // Each category of expenses total
-    let housingTotal = 0.00;
-    let transportationTotal = 0.00;
-    let foodTotal = 0.00;
-    let utilitiesTotal = 0.00;
-    let healthcareTotal = 0.00;
-    let personalTotal = 0.00;
-    let totalExpenses = 0.00;
+      closeAddExpenseView();  // Close the add new expense view
+      expenseCalculator(); // Recalculate the costs after adding the new expense to the table
+      }
 
-    // Calculate each categories expense total & total expenses
-    expenseCalculator();
-    function expenseCalculator() {
+      // Each category of expenses total
+      let housingTotal = 0.00;
+      let transportationTotal = 0.00;
+      let foodTotal = 0.00;
+      let utilitiesTotal = 0.00;
+      let healthcareTotal = 0.00;
+      let personalTotal = 0.00;
+      let totalExpenses = 0.00;
+
+      // Calculate each categories expense total & total expenses
+      expenseCalculator();
+      function expenseCalculator() {
 
       // Reset the amounts to zero to avoid counting expenses twice or more
        housingTotal = 0.00;
@@ -223,6 +226,8 @@ if(page == 'expenses.html') {
 
     // Add expense view status
     let addExpenseOpen = false;
+    // Edit expense view status
+    let editExpenseOpen = false;
 
     // Open add expense view
     function showAddExpenseView() {
@@ -239,8 +244,30 @@ if(page == 'expenses.html') {
           document.getElementById('add-expense-container').style.visibility='hidden';
           document.getElementById('add-expense-container').style.opacity='0';
           document.getElementById('add-expense-container').style.transition='.5s ease-in-out';
+
             addExpenseOpen = false;
             console.log('Add expense view closed');
+        }
+    }
+
+      // Open edit expense view
+      function showEditExpenseView() {
+        document.getElementById('edit-expense-container').style.visibility='visible';
+        document.getElementById('edit-expense-container').style.opacity='1';
+        document.getElementById('edit-expense-container').style.transition='.5s ease-in-out';
+        editExpenseOpen = true;
+        console.log('Edit expense view opened');
+    }
+
+    // Close edit expense view
+    function closeEditExpenseView() {
+        if(editExpenseOpen == true) {
+          document.getElementById('edit-expense-container').style.visibility='hidden';
+          document.getElementById('edit-expense-container').style.opacity='0';
+          document.getElementById('edit-expense-container').style.transition='.5s ease-in-out';
+
+            editExpenseOpen = false;
+            console.log('Edit expense view closed');
         }
     }
 
