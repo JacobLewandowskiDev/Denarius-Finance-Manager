@@ -27,4 +27,9 @@ public class ExpenseService{
         System.out.println("Saved expense: " + expense.getExpenseName() + " to the database");
         this.expenseRepository.save(expense);
     }
+
+    public void deleteExpense(long id) {
+        this.expenseRepository.deleteById(id);
+        System.out.println("Expense using the id:" + id + " was deleted from the database");
+    }
 }

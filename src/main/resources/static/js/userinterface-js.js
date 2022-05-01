@@ -117,7 +117,14 @@ if(page == 'expenses.html') {
   // Create empty expense table
   function basicExpenseHeaders() {
     expenseListTable.innerHTML = "";
-    tableRow = document.createElement('tr');
+
+    tableRow = document.createElement('tr'); // Create First row of headers within the table of expenses
+
+    tableHeader = document.createElement('th'); // Add Expense id No. header to table
+    tableHeader.setAttribute('class', 'expense-invisible'); // Make this tag diplay:none; -> It is strictly for endpoint usage
+    tableHeader.innerHTML = 'Id';
+    tableRow.appendChild(tableHeader);
+
     tableHeader = document.createElement('th'); // Add Expense id No. header to table
     tableHeader.innerHTML = 'No';
     tableRow.appendChild(tableHeader);
@@ -142,19 +149,20 @@ if(page == 'expenses.html') {
     tableHeader.innerHTML = 'Action'; 
     tableRow.appendChild(tableHeader);
   
-    expenseListTable.appendChild(tableRow);  
+    expenseListTable.appendChild(tableRow);  // Append the row to the expense table
   }
   
   // Get the list of all expenses from the server database and populate the html table with the data
   getAllExpenses();
 
-
-
+  // An array of all the expenses
+  let expenses = Array();
 
   // ENDPOINT CONNECTION - Get List of all expenses from the server
   function getAllExpenses() {
+    basicExpenseHeaders();
     // Fetch the response (expense list) from the server using the '/allexpenses' endpoint
-    fetch(url + "/allexpenses", {
+    fetch(url + "/all-expenses", {
       method: 'GET'
     })
     .then(response => response.json()
@@ -164,11 +172,22 @@ if(page == 'expenses.html') {
       let tableData;
       // Expense table action button variable
       let actionButton;
+      // Counter for table rows
+      let count = 1;
       // Add all expense positions from the DB to the html table by looping through the list
       for(const expense of expenseList) {
-        tableRow = document.createElement('tr'); // Insert Expense Id data cell to appropriate row
-        tableData = document.createElement('td');
+        expenses.push(expense); // Create a list of expenses
+
+        tableRow = document.createElement('tr'); // Create a new row inside the table
+
+        tableData = document.createElement('td'); // Insert Expense Id data cell to appropriate row
+        tableData.setAttribute('class', 'expense-invisible'); // Make this tag diplay:none; -> It is strictly for endpoint usage
         tableData.innerHTML = `${expense.id}`;
+        tableRow.appendChild(tableData);
+
+        tableData = document.createElement('td'); // Insert Expense row number to appropriate row
+        tableData.innerHTML = count;
+        count++;
         tableRow.appendChild(tableData);
 
         tableData = document.createElement('td'); // Insert Date data cell to appropriate row
@@ -182,13 +201,12 @@ if(page == 'expenses.html') {
         tableData = document.createElement('td'); // Insert Expense Cost data cell to appropriate row
         tableData.innerHTML = parseFloat(`${expense.cost}`);
         tableRow.appendChild(tableData);
-        console.log(tableData);
 
         tableData = document.createElement('td'); // Insert Expense Category data cell to appropriate row
         tableData.innerHTML = `${expense.category}`;
         tableRow.appendChild(tableData);
 
-        tableData = document.createElement('td');
+        tableData = document.createElement('td'); //Insert a table data tag that will contain both the edit and delete action button
         actionButton = document.createElement('button'); // Add edit expense action button
         actionButton.innerHTML = 'Edit';
         actionButton.setAttribute('class', 'buttons');
@@ -216,14 +234,18 @@ if(page == 'expenses.html') {
 
    // ENDPOINT CONNECTION - Save a new expense item to the servers database and update the html table
    function addNewExpense() {
-     basicExpenseHeaders();
-      // Get all of the users input and store them in variables
-      const inputs = document.querySelectorAll('input');
-      let expDate = inputs[0].value;
-      let expName = inputs[1].value;
-      let expCost = inputs[2].value;
-      let expCategory = document.getElementById('expense-category-select');
-      let expCategorySelectedOption = expCategory.options[expCategory.selectedIndex].value; // Get the selected option from the add expense select input
+
+    // Get all of the users input and store them in variables
+    const inputs = document.getElementById('add-new-expense').querySelectorAll('input');
+    let expDate = inputs[0].value;
+    let expName = inputs[1].value;
+    let expCost = inputs[2].value;
+    let expCategory = document.getElementById('expense-category-select');
+    let expCategorySelectedOption = expCategory.options[expCategory.selectedIndex].value; // Get the selected option from the add expense select input
+
+    // If any of the inputs are not filled out -> No add for you my good sir/maddame.
+    if(expDate.length !== 0 && expName.length !== 0 && expCost.length !== 0) {
+      basicExpenseHeaders();
 
       // Turn the user input for add-new-expense to JSON obj
       const newExpense = {
@@ -232,11 +254,9 @@ if(page == 'expenses.html') {
         'cost': expCost,
         'category': expCategorySelectedOption
       };
-
-      console.log(newExpense);
       
       // Post users new expense input data to the server to add it to the database
-      fetch(url + "/newexpense", {
+      fetch(url + "/new-expense", {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -244,13 +264,16 @@ if(page == 'expenses.html') {
         },
         body: JSON.stringify(newExpense)
       })
-      .then(console.log(newExpense.expenseName + " was added to the users expense list"))
+      .then(response => {
+        getAllExpenses(); // Reload the html table and recalculate totals
+        closeAddExpenseView();  // Close the add new expense view
+        console.log(newExpense.expenseName + " was added to the users expense list")
+      })
       .catch(e => console.log(e));
-
-      getAllExpenses(); // Reload the html table and recalculate totals
-      closeAddExpenseView();  // Close the add new expense view
+    } else {
+      alert('Please fill all the fields');
     }
-
+  }
 
 
     
@@ -281,9 +304,9 @@ if(page == 'expenses.html') {
       for(let row = 1, rows = table.rows.length; row < rows; row++) {
 
       // This is the const for the expense cost column values
-      let expenseCost = parseFloat(table.rows[row].cells[3].innerHTML);
+      let expenseCost = parseFloat(table.rows[row].cells[4].innerHTML);
       // This is the const for the expense category column values
-      let expenseCategory = table.rows[row].cells[4].innerHTML;
+      let expenseCategory = table.rows[row].cells[5].innerHTML;
 
       // Check if expense is of type housing category --> If yes, then proceed to add its cost to the appropriate total
       if(expenseCategory == 'Housing') {
@@ -386,19 +409,28 @@ if(page == 'expenses.html') {
 
   // Delete row inside expenses table if appropriate delete button is clicked
   function deleteExpense(row) {
-  let i = row.parentNode.parentNode.rowIndex;
-    document.getElementById("expenses-table").deleteRow(i);
-    expenseCalculator();  // Recalculate the expenses totals
+
+  let id = row.parentNode.parentNode.cells[0].textContent;
+
+    fetch((url + "/delete-expense?id=" + id), {
+      method: 'DELETE'
+    })
+    .then(response => {
+      getAllExpenses();
+      console.log('Expense was removed from the database');
+    })
+    .catch(e => console.log(e));
   }
 
 
 
 
   // Expenses page - expense donut chart creator
-  google.charts.load("current", {packages:["corechart"]});
+  google.load('visualization', '1', { packages: ['corechart', 'controls'] });
   google.charts.setOnLoadCallback(drawExpenseChart);
 
   function drawExpenseChart() {
+    
     let data = google.visualization.arrayToDataTable([
       ['Expense', 'Expenses by Category'],
       ['Housing', parseInt(housingTotal)],

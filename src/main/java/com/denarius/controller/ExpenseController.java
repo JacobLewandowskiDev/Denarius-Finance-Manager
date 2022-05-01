@@ -17,14 +17,20 @@ public class ExpenseController {
     }
 
     // Return list of expenses to the expenses.html page
-    @GetMapping("/allexpenses")
+    @GetMapping("/all-expenses")
     public List<Expense> getAllExpenses() {
         return expenseService.getAllExpenses();
     }
 
     // Add new expense to the database
-    @PostMapping("/newexpense")
+    @PostMapping("/new-expense")
     public void addNewExpense(@RequestBody Expense expense) {
         expenseService.addExpense(expense);
+    }
+
+    // Remove expense from the database
+    @DeleteMapping("/delete-expense")
+    public void deleteExpense(@RequestParam long id) {
+        expenseService.deleteExpense(id);
     }
 }
