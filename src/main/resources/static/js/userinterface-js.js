@@ -210,7 +210,7 @@ if(page == 'expenses.html') {
         actionButton = document.createElement('button'); // Add edit expense action button
         actionButton.innerHTML = 'Edit';
         actionButton.setAttribute('class', 'buttons');
-        actionButton.setAttribute('onclick', 'showEditExpenseView()');
+        actionButton.setAttribute('onclick', 'showEditExpenseView(), getCurrentExpenseInfo(this)');
         tableData.appendChild(actionButton);
 
         actionButton = document.createElement('button'); // Add delete expense action button
@@ -352,7 +352,6 @@ if(page == 'expenses.html') {
 
 
 
-
   // Add expense view status
   let addExpenseOpen = false;
 
@@ -401,13 +400,64 @@ if(page == 'expenses.html') {
     }
   }
 
-  // Edit expense button
-  function editExpense() {
-    closeEditExpenseView();
+
+  // Get the id of the expense the user wishes to update
+  let oldId;
+  function getCurrentExpenseInfo(currentRow) {
+    oldId = currentRow.parentNode.parentNode.cells[0].textContent;
+    console.log("Edit button works, id:" + oldId);
   }
 
 
-  // Delete row inside expenses table if appropriate delete button is clicked
+
+  // ENDPOINT CONNECTION - Edit expense button
+  function editExpense() {
+
+        // Get all of the users input for expense update and store them in variables
+        const newInputs = document.getElementById('update-expense').querySelectorAll('input');
+        let newExpDate = newInputs[0].value;
+        let newExpName = newInputs[1].value;
+        let newExpCost = newInputs[2].value;
+        let newExpCategory = document.getElementById('expense-category-select');
+        let newExpCategorySelectedOption = newExpCategory.options[newExpCategory.selectedIndex].value; // Get the selected option from the add expense select input
+    
+        // If any of the inputs are not filled out -> No add for you my good sir/maddame.
+        if(newExpDate.length !== 0 && newExpName.length !== 0 && newExpCost.length !== 0) {
+          basicExpenseHeaders();
+    
+          // Turn the user input for update-expense to JSON obj
+          const updatedExpense = {
+            'date': newExpDate,
+            'expenseName': newExpName,
+            'cost': newExpCost,
+            'category': newExpCategorySelectedOption
+          };
+          
+          // Post users new expense input data to the server to add it to the database
+          fetch((url + "/update-expense?id=" + oldId), {
+            method: 'PUT',
+            headers: {
+              'Accept': 'application/json',
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(updatedExpense)
+          })
+          .then(response => {
+            getAllExpenses(); // Reload the html table and recalculate totals
+            closeEditExpenseView(); // Close the edit expense view
+            console.log("User has updated an expense")
+          })
+          .catch(e => console.log(e));
+        } else {
+          alert('Please fill all the fields');
+        }
+
+  }
+
+  
+
+
+  // ENDPOINT CONNECTION - Delete row inside expenses table if appropriate delete button is clicked
   function deleteExpense(row) {
 
   let id = row.parentNode.parentNode.cells[0].textContent;
@@ -467,7 +517,7 @@ if(page == 'expenses.html') {
 // SAVING-GOALS PAGE JAVASCRIPT - START
 if(page == 'saving-goals.html') {
 
-  // Set the <p> tag value to whatever the sliders range indicates
+  // Set the slider <p> tag value to whatever the sliders range indicates
   let sliderValue = document.getElementById('current-slider-range');
   let sliderValueDisplay = document.getElementById('slider-goal-value');
 
@@ -475,7 +525,7 @@ if(page == 'saving-goals.html') {
     sliderValueDisplay.innerHTML = sliderValue.value + ' $';
   }
 
-  // Input type date - set min value of today's month and year
+  // Input type date - set min value to today's month and year
   let dateControl = document.getElementById('saving-goal-date');
   let today = new Date();
   let month = today.getMonth() + 1;
@@ -494,7 +544,44 @@ if(page == 'saving-goals.html') {
   dateControl.setAttribute('min',today);
   dateControl.setAttribute('value',today);
   document.getElementById('saving-date-value').innerHTML = today;
+
+
+
+  
+  // This function calculates the amount of money the user must save up in order to reach his/her saving goal
+  function calculateSavingTime() {
+    let goalReachDate = new Date(document.getElementById('saving-goal-date').value);
+    let startDate = new Date();
+    let goalMonth = goalReachDate.getMonth() + 1;
+    let goalYear = goalReachDate.getFullYear();
+     
+    months = (goalReachDate.getFullYear() - startDate.getFullYear()) * 12;
+    months -= startDate.getMonth();
+    
+    // The final value of month difference between two dates (startDate and goalReachDate)
+    months += goalReachDate.getMonth() + 1;
+    let savingMonthlyAmount = parseInt(sliderValue.value / months) + " $"
+
+    if(months != 0) {
+      document.getElementById('saving-goal-result-amount').innerHTML = savingMonthlyAmount;
+
+    // If the month is less then October than add a '0' before the number of the month
+    if(goalMonth < 10 && goalMonth > 0) {
+      goalReachDate =  goalYear +"-0" + goalMonth; 
+    }
+    // Else keep it as is
+    else {
+      goalReachDate =  goalYear +"-" + goalMonth; 
+    }
+      document.getElementById('saving-date-value').innerHTML = goalReachDate;
+    }
+
+  }
 }
+
+
+
+
 // SAVING-GOALS PAGE JAVASCRIPT - END
 
 

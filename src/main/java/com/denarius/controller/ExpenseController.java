@@ -33,4 +33,10 @@ public class ExpenseController {
     public void deleteExpense(@RequestParam long id) {
         expenseService.deleteExpense(id);
     }
+
+    // Remove expense from the database
+    @PutMapping("/update-expense")
+    public void updateExpense(@RequestParam long id, @RequestBody Expense expense) {
+        expenseService.updateExpense(id, expense);
+    }
 }
