@@ -548,36 +548,89 @@ if(page == 'saving-goals.html') {
 
 
   
+
+
+  // If a goal is set this variable will turn to false until user has reached 100% of his/her saving goal
+   let goalReached = true;
+
+   // This is the 100% goal
+   let currentGoal;
+   
   // This function calculates the amount of money the user must save up in order to reach his/her saving goal
   function calculateSavingTime() {
-    let goalReachDate = new Date(document.getElementById('saving-goal-date').value);
-    let startDate = new Date();
-    let goalMonth = goalReachDate.getMonth() + 1;
-    let goalYear = goalReachDate.getFullYear();
-     
-    months = (goalReachDate.getFullYear() - startDate.getFullYear()) * 12;
-    months -= startDate.getMonth();
-    
-    // The final value of month difference between two dates (startDate and goalReachDate)
-    months += goalReachDate.getMonth() + 1;
-    let savingMonthlyAmount = parseInt(sliderValue.value / months) + " $"
+    if(goalReached == true) {
+      let goalReachDate = new Date(document.getElementById('saving-goal-date').value);
+      let startDate = new Date();
+      let goalMonth = goalReachDate.getMonth() + 1;
+      let goalYear = goalReachDate.getFullYear();
+       
+      months = (goalReachDate.getFullYear() - startDate.getFullYear()) * 12;
+      months -= startDate.getMonth();
+      
+      // The final value of month difference between two dates (startDate and goalReachDate)
+      months += goalReachDate.getMonth() + 1;
+      let monthlySavingAmount = parseInt(sliderValue.value / months);
+      currentGoal = sliderValue.value;
+      document.getElementById('current-goal').innerHTML = currentGoal;
+      console.log(currentGoal);
+      if(months != 0) {
+        document.getElementById('saving-goal-result-amount').innerHTML = monthlySavingAmount + " $";
+      }
+  
+      // If the month is less then October than add a '0' before the number of the month
+      if(goalMonth < 10 && goalMonth > 0) {
+        goalReachDate =  goalYear +"-0" + goalMonth; 
+      }
 
-    if(months != 0) {
-      document.getElementById('saving-goal-result-amount').innerHTML = savingMonthlyAmount;
+      // Else keep it as is
+      else {
+        goalReachDate =  goalYear +"-" + goalMonth; 
+      }
 
-    // If the month is less then October than add a '0' before the number of the month
-    if(goalMonth < 10 && goalMonth > 0) {
-      goalReachDate =  goalYear +"-0" + goalMonth; 
-    }
-    // Else keep it as is
-    else {
-      goalReachDate =  goalYear +"-" + goalMonth; 
-    }
       document.getElementById('saving-date-value').innerHTML = goalReachDate;
+      goalReached = false;
+      console.log("A new saving goal has been set, setting goalReached to false");
     }
-
   }
+
+
+
+
+  // This is the current status of the saving goal amount 
+  let addedTotal;
+  let newPercentage;
+  // Increase percentage by 
+  function addAmountToSavingGoal() {
+    if(goalReached == false) {
+      let addedAmount = document.getElementById('addedSavingValue').value; // This is the added value
+      let currentPercentage = parseInt(document.getElementById('current-saving-percentage').innerHTML); // Grab the current percentage pre-update
+      console.log("Current percentage: " + currentPercentage);
+
+      let addedPercentage = parseInt((addedAmount / currentGoal) * 100); // This is the percentage achieved after adding to total
+      console.log("Added percentage: " + addedPercentage);
+
+      newPercentage = currentPercentage + addedPercentage;
+
+      if(newPercentage <= 100){
+        addedTotal += addedAmount; // Add the users added amount to the total
+        document.getElementById('current-saving-percentage').innerHTML = newPercentage;
+        console.log("New percentage: " + newPercentage);
+        console.log("Total saving: " + addedTotal);
+      }
+
+
+      if(addedTotal <= currentGoal) {
+        goalReached == true;
+        console.log("Saving goal has been reached, setting goalReached to true");
+      }
+    }
+  }
+
+
 }
+
+
+
 
 
 

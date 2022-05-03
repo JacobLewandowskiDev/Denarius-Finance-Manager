@@ -845,9 +845,10 @@ h5 {
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 15vw;
+        margin-top: 10px;
+        width: 13vw;
         min-width: 240px;
-        height: 15vw;
+        height: 13vw;
         min-height: 240px;
         border-radius: 50%;
         border: 6px #7dcdff solid;

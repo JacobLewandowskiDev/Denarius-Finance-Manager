@@ -122,22 +122,24 @@
         <div class="savings-inner-container">
             <h5><span class="important-text">Step 4:</span> How much have you managed to add to your savings account?</h5>
             <br>
-            <form id="addToSavings" action="add-saving" method="POST"> <!-- Connect this Endpoint -->
+            <div id="addToSavings"> <!-- Connect this Endpoint -->
                 <input id="addedSavingValue" type="number" step="0.01" placeholder="0.00 $" min="0.00" max="50000">
                 <br>
                 <br>
-                <button class="buttons" type="submit" onclick="">Add To Your savings</button>
-              </form>
+                <button class="buttons" onclick="addAmountToSavingGoal()">Add To Your savings</button>
+              </div>
         </div>      
       
         <div class="savings-inner-container">
             <h5><span class="important-text">Step 5:</span> Your progress in achieving your savings goal</h5>
-
-            <br> 
+            <h5>Your current goal is set to <span class="important-text" id="current-goal">0</span> <span class="important-text"> $</span></h5>
 
             <div id="wave-container">
                 <div id="percentage">
-                    <p id="current-saving-percentage">0%</p>
+                    <p id="current-saving-percentage">0</p>
+                    <div>
+                        <h5>%</h5>
+                    </div>
                 </div>
                 <div class="wave"></div>
             </div>
