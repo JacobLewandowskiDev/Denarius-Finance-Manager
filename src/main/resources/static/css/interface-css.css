@@ -696,7 +696,7 @@ h5 {
     margin: 0 auto;
     width: 90%;
     min-width: 260px;
-    display: block; /* Change this property with JS when a calculation request is sent */
+    display: none; /* Change this property with JS when a calculation request is sent */
 }
 
 /* Saving goals - Change important text properties */
