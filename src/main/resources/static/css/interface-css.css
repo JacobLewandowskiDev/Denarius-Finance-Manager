@@ -854,20 +854,20 @@ h5 {
         border: 6px #7dcdff solid;
         background-color: #1e94dd;
         box-shadow: 0 0 25px rgba(0, 0, 0, .5);
-        overflow: hidden;
+        /* overflow: hidden; */
     }
 
     /* Waves within the savings container */
-    .wave {
+    #wave {
         position: relative;
         width: 100%;
         height: 100%;
         bottom: -110%; /* This value is to be changed according to the percentage of savings in the project. */
-        /*How to calculate: 100% + bottom + 10% = actual savings level; ex. bottom:-80% --> 30% savings; bottom:-20% --> 90% savings  */
+        /*How to calculate: 100% - bottom + 10% = actual savings level; ex. bottom:-80% --> 30% savings; bottom:-20% --> 90% savings  */
         border-radius: 100%;
     }
 
-    .wave::before, .wave::after {
+    #wave::before, #wave::after {
         content: '';
         position: absolute;
         width: 200%;
@@ -878,13 +878,13 @@ h5 {
         background: #000;
     }
 
-    .wave::before {
+    #wave::before {
         border-radius: 45%;
         background: #ecad25e0;
         animation: waves 12s linear infinite;
     }
 
-    .wave::after {
+    #wave::after {
         border-radius: 45%;
         background:  #ffbf35;
         animation: waves 15s linear infinite;
