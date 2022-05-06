@@ -107,7 +107,7 @@
 
             <div class="savings-form-inner-container">
                 <h5><span class="important-text">Step 3:</span> Calculate how much you need to be saving each month</h5>
-                <button class="buttons" onclick="calculateSavingTime()">Calculate</button>
+                <button class="buttons" onclick="setSavingGoalAndDate()">Calculate</button>
             </div>
         </div>
     </div>
@@ -132,7 +132,9 @@
       
         <div class="savings-inner-container">
             <h5><span class="important-text">Step 5:</span> Your progress in achieving your savings goal</h5>
-            <h5>Your current goal is set to <span class="important-text" id="current-goal">0</span> <span class="important-text"> $</span></h5>
+            <h5>Your current goal is: <span class="important-text" id="current-goal">0</span> <span class="important-text"> $</span>
+                You saved up: <span class="important-text" id="current-savings">0</span> <span class="important-text"> $</span>
+            </h5>
 
             <div id="wave-container">
                 <div id="percentage">

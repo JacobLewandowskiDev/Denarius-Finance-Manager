@@ -601,14 +601,28 @@ if(page == 'saving-goals.html') {
 
 
 
-  // If a goal is set this variable will turn to false until user has reached 100% of his/her saving goal
-   let goalReached = true;
-   // This is the 100% goal
-   let currentGoal;
+// If a goal is set this variable will turn to false until user has reached 100% of his/her saving goal
+  let goalReached = true;
+  // This is the 100% goal
+  let currentGoal;
+  // This is the amount of all the savings the user has ever collected 
+  let totalSavings;
+  // This is the new percentage that has been reached after adding a certain money amount to the pool of savings.
+  let newPercentage;
+  // This is the current amount of the saving goal collected by the user 
+  let userSavedForCurrentGoal = 0;
+  // The amount that the user has added to the pool
+  let addedAmount;
+  // The current percentage of the savings goal by the user - value display
+  let currentPercentage = parseFloat(document.getElementById('current-saving-percentage').innerHTML);
+  // The added percentage to the savings goal calculated based on the added amount and the set current goal
+  let addedPercentage;
    
   // This function calculates the amount of money the user must save up in order to reach his/her saving goal
-  function calculateSavingTime() {
+  function setSavingGoalAndDate() {
     if(goalReached == true) {
+
+      // Reset the percentage and saving amounts
 
       // Set a new current savings goal to be reached
       currentGoal = sliderValue.value;
@@ -635,12 +649,12 @@ if(page == 'saving-goals.html') {
 
       // If the month is less then October (10) and is greater than 0 then append a '0' before the number of the month
       if(goalMonth < 10 && goalMonth > 0) {
-        goalReachDate =  goalYear +"-0" + goalMonth; 
+        goalReachDate = goalYear +"-0" + goalMonth; 
       }
 
       // If else keep the goal reach date as is
       else {
-        goalReachDate =  goalYear +"-" + goalMonth; 
+        goalReachDate = goalYear +"-" + goalMonth; 
       }
 
       // If the current goal value is greater than 0 -> show the goal reach div and put the users saving goal amount and goal reach date in it
@@ -655,78 +669,64 @@ if(page == 'saving-goals.html') {
       // If the user hasn't put a desired saving amount to be reached alert him
       else {
         alert("Please use the range slider to select a desired amount of money you would like to save up.");
-        console.log("Missing some data to perform the function: " + calculateSavingTime.name);
+        console.log("Missing some data to perform the function: " + setSavingGoalAndDate.name);
       }
     }
   }
 
-
-
-
-  // This is the amount of all the savings the user has ever collected 
-  let totalSavings;
-  // This is the new percentage that has been reached after adding a certain money amount to the pool of savings.
-  let newPercentage;
-  // This is the current amount of the saving goal collected by the user 
-  let userSavedForCurrentGoal = 0;
-  // The amount that the user has added to the pool
-  let addedAmount;
-  // The current percentage of the savings goal by the user - value display
-  let currentPercentage;
-  // The added percentage to the savings goal calculated based on the added amount and the set current goal
-  let addedPercentage;
-
   // Increase percentage of savings amount function -> It is only active if the goalReached variable is false. Otherwise user needs to set up a savings goal.
   function addAmountToSavingGoal() {
-
+      
     if(goalReached == false) {
+
       // Grab the user amount added to savings
-      addedAmount = document.getElementById('addedSavingValue').value; 
+      addedAmount = parseFloat(document.getElementById('addedSavingValue').value); 
 
       // If the added amount is greater than 0, and the newPercentage hasn't yet reached 100% keep adding to the pool
       if (addedAmount > 0 && newPercentage != 100) {
 
         // The current percentage achieved by the user value display
-        currentPercentage = parseInt(document.getElementById('current-saving-percentage').innerHTML);   
-        
+        currentPercentage = parseFloat(document.getElementById('current-saving-percentage').innerHTML);   
+
         // The added percentage calculated based on the added amount and the set current goal
         addedPercentage = Math.round((addedAmount / currentGoal) * 100); 
-        console.log("Added percentage: " + addedPercentage);
   
         // The new percentage calculation - adding the current percentage and the new added one
         newPercentage = currentPercentage + addedPercentage;
 
         // If new percentage should exceed 100% set it to 100%
-        if(newPercentage > 100) {
+        if(newPercentage >= 100) {
           newPercentage = 100;
         }
-  
+
         // Check if the amount the user has saved up in total for the current goal is less than the goal set to be reached by the user
         if(userSavedForCurrentGoal < currentGoal) {
 
-          // Append the users added amount to the current goal total
-          userSavedForCurrentGoal += parseInt(addedAmount); 
-          totalSavings += addedAmount;
+            // Append the users added amount to the current goal total
+            userSavedForCurrentGoal += addedAmount; 
+            document.getElementById('current-savings').innerHTML = userSavedForCurrentGoal;
+            totalSavings += addedAmount;
 
-          // Percentage count animation upon add
-          countPercentageAndWave();
-
-          console.log("New percentage: " + newPercentage);
-          console.log("Current goal reach total savings: " + userSavedForCurrentGoal);
+            // Percentage count animation upon add
+            countPercentageAndWave();
+  
+            console.log("New percentage: " + newPercentage);
+            console.log("Current goal reach total savings: " + userSavedForCurrentGoal);
         } 
       }
 
       else if(addedAmount < 0) {
-        console.log("You cannot save minus money. What would you even buy with that? Minus bread?");
+        console.log("You cannot save negative money. What would you even buy with that? Negative bread?");
       }
 
       else if(newPercentage == 100) {
         goalReached = true;
+        
         alert("Congratulations, you have reached your current savings goal. Go ahead and set up a new one.")
         console.log("Saving goal has been reached, setting goalReached to " + goalReached);
       }
     }
-  }
+   }
 
 
 
@@ -745,6 +745,9 @@ if(page == 'saving-goals.html') {
       // wave.style.transform='translateY(percent)';
       if(percent == newPercentage) {
         clearInterval(interval);
+      }
+      if(percent == 100) {
+        percentCount.innerHTML = 0;
       }
     },30);
   }
