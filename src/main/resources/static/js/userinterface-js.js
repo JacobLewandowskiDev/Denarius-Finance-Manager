@@ -454,7 +454,7 @@ if(page == 'expenses.html') {
     let newExpName = newInputs[1].value;
     let newExpCost = newInputs[2].value;
     // Get the selected option from the add expense select input
-    let newExpCategory = document.getElementById('expense-category-select');
+    let newExpCategory = document.getElementById('update-expense-category-select');
     let newExpCategorySelectedOption = newExpCategory.options[newExpCategory.selectedIndex].value; 
 
     // If any of the inputs are not filled out -> It won't work my good sir/maddame.
@@ -599,30 +599,39 @@ if(page == 'saving-goals.html') {
 
 
 
-
-
 // If a goal is set this variable will turn to false until user has reached 100% of his/her saving goal
   let goalReached = true;
   // This is the 100% goal
   let currentGoal;
   // This is the amount of all the savings the user has ever collected 
-  let totalSavings;
+  let totalSavings = 0;
   // This is the new percentage that has been reached after adding a certain money amount to the pool of savings.
   let newPercentage;
   // This is the current amount of the saving goal collected by the user 
-  let userSavedForCurrentGoal = 0;
+  let userSavedForCurrentGoal;
   // The amount that the user has added to the pool
   let addedAmount;
   // The current percentage of the savings goal by the user - value display
-  let currentPercentage = parseFloat(document.getElementById('current-saving-percentage').innerHTML);
+  let currentPercentage;
   // The added percentage to the savings goal calculated based on the added amount and the set current goal
-  let addedPercentage;
-   
+  let addedPercentageOfGoal;   
+  // This is the wave level DOM element
+  const waveElement = document.getElementById('wave');
+
   // This function calculates the amount of money the user must save up in order to reach his/her saving goal
   function setSavingGoalAndDate() {
     if(goalReached == true) {
 
       // Reset the percentage and saving amounts
+      currentPercentage = document.getElementById('current-saving-percentage').innerText = 0;
+      console.log("currentPercentage: " + currentPercentage);
+      userSavedForCurrentGoal = 0;
+      document.getElementById('current-savings').innerText = userSavedForCurrentGoal;
+      console.log("userSavedForCurrentGoal: " + userSavedForCurrentGoal);
+
+      // Reset the wave level
+      waveElement.style.transform = 'translateY(120%)';
+      waveElement.style.transition = '.5s ease-in-out';
 
       // Set a new current savings goal to be reached
       currentGoal = sliderValue.value;
@@ -674,87 +683,77 @@ if(page == 'saving-goals.html') {
     }
   }
 
+
+
+
+  // This is the cuurent wave percentage 
+  let wavePercentage;
+
   // Increase percentage of savings amount function -> It is only active if the goalReached variable is false. Otherwise user needs to set up a savings goal.
   function addAmountToSavingGoal() {
-      
+    // If the goal hasn't been reached allow to keep on adding money to the pool
     if(goalReached == false) {
 
-      // Grab the user amount added to savings
-      addedAmount = parseFloat(document.getElementById('addedSavingValue').value); 
+      // Grab the amount added by the user to the total
+      addedAmount = document.getElementById('addedSavingValue').value;
+      console.log("User added amount: " + addedAmount);
 
-      // If the added amount is greater than 0, and the newPercentage hasn't yet reached 100% keep adding to the pool
-      if (addedAmount > 0 && newPercentage != 100) {
+      // Check if the added amount is not a negative number or not equals to 0
+      if(addedAmount > 0) {
 
-        // The current percentage achieved by the user value display
-        currentPercentage = parseFloat(document.getElementById('current-saving-percentage').innerHTML);   
+        // Add the users added amount to a pool of the current goal savings total
+        userSavedForCurrentGoal += parseFloat(addedAmount);
+        document.getElementById('current-savings').innerHTML = userSavedForCurrentGoal;
+        console.log("userSavedForCurrentGoal: " +  userSavedForCurrentGoal);
 
-        // The added percentage calculated based on the added amount and the set current goal
-        addedPercentage = Math.round((addedAmount / currentGoal) * 100); 
-  
-        // The new percentage calculation - adding the current percentage and the new added one
-        newPercentage = currentPercentage + addedPercentage;
+        // Add the users added amount to a grand total of all of his savings
+        totalSavings += parseFloat(addedAmount);
+        console.log("totalSavings: " +  totalSavings);
 
-        // If new percentage should exceed 100% set it to 100%
+        // Calculate what the added amounts percentage is of the current goal
+        addedPercentageOfGoal = Math.round((addedAmount / currentGoal) * 10000) / 100;
+        console.log("addedPercentageOfGoal: " +  addedPercentageOfGoal);
+
+        // Grab the current percentage of the goal achievement displayed to the user
+        currentPercentage = parseFloat(document.getElementById('current-saving-percentage').innerText);
+        console.log("currentPercentage: " + currentPercentage);
+
+        // Calculate the new percentage of goal achievement after the user adds the amount
+        newPercentage = Math.round((currentPercentage + addedPercentageOfGoal) * 100) / 100;
+        console.log("newPercentage: " + newPercentage);
+
+        // Raise the percentage wave level according to the current percentage
+        /** translate: transformY(120%) ==> 0% of savings,
+         *  translate: transformY(10%) ==> 100% of savings,
+         *  So the math behind this would be: 
+         *  If the newPercentage = 30% ==> translateY( 120% - 30%)*/
+        wavePercentage = Math.round((120 - newPercentage) * 100) / 100;
+        let translateY_Value = "translateY(" + wavePercentage + "%)" 
+        waveElement.style.transform = translateY_Value;
+        waveElement.style.transition = '.5s ease-in-out';
+        console.log("wavePercentage: " + wavePercentage);
+
+        // Save the new percentage as updated currentPercentage
+        document.getElementById('current-saving-percentage').innerHTML = newPercentage;
+      
+        // Check if the new percentage is greater or equal to 100%
         if(newPercentage >= 100) {
-          newPercentage = 100;
+          // Set the goalReached variable to true -> Unlocks the possibility to set a new goal up
+          goalReached = true;
+
+          // Alert user of reaching the goal
+          alert("You have reached your goal");
+
+          // Set the percentage to 100% and lock it so that it cant be changed untill a new goal has been set
+          document.getElementById('current-saving-percentage').innerHTML = 100;
         }
-
-        // Check if the amount the user has saved up in total for the current goal is less than the goal set to be reached by the user
-        if(userSavedForCurrentGoal < currentGoal) {
-
-            // Append the users added amount to the current goal total
-            userSavedForCurrentGoal += addedAmount; 
-            document.getElementById('current-savings').innerHTML = userSavedForCurrentGoal;
-            totalSavings += addedAmount;
-
-            // Percentage count animation upon add
-            countPercentageAndWave();
-  
-            console.log("New percentage: " + newPercentage);
-            console.log("Current goal reach total savings: " + userSavedForCurrentGoal);
-        } 
       }
-
-      else if(addedAmount < 0) {
-        console.log("You cannot save negative money. What would you even buy with that? Negative bread?");
-      }
-
-      else if(newPercentage == 100) {
-        goalReached = true;
-        
-        alert("Congratulations, you have reached your current savings goal. Go ahead and set up a new one.")
-        console.log("Saving goal has been reached, setting goalReached to " + goalReached);
-      }
-    }
+   } 
+   else {
+   // Alert the user that he hasn't yet set a savings goal
+   alert("You cannot add to your savings pool, because you already reached 100% of your current goal. Please set up a new savings goal.");
    }
-
-
-
-
-
-  // A counter function that animates the value of the percentage and moves the wave accordingly
-  function countPercentageAndWave() {
-    let percentCount = document.getElementById("current-saving-percentage"); 
-    let wave = document.getElementById("wave");
-    let percent = percentCount.innerText;
-    let interval;
-
-    interval = setInterval(function() { 
-      percent++; 
-      percentCount.innerHTML = percent; 
-      // wave.style.transform='translateY(percent)';
-      if(percent == newPercentage) {
-        clearInterval(interval);
-      }
-      if(percent == 100) {
-        percentCount.innerHTML = 0;
-      }
-    },30);
   }
-
-
-
-
 }
 // SAVING-GOALS PAGE JAVASCRIPT - END
 

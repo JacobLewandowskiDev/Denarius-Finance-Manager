@@ -854,26 +854,26 @@ h5 {
         border: 6px #7dcdff solid;
         background-color: #1e94dd;
         box-shadow: 0 0 25px rgba(0, 0, 0, .5);
-        /* overflow: hidden; */
+        overflow: hidden;
     }
 
     /* Waves within the savings container */
+    /* Positioning of the wave container */
     #wave {
         position: relative;
         width: 100%;
         height: 100%;
-        bottom: -110%; /* This value is to be changed according to the percentage of savings in the project. */
-        /*How to calculate: 100% - bottom + 10% = actual savings level; ex. bottom:-80% --> 30% savings; bottom:-20% --> 90% savings  */
+        transform: translateY(120%); /* This property is responsible for showing the percentage of the set savings goal achieved by the user 120% = 0% of savings, and 10% = 100% of savings */
         border-radius: 100%;
     }
 
     #wave::before, #wave::after {
         content: '';
         position: absolute;
-        width: 200%;
-        height: 200%;
+        width: 250%;
+        height: 250%;
         top: 20%; 
-        left: -35%;
+        left: -50%;
         transform: translate(-50%, -75%);
         background: #000;
     }
@@ -913,7 +913,7 @@ h5 {
     }
 
     /* Percentage text properties */
-    #percentage p {
+    #current-saving-percentage {
         color: #ffffff;
         text-shadow: 2px 1px #000000;
         font-size: calc(20px + 1vw);
