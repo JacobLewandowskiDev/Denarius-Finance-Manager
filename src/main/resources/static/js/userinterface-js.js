@@ -1,6 +1,6 @@
 // Get page url
-const path = window.location.pathname;
-const page = path.split("/").pop();
+const url = window.location.pathname;
+const page = url.split("/").pop();
 
 // Open/Close user interface menu 
 const interfaceMenuPosition = document.getElementById('user-menu-container');
@@ -105,7 +105,6 @@ for (i = 0; i < accordions.length; i++) {
 
 // EXPENSES PAGE JAVASCRIPT START - These functions will run only if the current URL ends with '/expenses.html'
 if(page == 'expenses.html') {
-  const url = path;
 
   // Create named columns for expense list table
   const expenseListTable = document.getElementById('expenses-table');
@@ -565,6 +564,8 @@ if(page == 'expenses.html') {
 
 // SAVING-GOALS PAGE JAVASCRIPT - START
 if(page == 'saving-goals.html') {
+  // Fetch savings info for the user using fetch GET method
+  getUserSavingsInfo();
 
   // Set the slider <p> tag value to whatever the sliders range indicates
   let sliderValue = document.getElementById('current-slider-range');
@@ -680,9 +681,11 @@ if(page == 'saving-goals.html') {
         alert("Please use the range slider to select a desired amount of money you would like to save up.");
         console.log("Missing some data to perform the function: " + setSavingGoalAndDate.name);
       }
+
+      // Partially update users saving information in the server
+      updatePartialUserSavingsInfo();
     }
   }
-
 
 
 
@@ -747,13 +750,98 @@ if(page == 'saving-goals.html') {
           // Set the percentage to 100% and lock it so that it cant be changed untill a new goal has been set
           document.getElementById('current-saving-percentage').innerHTML = 100;
         }
+        // Update all of the users savings information in the servers database
+        updateAllUserSavingsInfo();
       }
    } 
    else {
    // Alert the user that he hasn't yet set a savings goal
-   alert("You cannot add to your savings pool, because you already reached 100% of your current goal. Please set up a new savings goal.");
+   alert("You cannot add to your savings pool, please set up a new savings goal.");
    }
   }
+
+
+
+  // Update all of the users savings info in the server
+  // This method updates these variables: today, currentGoal, totalSavings, userSavedForCurrentGoal, for user id (1) for now, implement auto generation for logged in user later
+  function updateAllUserSavingsInfo() {
+      // Turn the users saving ingo to JSON obj
+      const savingsInfo = {
+        'userId': 1,
+        'currentGoal': parseFloat(currentGoal),
+        'currentGoalDate': today,
+        'userSavedForCurrentGoal': parseFloat(userSavedForCurrentGoal),
+        'totalSavings': parseFloat(totalSavings)
+      };
+
+      
+      // Post users updated savings info to the server to update it within the database
+      fetch((url + "/update-all-savings?id=1"), {
+        method: 'PUT',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(savingsInfo)
+      })
+      .then(response => {
+        console.log(savingsInfo);
+
+        console.log("Users savings information has been updated.")
+      })
+      .catch(e => console.log(e));
+  }
+
+
+
+
+  // Update only patial information of the users savings info in the server
+  // This method updates these variables: today, currentGoal, and resets these to  '0': totalSavings, userSavedForCurrentGoal, for user id (1) for now, implement auto generation for logged in user later
+  function updatePartialUserSavingsInfo() {
+    // Turn the users saving ingo to JSON obj
+    const partialSavingsInfo = {
+      'userId': 1,
+      'currentGoal': parseFloat(currentGoal),
+      'currentGoalDate': today,
+      'userSavedForCurrentGoal': 0,
+    };
+
+    
+    // Update pratially users savings info to the server within the database
+    fetch((url + "/update-partial-savings?id=1"), {
+      method: 'PATCH',
+      headers: {
+        'Accept': 'application/json',
+      },
+      body: JSON.stringify(partialSavingsInfo)
+    })
+    .then(response => {
+      console.log(partialSavingsInfo);
+
+      console.log("Users savings information has been updated.")
+    })
+    .catch(e => console.log(e));
+}
+
+
+
+
+// Get all of the users savings information from the server
+function getUserSavingsInfo() {
+  fetch((url + "/get-savings-info?id=1"), {
+    method: 'GET'
+  })
+  .then(response => response.json())
+  .then(data => {
+    const test = data.id;
+    console.log(test);
+
+
+    //TODO --> Populate the appropriate ID's from within the fetch method
+
+  }) .catch(e => console.log(e));
+};
+
 }
 // SAVING-GOALS PAGE JAVASCRIPT - END
 
