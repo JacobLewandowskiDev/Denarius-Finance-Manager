@@ -24,28 +24,15 @@ public class SavingsService {
         return savings;
     }
 
-    public void updatePartialSavingsInfo(Long id, Savings savings) {
-        Savings found = this.savingsRepository.getById(id);
-        if(found != null) {
-            found.setCurrentGoal(savings.getCurrentGoal());
-            System.out.println("CurrentGoal: " + found.getCurrentGoal());
-            found.setCurrentGoalDate(savings.getCurrentGoalDate());
-            System.out.println("CurrentGoalDate: " + found.getCurrentGoalDate());
-            found.setUserSavedForCurrentGoal(savings.getUserSavedForCurrentGoal());
-            System.out.println("UserSavedForCurrentGoal: " + found.getUserSavedForCurrentGoal());
-            this.savingsRepository.save(found);
-            System.out.println("Savings using the id:" + id + " have been partially updated in the database");
-        }
-    }
-
     // Update all existing savings info for the user if they exist, if not then create default ones
-    public void updateAllSavingsInfo(Long id, Savings savings) {
+    public void updateUserSavingsInfo(Long id, Savings savings) {
         Savings found = this.savingsRepository.getById(id);
         if(found != null) {
             found.setCurrentGoal(savings.getCurrentGoal());
             found.setCurrentGoalDate(savings.getCurrentGoalDate());
             found.setUserSavedForCurrentGoal(savings.getUserSavedForCurrentGoal());
             found.setTotalSavings(savings.getTotalSavings());
+            found.setGoalReached(savings.getGoalReached());
             this.savingsRepository.save(found);
             System.out.println("Savings using the id:" + id + " have been updated in the database");
         }

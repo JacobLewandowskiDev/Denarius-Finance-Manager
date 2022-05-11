@@ -101,17 +101,28 @@ for (i = 0; i < accordions.length; i++) {
   });
 }
 
+if(page == 'userinterface.html') {
+  let interfaceTotalSave;
+  let interfaceTotalExpense;
+
+  //TODO Add endpoint to get total savings and total expenses amount and populate appropriate html tags
+}
+
 
 
 // EXPENSES PAGE JAVASCRIPT START - These functions will run only if the current URL ends with '/expenses.html'
 if(page == 'expenses.html') {
 
-  // Create named columns for expense list table
+  // Create header columns for expense list table
   const expenseListTable = document.getElementById('expenses-table');
   let tableRow; 
   let tableHeader;
 
+  // Create empty expense table
   basicExpenseHeaders();
+
+
+
 
   // Create empty expense table
   function basicExpenseHeaders() {
@@ -162,6 +173,8 @@ if(page == 'expenses.html') {
   
   // Get the list of all expenses from the server database and populate the html table with the data
   getAllExpenses();
+
+
 
 
   // ENDPOINT CONNECTION - Get List of all expenses from the server
@@ -393,6 +406,7 @@ if(page == 'expenses.html') {
     console.log('Add expense view opened');
   }
 
+
   // Close add expense view
   function closeAddExpenseView() {
     if(addExpenseOpen == true) {
@@ -432,6 +446,7 @@ if(page == 'expenses.html') {
   }
 
 
+  
 
 
   // Old expense id variable
@@ -564,13 +579,39 @@ if(page == 'expenses.html') {
 
 // SAVING-GOALS PAGE JAVASCRIPT - START
 if(page == 'saving-goals.html') {
-  // Fetch savings info for the user using fetch GET method
-  getUserSavingsInfo();
-
+  // If a goal is set this variable will turn to false until user has reached 100% of his/her saving goal
+  let goalReached;
+  // This is the 100% goal
+  let currentGoal;
+  // This is the amount of all the savings the user has ever collected 
+  let totalSavings = 0;
+  // This is the new percentage that has been reached after adding a certain money amount to the pool of savings.
+  let newPercentage;
+  // This is the current amount of the saving goal collected by the user 
+  let userSavedForCurrentGoal;
+  // The amount that the user has added to the pool
+  let addedAmount;
+  // The current percentage of the savings goal by the user - value display
+  let currentPercentage;
+  // The added percentage to the savings goal calculated based on the added amount and the set current goal
+  let addedPercentageOfGoal;   
+  // The savings information id and user id
+  let savingsId;
+  let savingsUserId;
+  // If this variable is set to false allow the function to execute once per page load
+  let executed = false;
   // Set the slider <p> tag value to whatever the sliders range indicates
   let sliderValue = document.getElementById('current-slider-range');
   // The current text displaying the users selected slider range
   let sliderValueDisplay = document.getElementById('slider-goal-value');
+  // This is the wave level DOM element
+  const waveElement = document.getElementById('wave');
+
+  // Fetch savings info for the user using fetch GET method --> Fills currentGoal, currentGoalDate, userSavedForCurrentGoal, goalReached
+  getUserSavingsInfo();
+
+
+
 
   // Update the slider text value upon change
   function updateSliderGoalValue() {
@@ -600,25 +641,6 @@ if(page == 'saving-goals.html') {
 
 
 
-// If a goal is set this variable will turn to false until user has reached 100% of his/her saving goal
-  let goalReached = true;
-  // This is the 100% goal
-  let currentGoal;
-  // This is the amount of all the savings the user has ever collected 
-  let totalSavings = 0;
-  // This is the new percentage that has been reached after adding a certain money amount to the pool of savings.
-  let newPercentage;
-  // This is the current amount of the saving goal collected by the user 
-  let userSavedForCurrentGoal;
-  // The amount that the user has added to the pool
-  let addedAmount;
-  // The current percentage of the savings goal by the user - value display
-  let currentPercentage;
-  // The added percentage to the savings goal calculated based on the added amount and the set current goal
-  let addedPercentageOfGoal;   
-  // This is the wave level DOM element
-  const waveElement = document.getElementById('wave');
-
   // This function calculates the amount of money the user must save up in order to reach his/her saving goal
   function setSavingGoalAndDate() {
     if(goalReached == true) {
@@ -639,15 +661,15 @@ if(page == 'saving-goals.html') {
       document.getElementById('current-goal').innerHTML = currentGoal;
 
       // Get the date by which the user wants the saving goal to be reached
-      let goalReachDate = new Date(document.getElementById('saving-goal-date').value);
+      let currentGoalDate = new Date(document.getElementById('saving-goal-date').value);
       let startDate = new Date();
-      let goalMonth = goalReachDate.getMonth() + 2; // Add 2 to skip over current month
-      let goalYear = goalReachDate.getFullYear();
+      let goalMonth = currentGoalDate.getMonth() + 2; // Add 2 to skip over current month
+      let goalYear = currentGoalDate.getFullYear();
        
       // Calculate the number of months between todays date and users date
-      months = (goalReachDate.getFullYear() - startDate.getFullYear()) * 12;
+      months = (currentGoalDate.getFullYear() - startDate.getFullYear()) * 12;
       months -= startDate.getMonth();
-      months += goalReachDate.getMonth() + 1;
+      months += currentGoalDate.getMonth() + 1;
 
       // Calculate the monthly amount the user needs to save up to reach the goal by that date
       let monthlySavingAmount = parseInt(sliderValue.value / months);
@@ -659,20 +681,20 @@ if(page == 'saving-goals.html') {
 
       // If the month is less then October (10) and is greater than 0 then append a '0' before the number of the month
       if(goalMonth < 10 && goalMonth > 0) {
-        goalReachDate = goalYear +"-0" + goalMonth; 
+        currentGoalDate = goalYear +"-0" + goalMonth; 
       }
 
       // If else keep the goal reach date as is
       else {
-        goalReachDate = goalYear +"-" + goalMonth; 
+        currentGoalDate = goalYear +"-" + goalMonth; 
       }
 
       // If the current goal value is greater than 0 -> show the goal reach div and put the users saving goal amount and goal reach date in it
       if(currentGoal > 0) {
-        document.getElementById('saving-date-value').innerHTML = goalReachDate; // Set the date to goalReachDate
+        document.getElementById('saving-date-value').innerHTML = currentGoalDate; // Set the date to currentGoalDate
         goalReached = false;  // Set the goal has been reached variable to false;
         console.log("A new saving goal has been set to: " + currentGoal + ", setting goalReached to " + goalReached);
-        document.getElementById('saving-goal-result-amount').innerHTML = monthlySavingAmount + " $"; // Set the monthly savings amount to monthlySavingAmount
+        document.getElementById('saving-goal-result-amount').innerHTML = monthlySavingAmount; // Set the monthly savings amount to monthlySavingAmount
         document.getElementById('saving-goal-result').style.display = "block";  // Display the hidden goal reach div
       }
 
@@ -683,7 +705,7 @@ if(page == 'saving-goals.html') {
       }
 
       // Partially update users saving information in the server
-      updatePartialUserSavingsInfo();
+      updateUserSavingsInfo();
     }
   }
 
@@ -751,7 +773,7 @@ if(page == 'saving-goals.html') {
           document.getElementById('current-saving-percentage').innerHTML = 100;
         }
         // Update all of the users savings information in the servers database
-        updateAllUserSavingsInfo();
+        updateUserSavingsInfo();
       }
    } 
    else {
@@ -764,19 +786,20 @@ if(page == 'saving-goals.html') {
 
   // Update all of the users savings info in the server
   // This method updates these variables: today, currentGoal, totalSavings, userSavedForCurrentGoal, for user id (1) for now, implement auto generation for logged in user later
-  function updateAllUserSavingsInfo() {
+  function updateUserSavingsInfo() {
       // Turn the users saving ingo to JSON obj
       const savingsInfo = {
         'userId': 1,
         'currentGoal': parseFloat(currentGoal),
         'currentGoalDate': today,
         'userSavedForCurrentGoal': parseFloat(userSavedForCurrentGoal),
-        'totalSavings': parseFloat(totalSavings)
+        'totalSavings': parseFloat(totalSavings),
+        'goalReached': goalReached
       };
 
       
       // Post users updated savings info to the server to update it within the database
-      fetch((url + "/update-all-savings?id=1"), {
+      fetch((url + "/update-savings?id=1"), {
         method: 'PUT',
         headers: {
           'Accept': 'application/json',
@@ -795,52 +818,46 @@ if(page == 'saving-goals.html') {
 
 
 
-  // Update only patial information of the users savings info in the server
-  // This method updates these variables: today, currentGoal, and resets these to  '0': totalSavings, userSavedForCurrentGoal, for user id (1) for now, implement auto generation for logged in user later
-  function updatePartialUserSavingsInfo() {
-    // Turn the users saving ingo to JSON obj
-    const partialSavingsInfo = {
-      'userId': 1,
-      'currentGoal': parseFloat(currentGoal),
-      'currentGoalDate': today,
-      'userSavedForCurrentGoal': 0,
-    };
-
-    
-    // Update pratially users savings info to the server within the database
-    fetch((url + "/update-partial-savings?id=1"), {
-      method: 'PATCH',
-      headers: {
-        'Accept': 'application/json',
-      },
-      body: JSON.stringify(partialSavingsInfo)
-    })
-    .then(response => {
-      console.log(partialSavingsInfo);
-
-      console.log("Users savings information has been updated.")
-    })
-    .catch(e => console.log(e));
-}
-
-
 
 
 // Get all of the users savings information from the server
 function getUserSavingsInfo() {
-  fetch((url + "/get-savings-info?id=1"), {
-    method: 'GET'
-  })
-  .then(response => response.json())
-  .then(data => {
-    const test = data.id;
-    console.log(test);
+  if(executed == false) {
+    fetch((url + "/get-savings-info?id=1"), {
+      method: 'GET'
+    })
+    .then(response => response.json())
+    .then(data => {
+      // Get all of the data from the json response and store them in the appropriate variables
+      currentGoal = data.currentGoal;
+      currentGoalDate = data.currentGoalDate;
+      userSavedForCurrentGoal = data.userSavedForCurrentGoal;
+      goalReached = data.goalReached;
+      totalSavings = data.totalSavings;
+      savingsId = data.id;
+      savingsUserId = data.userId;
 
+      // Populate the appropriate html tags with the data and set the percentage 
+      if(currentGoal > 0) {
+        document.getElementById('current-goal').innerHTML = currentGoal;
+        document.getElementById('saving-date-value').innerHTML = currentGoalDate;
+        document.getElementById('saving-goal-result').style.display = 'block';
 
-    //TODO --> Populate the appropriate ID's from within the fetch method
+        document.getElementById('current-savings').innerHTML = userSavedForCurrentGoal;
 
-  }) .catch(e => console.log(e));
-};
+        currentPercentage = Math.round(((userSavedForCurrentGoal / currentGoal) * 100) * 100) / 100;
+        document.getElementById('current-saving-percentage').innerHTML = currentPercentage;
+        wavePercentage = Math.round((120 - currentPercentage) * 100) / 100;
+        let translateY_Value = "translateY(" + wavePercentage + "%)" 
+        waveElement.style.transform = translateY_Value;
+        waveElement.style.transition = '.5s ease-in-out';
+      }
+      executed = true;
+    })
+    .catch(e => console.log(e));
+  };
+}
+  
 
 }
 // SAVING-GOALS PAGE JAVASCRIPT - END

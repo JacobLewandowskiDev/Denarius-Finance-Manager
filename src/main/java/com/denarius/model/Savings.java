@@ -25,6 +25,9 @@ public class Savings {
     @Column(name = "totalSavings")
     private double totalSavings;
 
+    @Column(name = "goalReached")
+    private boolean goalReached;
+
 
     public Long getId() {
         return id;
@@ -72,5 +75,13 @@ public class Savings {
 
     public void setTotalSavings(double totalSavings) {
         this.totalSavings = totalSavings;
+    }
+
+    public boolean getGoalReached() {
+        return goalReached;
+    }
+
+    public void setGoalReached(boolean goalReached) {
+        this.goalReached = goalReached;
     }
 }

@@ -23,15 +23,9 @@ public class SavingsController {
         return this.savingsService.getUserSavingsInfo(id);
     }
 
-    // Partially update the savings information of a user (savings goal and date)
-    @PatchMapping("/update-partial-savings")
-    public void updatePartialUserSavingsInfo(@RequestParam Long id, @RequestBody Savings savings) {
-        this.savingsService.updatePartialSavingsInfo(id, savings);
-    }
-
     // Update all the savings information of a user
-    @PutMapping("/update-all-savings")
-    public void updateAllUserSavingsInfo(@RequestParam Long id, @RequestBody Savings savings) {
-        this.savingsService.updateAllSavingsInfo(id,savings);
+    @PutMapping("/update-savings")
+    public void updateUserSavingsInfo(@RequestParam Long id, @RequestBody Savings savings) {
+        this.savingsService.updateUserSavingsInfo(id,savings);
     }
 }
