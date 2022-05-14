@@ -581,8 +581,12 @@ if(page == 'expenses.html') {
 if(page == 'saving-goals.html') {
   // If a goal is set this variable will turn to false until user has reached 100% of his/her saving goal
   let goalReached;
-  // This is the 100% goal
+  // This is the current goal amount
   let currentGoal;
+  // This is the current goal date by which the user wants toachieve his savings goal
+  let currentGoalDate;
+  // This is the amount the user must save up monthly to reach his goal
+  let monthlySavingAmount;
   // This is the amount of all the savings the user has ever collected 
   let totalSavings = 0;
   // This is the new percentage that has been reached after adding a certain money amount to the pool of savings.
@@ -661,7 +665,7 @@ if(page == 'saving-goals.html') {
       document.getElementById('current-goal').innerHTML = currentGoal;
 
       // Get the date by which the user wants the saving goal to be reached
-      let currentGoalDate = new Date(document.getElementById('saving-goal-date').value);
+      currentGoalDate = new Date(document.getElementById('saving-goal-date').value);
       let startDate = new Date();
       let goalMonth = currentGoalDate.getMonth() + 2; // Add 2 to skip over current month
       let goalYear = currentGoalDate.getFullYear();
@@ -672,11 +676,11 @@ if(page == 'saving-goals.html') {
       months += currentGoalDate.getMonth() + 1;
 
       // Calculate the monthly amount the user needs to save up to reach the goal by that date
-      let monthlySavingAmount = parseInt(sliderValue.value / months);
+      monthlySavingAmount = parseInt(currentGoal / months);
 
       // If the user hasn't put in a date to reach his goal just accept the amount as a goal
       if(months == 0) {
-        monthlySavingAmount = sliderValue.value;
+        monthlySavingAmount = currentGoal;
       }
 
       // If the month is less then October (10) and is greater than 0 then append a '0' before the number of the month
@@ -708,6 +712,7 @@ if(page == 'saving-goals.html') {
       updateUserSavingsInfo();
     }
   }
+
 
 
 
@@ -791,7 +796,8 @@ if(page == 'saving-goals.html') {
       const savingsInfo = {
         'userId': 1,
         'currentGoal': parseFloat(currentGoal),
-        'currentGoalDate': today,
+        'currentGoalDate': currentGoalDate,
+        'monthlySavingAmount': monthlySavingAmount,
         'userSavedForCurrentGoal': parseFloat(userSavedForCurrentGoal),
         'totalSavings': parseFloat(totalSavings),
         'goalReached': goalReached
@@ -831,6 +837,7 @@ function getUserSavingsInfo() {
       // Get all of the data from the json response and store them in the appropriate variables
       currentGoal = data.currentGoal;
       currentGoalDate = data.currentGoalDate;
+      monthlySavingAmount = data.monthlySavingAmount;
       userSavedForCurrentGoal = data.userSavedForCurrentGoal;
       goalReached = data.goalReached;
       totalSavings = data.totalSavings;
@@ -841,6 +848,8 @@ function getUserSavingsInfo() {
       if(currentGoal > 0) {
         document.getElementById('current-goal').innerHTML = currentGoal;
         document.getElementById('saving-date-value').innerHTML = currentGoalDate;
+        document.getElementById('saving-goal-date').value = currentGoalDate;
+        document.getElementById('saving-goal-result-amount').innerHTML = monthlySavingAmount;
         document.getElementById('saving-goal-result').style.display = 'block';
 
         document.getElementById('current-savings').innerHTML = userSavedForCurrentGoal;
@@ -851,6 +860,9 @@ function getUserSavingsInfo() {
         let translateY_Value = "translateY(" + wavePercentage + "%)" 
         waveElement.style.transform = translateY_Value;
         waveElement.style.transition = '.5s ease-in-out';
+      } else {
+        goalReached == true;
+        console.log("Goal reached set to: " + goalReached);
       }
       executed = true;
     })

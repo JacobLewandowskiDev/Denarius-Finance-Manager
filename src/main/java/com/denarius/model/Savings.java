@@ -19,6 +19,9 @@ public class Savings {
     @Column(name = "currentGoalDate")
     private String currentGoalDate;
 
+    @Column(name = "monthlySavingAmount")
+    private double monthlySavingAmount;
+
     @Column(name = "userSavedForCurrentGoal")
     private double userSavedForCurrentGoal;
 
@@ -59,6 +62,18 @@ public class Savings {
 
     public void setCurrentGoalDate(String currentGoalDate) {
         this.currentGoalDate = currentGoalDate;
+    }
+
+    public double getMonthlySavingAmount() {
+        return monthlySavingAmount;
+    }
+
+    public void setMonthlySavingAmount(double monthlySavingAmount) {
+        this.monthlySavingAmount = monthlySavingAmount;
+    }
+
+    public boolean isGoalReached() {
+        return goalReached;
     }
 
     public double getUserSavedForCurrentGoal() {
