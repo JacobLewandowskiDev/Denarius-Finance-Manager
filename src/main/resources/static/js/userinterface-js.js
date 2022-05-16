@@ -649,17 +649,6 @@ if(page == 'saving-goals.html') {
   function setSavingGoalAndDate() {
     if(goalReached == true) {
 
-      // Reset the percentage and saving amounts
-      currentPercentage = document.getElementById('current-saving-percentage').innerText = 0;
-      console.log("currentPercentage: " + currentPercentage);
-      userSavedForCurrentGoal = 0;
-      document.getElementById('current-savings').innerText = userSavedForCurrentGoal;
-      console.log("userSavedForCurrentGoal: " + userSavedForCurrentGoal);
-
-      // Reset the wave level
-      waveElement.style.transform = 'translateY(120%)';
-      waveElement.style.transition = '.5s ease-in-out';
-
       // Set a new current savings goal to be reached
       currentGoal = sliderValue.value;
       document.getElementById('current-goal').innerHTML = currentGoal;
@@ -782,10 +771,20 @@ if(page == 'saving-goals.html') {
       }
    } 
    else {
+    // Reset the percentage and saving amounts
+    currentPercentage = document.getElementById('current-saving-percentage').innerText = 0;
+    console.log("currentPercentage: " + currentPercentage);
+    userSavedForCurrentGoal = 0;
+    document.getElementById('current-savings').innerText = userSavedForCurrentGoal;
+    console.log("userSavedForCurrentGoal: " + userSavedForCurrentGoal);
+
+    // Reset the wave level
+    waveElement.style.transform = 'translateY(120%)';
+    waveElement.style.transition = '.5s ease-in-out';
    // Alert the user that he hasn't yet set a savings goal
    alert("You cannot add to your savings pool, please set up a new savings goal.");
-   }
   }
+}
 
 
 
@@ -797,7 +796,7 @@ if(page == 'saving-goals.html') {
         'userId': 1,
         'currentGoal': parseFloat(currentGoal),
         'currentGoalDate': currentGoalDate,
-        'monthlySavingAmount': monthlySavingAmount,
+        'monthlySavingAmount': parseFloat(monthlySavingAmount),
         'userSavedForCurrentGoal': parseFloat(userSavedForCurrentGoal),
         'totalSavings': parseFloat(totalSavings),
         'goalReached': goalReached
@@ -843,6 +842,8 @@ function getUserSavingsInfo() {
       totalSavings = data.totalSavings;
       savingsId = data.id;
       savingsUserId = data.userId;
+
+      console.log("data: " + JSON.stringify(data));
 
       // Populate the appropriate html tags with the data and set the percentage 
       if(currentGoal > 0) {

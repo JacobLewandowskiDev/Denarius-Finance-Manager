@@ -4,29 +4,80 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" href="images/dollar.png">
-    <link rel="stylesheet" href="css/interface-css.css">
+    <link rel="stylesheet" href="css/admin-interface-css.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Rambla:wght@700&display=swap" rel="stylesheet">
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-T8Gy5hrqNKT+hzMclPo118YTQO6cYprQmhrYwIiQ/3axmI1hQomh7Ud2hPOy8SP1" crossorigin="anonymous">
-    <title>Denarius - Admin interface</title>
+    <title>Denarius - Admin Interface</title>
 </head>
 <body>
+    <!-- Logout bar -->    
+            <!-- Webapp Logo -->
+                <div id="logout-bar">
+                    <div id="project-info-container">
+                        <img id="project-logo" src="images/dollar.png">
+                        <div id="project-name">DENARIUS</div>
+                    </div>
+    
+                    <!-- Logout button -->
+                    <div id="log-out-container">
+                        <form action="/logout" METHOD="GET">
+                            <button id="log-out-button" type="submit"><i class="fa fa-sign-out" aria-hidden="true"></i> <span id="logout-text">Log out</span></button>
+                        </form>
+                    </div>
+                </div>
+      
+    
+                <!-- User interface menu button -->
+                <div id="burger-menu" onclick="toggleInterfaceMenu();">
+                    <i class="fa fa-times fa-3x" aria-hidden="true"></i>
+                </div>
+    
+                <!-- User interface menu container -->
+                <div id="user-menu-container">
+                    <div id="menu">
+                        <div>
+                            <h4>Admin interface</h4>
+                        </div>
+                    </div>
+               
+                    <!-- These are the user interface menu options -->
+                    <div id="interface-options">
+                        <ul id="user-options">
+                            <li>
+                                <a id="user-dashboard-button"><i class="fa fa-users" aria-hidden="true"></i> User List</a>
+                            </li>
 
-<!-- Main Error viewport -->
-<div id="main-viewport">
-    <div id="welcome-view">
+                            <li>
+                                <a href="#" id="user-dashboard-button"><i class="fa fa-lock" aria-hidden="true"></i> Placeholder</a>
+                            </li>
 
-        <div id="greeting-text">
-            <h1>Welcome to the User Interface</h1>
-            <h3>Let us <span id="usecase-word">help</span> you save some money.</h3>
+                            <li>
+                                <a href="#" id="user-dashboard-button"><i class="fa fa-lock" aria-hidden="true"></i> Placeholder</a>
+                            </li>
 
+                            <li>
+                                <a href="#" id="user-dashboard-button"><i class="fa fa-lock" aria-hidden="true"></i> Placeholder</a>
+                            </li>
 
-            <form action="/logout" METHOD="GET">
-                <button id="sign-in-button" type="submit">Logout</button>
-            </form>
-        </div>
-    </div>
-</div>
+                        </ul>
+                    </div>
+                </div>  
+    
+
+                <!-- This is the user dashboard viewport -->
+                <div id="user-dashboard">
+                  <h3> List of application users </h3>
+
+                    <div id="table-container">
+                        <div id="show-users"><button class="buttons" onclick="getAllUsers()">Get List Of All Users</button></div>
+                        <br>
+                        <table id="users-table"></table> 
+                    </div>
+                    
+                </div>
+
+        <script src="js/admininterface-js.js" defer></script>
 </body>
 </html>

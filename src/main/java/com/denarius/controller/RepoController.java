@@ -1,27 +1,29 @@
 package com.denarius.controller;
 
 import com.denarius.model.User;
-import com.denarius.repository.UserRepositoryDao;
+import com.denarius.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
-@RequestMapping("/test")
+@RequestMapping("/admininterface.html")
 public class RepoController {
 
     @Autowired
-    private UserRepositoryDao userRepositoryDao;
+    private UserRepository userRepository;
 
-    @GetMapping("/all")
+    // Return a list of usernames to when the endpoint is called
+    @GetMapping("/get-user-list")
     public @ResponseBody
-    Iterable<User> getAllUsers() {
-        return userRepositoryDao.findAll();
+    List<String> getAllUsers() {
+        List<User> users = userRepository.findAll();
+        List<String> usernames = new ArrayList<String>();
+        for (User user : users) {
+            usernames.add(user.getUsername());
+        }
+        return usernames;
     }
-
-    @PostMapping("/add")
-    @RequestMapping("/")
-    public String addUser(User user) {
-        return "User was added";
-    }
-
 }

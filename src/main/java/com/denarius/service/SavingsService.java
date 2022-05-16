@@ -30,6 +30,7 @@ public class SavingsService {
         if(found != null) {
             found.setCurrentGoal(savings.getCurrentGoal());
             found.setCurrentGoalDate(savings.getCurrentGoalDate());
+            found.setMonthlySavingAmount(savings.getMonthlySavingAmount());
             found.setUserSavedForCurrentGoal(savings.getUserSavedForCurrentGoal());
             found.setTotalSavings(savings.getTotalSavings());
             found.setGoalReached(savings.getGoalReached());

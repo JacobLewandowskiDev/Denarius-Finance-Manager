@@ -19,13 +19,17 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     // Password encoder variable
     private final PasswordEncoder passwordEncoder;
-    private UserService userService;
+    // User service
+    private final UserService userService;
+    // Custom success handler
+    private final CustomSuccessHandler customSuccessHandler;
 
     // Instantiate the password encoder via constructor
     @Autowired
-    public SecurityConfig(PasswordEncoder passwordEncoder, UserService userService) {
+    public SecurityConfig(PasswordEncoder passwordEncoder, UserService userService, CustomSuccessHandler customSuccessHandler) {
         this.passwordEncoder = passwordEncoder;
         this.userService = userService;
+        this.customSuccessHandler = customSuccessHandler;
     }
 
     // Spring security configuration for the web-app
@@ -35,6 +39,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .authorizeRequests()
                 .antMatchers("/", "/test/**", "/index", "/error/**", "/css/**", "/js/**", "/images/**").permitAll() // Allow all users to freely access <index.html> page
+                .antMatchers("/userinterface.html", "/css/interface.css", "/js/userinterface-js.js").hasAnyAuthority("USER") // Allow users with role USER to access these files
+                .antMatchers("/admininterface.html", "/css/admin-interface.css", "/js/admininterface-js.js").hasAnyAuthority("ADMIN")// Allow users with role ADMIN to access these files
             .and()
                 .authorizeRequests()
                 .anyRequest()
@@ -43,8 +49,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .formLogin()    // Allow form login for users
                 .loginPage("/user-login")    // Change default login page to custom login popup on <index.html>
                 .permitAll()
-                .defaultSuccessUrl("/userinterface.html", true) // Set userinterface.html as the default success url after a correct login attempt
-                .failureForwardUrl("/index.html") // In case of a invalid username or password redirect back to <index.html>
+                .successHandler(customSuccessHandler) // Set up a custom success handler for all user role types after a correct login attempt
+                .failureForwardUrl("/index.html") // In case of an invalid username or password redirect back to <index.html>
                 .usernameParameter("username")
                 .passwordParameter("password")
             .and()
@@ -70,8 +76,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
-        provider.setPasswordEncoder(passwordEncoder);
         provider.setUserDetailsService(userService);
+        provider.setPasswordEncoder(passwordEncoder);
         return provider;
     }
 
