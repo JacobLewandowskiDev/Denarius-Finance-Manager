@@ -102,10 +102,43 @@ for (i = 0; i < accordions.length; i++) {
 }
 
 if(page == 'userinterface.html') {
-  let interfaceTotalSave;
-  let interfaceTotalExpense;
+  let interfaceTotalSaving = 0;
+  let interfaceTotalExpense = 0;
+
+  getTotals();
 
   //TODO Add endpoint to get total savings and total expenses amount and populate appropriate html tags
+  function getTotals() {
+
+    // Get the total expenses amount
+    fetch(url + "/get-total-expenses", {
+      method: 'GET'
+    })
+    .then(response => response.json())
+    .then(data => {
+      for(expense of data) {
+        interfaceTotalExpense += parseFloat(expense.cost);
+      }
+      // Store the total expensesamount in the html tag
+      if(interfaceTotalExpense > 0) {
+        document.getElementById('balance-overview').innerHTML = "-" + interfaceTotalExpense + " $";
+        document.getElementById('balance-overview').style.color = "#FF3333";
+      }
+    })
+
+    // Get the total savings amount
+    fetch((url + "/get-total-savings?id=1"), {
+      method: 'GET'
+    })
+    .then(response => response.json())
+    .then(data => {     
+      // Store the savings total in the html tag
+      interfaceTotalSaving = parseFloat(data.totalSavings);
+      if(interfaceTotalSaving > 0) {
+        document.getElementById('savings-overview').innerHTML = interfaceTotalSaving + " $";
+      }
+    })
+  }
 }
 
 
