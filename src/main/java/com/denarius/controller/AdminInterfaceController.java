@@ -10,12 +10,11 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/admininterface.html")
-public class RepoController {
+public class AdminInterfaceController {
 
     @Autowired
     private UserRepository userRepository;
 
-    // Return a list of usernames to when the endpoint is called
     @GetMapping("/get-user-list")
     public @ResponseBody
     List<String> getAllUsers() {

@@ -24,7 +24,6 @@ public class CustomUserDetails implements UserDetails {
         for (Role role : roles) {
             authorities.add(new SimpleGrantedAuthority(role.getName()));
         }
-
         return authorities;
     }
 
@@ -32,6 +31,9 @@ public class CustomUserDetails implements UserDetails {
         return this.user.hasRole(roleName);
     }
 
+    public int getId() {
+        return user.getId();
+    }
 
     @Override
     public String getPassword() {

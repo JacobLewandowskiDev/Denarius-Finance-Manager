@@ -1,8 +1,10 @@
 package com.denarius.controller;
 
+import com.denarius.model.CustomUserDetails;
 import com.denarius.model.Savings;
 import com.denarius.service.SavingsService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
@@ -19,13 +21,15 @@ public class SavingsController {
     }
 
     @GetMapping("/get-savings-info")
-    public Optional<Savings> getUserSavingsInfo(@RequestParam(name = "id") Long id) {
-        return this.savingsService.getUserSavingsInfo(id);
+    public Optional<Savings> getUserSavingsInfo() {
+        CustomUserDetails authenticatedUser = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return this.savingsService.getUserSavingsInfo(authenticatedUser.getId());
     }
 
     // Update all the savings information of a user
     @PutMapping("/update-savings")
-    public void updateUserSavingsInfo(@RequestParam Long id, @RequestBody Savings savings) {
-        this.savingsService.updateUserSavingsInfo(id,savings);
+    public void updateUserSavingsInfo(@RequestBody Savings savings) {
+        CustomUserDetails authenticatedUser = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        this.savingsService.updateUserSavingsInfo(authenticatedUser.getId(), savings);
     }
 }

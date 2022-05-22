@@ -9,6 +9,9 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.concurrent.TimeUnit;
@@ -17,14 +20,10 @@ import java.util.concurrent.TimeUnit;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    // Password encoder variable
     private final PasswordEncoder passwordEncoder;
-    // User service
     private final UserService userService;
-    // Custom success handler
     private final CustomSuccessHandler customSuccessHandler;
 
-    // Instantiate the password encoder via constructor
     @Autowired
     public SecurityConfig(PasswordEncoder passwordEncoder, UserService userService, CustomSuccessHandler customSuccessHandler) {
         this.passwordEncoder = passwordEncoder;
@@ -80,5 +79,4 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         provider.setPasswordEncoder(passwordEncoder);
         return provider;
     }
-
 }

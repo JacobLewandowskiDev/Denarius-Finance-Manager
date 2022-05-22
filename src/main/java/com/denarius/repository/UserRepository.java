@@ -9,5 +9,7 @@ import java.util.Optional;
 
 @Repository(value = "finance_manager")
 public interface UserRepository extends JpaRepository<User, Integer> {
+
     Optional<User> findByUsername(String username);
+
 }

@@ -18,16 +18,17 @@ public class SavingsService {
         this.savingsRepository = savingsRepository;
     }
 
-    public Optional<Savings> getUserSavingsInfo(Long id) {
-        System.out.println("Returned the users saving info");
-        Optional<Savings> savings = this.savingsRepository.findById(id);
+    public Optional<Savings> getUserSavingsInfo(int id) {
+        long userId = id;
+        System.out.println("getUserSavingsInfo call: Returned the users saving info for userId: " + userId);
+        Optional<Savings> savings = this.savingsRepository.getUserSavingsInfo(userId);
         return savings;
     }
 
     // Update all existing savings info for the user if they exist, if not then create default ones
-    public void updateUserSavingsInfo(Long id, Savings savings) {
-        Savings found = this.savingsRepository.getById(id);
-        if(found != null) {
+    public void updateUserSavingsInfo(int userId, Savings savings) {
+        Savings found = this.savingsRepository.getById(savings.getId());
+        if(found.getUserId() == userId) {
             found.setCurrentGoal(savings.getCurrentGoal());
             found.setCurrentGoalDate(savings.getCurrentGoalDate());
             found.setMonthlySavingAmount(savings.getMonthlySavingAmount());
@@ -35,7 +36,7 @@ public class SavingsService {
             found.setTotalSavings(savings.getTotalSavings());
             found.setGoalReached(savings.getGoalReached());
             this.savingsRepository.save(found);
-            System.out.println("Savings using the id:" + id + " have been updated in the database");
+            System.out.println("updateUserSavingsInfo call: Position " + savings.getId() + " has been updated in the database");
         }
     }
 }

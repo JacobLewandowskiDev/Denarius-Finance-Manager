@@ -24,6 +24,8 @@ public class Expense {
     @Column(name = "category")
     private String category;
 
+    @Column(name = "userId")
+    private int userId;
 
     public Long getId() {
         return id;
@@ -63,5 +65,13 @@ public class Expense {
 
     public void setCategory(String category) {
         this.category = category;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 }

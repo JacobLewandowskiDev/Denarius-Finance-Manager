@@ -111,13 +111,13 @@ if(page == 'userinterface.html') {
   function getTotals() {
 
     // Get the total expenses amount
-    fetch(url + "/get-total-expenses", {
+    fetch((url + "/get-total-expenses"), {
       method: 'GET'
     })
     .then(response => response.json())
     .then(data => {
-      for(expense of data) {
-        interfaceTotalExpense += parseFloat(expense.cost);
+      for(let i = 0; i < data.length; i ++) {
+        interfaceTotalExpense += parseFloat(data[i]);
       }
       // Store the total expensesamount in the html tag
       if(interfaceTotalExpense > 0) {
@@ -127,13 +127,13 @@ if(page == 'userinterface.html') {
     })
 
     // Get the total savings amount
-    fetch((url + "/get-total-savings?id=1"), {
+    fetch((url + "/get-total-savings"), {
       method: 'GET'
     })
     .then(response => response.json())
-    .then(data => {     
+    .then(totalSavings => {     
       // Store the savings total in the html tag
-      interfaceTotalSaving = parseFloat(data.totalSavings);
+      interfaceTotalSaving = parseFloat(totalSavings);
       if(interfaceTotalSaving > 0) {
         document.getElementById('savings-overview').innerHTML = interfaceTotalSaving + " $";
       }
@@ -217,7 +217,7 @@ if(page == 'expenses.html') {
     basicExpenseHeaders();
 
     // Fetch the response (expense list data) from the server database using the '/allexpenses' endpoint
-    fetch(url + "/all-expenses", {
+    fetch((url + "/all-expenses"), {
       method: 'GET'
     })
     .then(response => response.json()
@@ -632,9 +632,6 @@ if(page == 'saving-goals.html') {
   let currentPercentage;
   // The added percentage to the savings goal calculated based on the added amount and the set current goal
   let addedPercentageOfGoal;   
-  // The savings information id and user id
-  let savingsId;
-  let savingsUserId;
   // If this variable is set to false allow the function to execute once per page load
   let executed = false;
   // Set the slider <p> tag value to whatever the sliders range indicates
@@ -826,7 +823,7 @@ if(page == 'saving-goals.html') {
   function updateUserSavingsInfo() {
       // Turn the users saving ingo to JSON obj
       const savingsInfo = {
-        'userId': 1,
+        'id': savingsId,
         'currentGoal': parseFloat(currentGoal),
         'currentGoalDate': currentGoalDate,
         'monthlySavingAmount': parseFloat(monthlySavingAmount),
@@ -837,7 +834,7 @@ if(page == 'saving-goals.html') {
 
       
       // Post users updated savings info to the server to update it within the database
-      fetch((url + "/update-savings?id=1"), {
+      fetch((url + "/update-savings"), {
         method: 'PUT',
         headers: {
           'Accept': 'application/json',
@@ -848,7 +845,7 @@ if(page == 'saving-goals.html') {
       .then(response => {
         console.log(savingsInfo);
 
-        console.log("Users savings information has been updated.")
+        console.log("The users savings information has been updated.")
       })
       .catch(e => console.log(e));
   }
@@ -861,7 +858,7 @@ if(page == 'saving-goals.html') {
 // Get all of the users savings information from the server
 function getUserSavingsInfo() {
   if(executed == false) {
-    fetch((url + "/get-savings-info?id=1"), {
+    fetch((url + "/get-savings-info"), {
       method: 'GET'
     })
     .then(response => response.json())
@@ -874,7 +871,6 @@ function getUserSavingsInfo() {
       goalReached = data.goalReached;
       totalSavings = data.totalSavings;
       savingsId = data.id;
-      savingsUserId = data.userId;
 
       console.log("data: " + JSON.stringify(data));
 
