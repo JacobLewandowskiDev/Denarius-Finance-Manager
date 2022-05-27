@@ -25,7 +25,6 @@ public class SavingsService {
         return savings;
     }
 
-    // Update all existing savings info for the user if they exist, if not then create default ones
     public void updateUserSavingsInfo(int userId, Savings savings) {
         Savings found = this.savingsRepository.getById(savings.getId());
         if(found.getUserId() == userId) {

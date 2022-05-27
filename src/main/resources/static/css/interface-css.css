@@ -920,6 +920,9 @@ h5 {
         z-index: 100;
     }
 /* SAVING GOALS CSS - END */
+    #crypto-table td:nth-child(5), td:nth-child(6) {
+        font-weight: bold;
+    }
 
 /* MEDIA QUERIES */
 /* Change the user interface menu when viewport size smaller or equal to 430px */

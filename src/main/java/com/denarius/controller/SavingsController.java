@@ -3,7 +3,6 @@ package com.denarius.controller;
 import com.denarius.model.CustomUserDetails;
 import com.denarius.model.Savings;
 import com.denarius.service.SavingsService;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 

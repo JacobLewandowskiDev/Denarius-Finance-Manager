@@ -1,12 +1,8 @@
 package com.denarius.service;
 
-
-import com.denarius.model.CustomUserDetails;
 import com.denarius.model.Expense;
 import com.denarius.repository.ExpenseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

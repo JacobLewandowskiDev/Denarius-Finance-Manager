@@ -139,6 +139,7 @@ if(page == 'userinterface.html') {
       }
     })
   }
+
 }
 
 
@@ -900,8 +901,153 @@ function getUserSavingsInfo() {
   };
 }
   
-
 }
 // SAVING-GOALS PAGE JAVASCRIPT - END
 
 
+// PORTFOLIO PAGE JAVASCRIPT - START
+
+// PORTFOLIO PAGE JAVASCRIPT - END
+if(page == 'crypto.html') {
+
+  // Create header columns for crypto info table
+  const cryptoTable = document.getElementById('crypto-table');
+  let cryptoTableRow; 
+  let cryptoTableHeader;
+  let cryptoTableData;
+
+  // Create empty crypto info table
+  basicCryptoTableHeaders();
+
+
+  // Create empty expense table
+  function basicCryptoTableHeaders() {
+    cryptoTable.innerHTML = "";
+
+    // Create First row of headers within the table
+    cryptoTableRow = document.createElement('tr'); 
+
+    // Add Crypto No. header to table
+    cryptoTableHeader = document.createElement('th'); 
+    cryptoTableHeader.innerHTML = 'No.';
+    cryptoTableRow.appendChild(cryptoTableHeader);
+
+    // Add Crypto symbol header to table
+    cryptoTableHeader = document.createElement('th'); 
+    cryptoTableHeader.innerHTML = 'Symbol'; 
+    cryptoTableRow.appendChild(cryptoTableHeader);
+
+    // Add Crypto name header to table
+    cryptoTableHeader = document.createElement('th'); 
+    cryptoTableHeader.innerHTML = 'Name';
+    cryptoTableRow.appendChild(cryptoTableHeader);
+
+    // Add Crypto price header to table
+    cryptoTableHeader = document.createElement('th'); 
+    cryptoTableHeader.innerHTML = 'Price $';
+    cryptoTableRow.appendChild(cryptoTableHeader);
+
+    // Add Crypto change % in 24h header to table
+    cryptoTableHeader = document.createElement('th');  
+    cryptoTableHeader.innerHTML = 'Change % in 24h';
+    cryptoTableRow.appendChild(cryptoTableHeader);
+
+    // Add Crypto change % in 7 day period header to table
+    cryptoTableHeader = document.createElement('th'); 
+    cryptoTableHeader.innerHTML = 'Change % in 7d';
+    cryptoTableRow.appendChild(cryptoTableHeader);
+
+    // Add Crypto market cap header to table
+    cryptoTableHeader = document.createElement('th');  
+    cryptoTableHeader.innerHTML = 'Market Cap'; 
+    cryptoTableRow.appendChild(cryptoTableHeader);
+
+    // Append the row to the expense table
+    cryptoTable.appendChild(cryptoTableRow);  
+  }
+
+    // Upon page load get the latest crypto info
+    getCryptoInfo();
+
+    function getCryptoInfo() {
+
+      fetch((url + '/get-crypto-info'), {
+        method: 'GET'
+      })
+      .then(response => response.json())
+      .then(cryptoData => {
+        for(let i = 0; i <= 19; i++) {
+            // Create new row of headers within the table
+            cryptoTableRow = document.createElement('tr'); 
+
+            // Insert row number
+            cryptoTableData = document.createElement('td'); 
+            cryptoTableData.innerHTML = (i + 1) + ".";
+            cryptoTableRow.appendChild(cryptoTableData);
+
+            // Insert crypto symbol
+            cryptoTableData = document.createElement('td'); 
+            cryptoTableData.innerHTML = cryptoData.data[i].symbol;
+            cryptoTableRow.appendChild(cryptoTableData);
+
+            // Insert crypto name
+            cryptoTableData = document.createElement('td'); 
+            cryptoTableData.innerHTML = cryptoData.data[i].name;
+            cryptoTableRow.appendChild(cryptoTableData);
+            
+            // Insert crypto price
+            cryptoTableData = document.createElement('td'); 
+            let cryptoPrice = Math.round(cryptoData.data[i].quote.USD.price * 100) / 100;
+            cryptoTableData.innerHTML = cryptoPrice;
+            cryptoTableRow.appendChild(cryptoTableData);
+
+            // Insert crypto price change % in 24h
+            cryptoTableData = document.createElement('td'); 
+            let cryptoChange_24h = Math.round(cryptoData.data[i].quote.USD.percent_change_24h * 100) / 100;
+            cryptoTableData.innerHTML = cryptoChange_24h;
+            if(cryptoChange_24h < 0) {
+              cryptoTableData.style.color = '#f72525';
+            } else {
+              cryptoTableData.style.color = '#44eb4c';
+            }
+            cryptoTableRow.appendChild(cryptoTableData);
+
+            // Insert crypto price change % in 7d
+            cryptoTableData = document.createElement('td'); 
+            let cryptoChange_7d = Math.round(cryptoData.data[i].quote.USD.percent_change_7d * 100) / 100;
+            cryptoTableData.innerHTML = cryptoChange_7d;
+            if(cryptoChange_7d < 0) {
+              cryptoTableData.style.color = '#ff3636';
+            } else {
+              cryptoTableData.style.color = '#44eb4c';
+            }
+            cryptoTableRow.appendChild(cryptoTableData);
+
+            // Insert crypto market cap
+            cryptoTableData = document.createElement('td'); 
+            let cryptoMarketCap = Math.round(cryptoData.data[i].quote.USD.market_cap * 100) / 100;
+            cryptoTableData.innerHTML = cryptoMarketCap;
+            cryptoTableRow.appendChild(cryptoTableData);
+
+            // Append the created row to the table
+            cryptoTable.appendChild(cryptoTableRow);          
+        }
+      })
+    };
+
+    // Set timer to 60 seconds - Will refresh the crypto info table every 60 seconds
+    let timer = 120;
+    let timePassed = 1;
+    setInterval(function(){
+      if(timePassed == 120){
+        getCryptoInfo();
+        timePassed = 1;
+        timer = 120;
+        console.log("Retrieved updated crypto info")
+      }
+      let result = timer - timePassed;
+      document.getElementById("crypto-refresh").innerHTML ="The list will update in: " + result + " seconds";
+      timePassed += 1;
+    }, 1000);  
+
+}
