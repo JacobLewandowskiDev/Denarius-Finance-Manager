@@ -1,5 +1,8 @@
 # DENARIUS - Personal Finance Manager
 
+## Application Description
+
+
 ## How to run app
 1. Simply copy the repository and run the financeManager-0.0.1-SNAPSHOT-with-dependencies.jar file.
 2. After the file has finished downloading all the required dependencies just run the Main class within the app
