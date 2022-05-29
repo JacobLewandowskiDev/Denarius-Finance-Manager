@@ -17,7 +17,7 @@
   - Front-end: HTML, CSS, JavaScript
   - Project build and management automation: Maven 3.8.3
   - Java Frameworks: Spring ver 2.6.3
-  - CoinMarketCap API
+  - CryptoCurrency info: CoinMarketCap API
 
 ## How To Run The Application
   1. Copy the repository
