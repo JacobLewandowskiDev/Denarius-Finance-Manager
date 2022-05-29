@@ -24,7 +24,7 @@
   2. In your IDE run the following command in the terminal: 'mvn package' 
   3. After the code has finished compiling make sure all of the required dependencies are downloaded
   4. After completing steps 1-3 run the main method from the 'DenariusApplication.class' 
-  5. After the application starts open MySQL Workbench and open the Schema from the code package you downloaded
+  5. After the application starts open MySQL Workbench and create the Schema finance_manager
   6. Create all of the tables and perform all of the INSERTS within the Schema (Refer to Schema in the readme.md for reference)
   7. Restart the application by running the main method from the 'DenariusApplication.class'
   8. You are set to use the web app
