@@ -1,5 +1,5 @@
 # DENARIUS - Personal Finance Manager
-![](static/images/Denarius.jpg)
+![](images/Denarius.jpg)
 ## Application Description
   Denarius - The name of the web app comes from a silver coin used in ancient Rome. This web app helps its users with managing their finances. The client side of the   application can setup saving goals they wish to achieve by a certain date and track their expenses, the backend then takes care of storing that data and performing all of the calculations upon a specific endpoint request call. The webapp also tracks the information of the top 20 trading Cryptocurrencies and updates the information every 2 minutes using tht CoinMarketCap API.
 
