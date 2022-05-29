@@ -33,12 +33,11 @@
 
 ## Schema
 ```
-use finance_manager;
+USE finance_manager;
 
-insert into user (id, username, password) values(1, 'admin', '$2a$07$meO8oEFk9Flf7vTaR4nCG.yWUTdDx1IMVcW3ZGAdeehP.P8tIFz.O');
-insert into user (id, username, password) values(2, 'user', '$2a$07$cTaTTiLkhstoHKLnA2/FxeqPgkSGdp9XiQADgOsiBVv4.3lOxst3G');
-insert into user (id, username, password) values(3, 'testuser', '$2a$07$cTaTTiLkhstoHKLnA2/FxeqPgkSGdp9XiQADgOsiBVv4.3lOxst3G');
-
+INSERT INTO user (id, username, password) VALUES(1, 'admin', '$2a$07$meO8oEFk9Flf7vTaR4nCG.yWUTdDx1IMVcW3ZGAdeehP.P8tIFz.O');
+INSERT INTO user (id, username, password) VALUES(2, 'user', '$2a$07$cTaTTiLkhstoHKLnA2/FxeqPgkSGdp9XiQADgOsiBVv4.3lOxst3G');
+INSERT INTO user (id, username, password) VALUES(3, 'testuser', '$2a$07$cTaTTiLkhstoHKLnA2/FxeqPgkSGdp9XiQADgOsiBVv4.3lOxst3G');
 
 CREATE TABLE `roles` (
   `role_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -48,8 +47,6 @@ CREATE TABLE `roles` (
 
 INSERT INTO `roles` (`name`) VALUES ('ADMIN');
 INSERT INTO `roles` (`name`) VALUES ('USER');
-
-
 
 CREATE TABLE `users_roles` (
   `user_id` int(11) NOT NULL,
@@ -64,24 +61,23 @@ INSERT INTO `users_roles` (`user_id`, `role_id`) VALUES (1, 1);
 INSERT INTO `users_roles` (`user_id`, `role_id`) VALUES (2, 2);
 INSERT INTO `users_roles` (`user_id`, `role_id`) VALUES (3, 2);
 
+INSERT INTO expenses (date, expense_name, cost, category, user_id) VALUES ('2022-03-12', 'Coffee & Lunch', '25.99', 'Food', '2');
+INSERT INTO expenses (date, expense_name, cost, category, user_id) VALUES ('2022-01-28', 'Gym membership', '59.99', 'Personal', '2');
+INSERT INTO expenses (date, expense_name, cost, category, user_id) VALUES ('2022-05-01', 'Amazon Prime', '14.99', 'Utilities', '2');
+INSERT INTO expenses (date, expense_name, cost, category, user_id) VALUES ('2022-02-05', 'Gasoline', '135.73', 'Transportation', '2');
+INSERT INTO expenses (date, expense_name, cost, category, user_id) VALUES ('2022-04-18', 'Ice cream', '125.50', 'HealthCare', '2');
+INSERT INTO expenses (date, expense_name, cost, category, user_id) VALUES ('2022-02-21', 'Rent', '499', 'Housing', '2');
 
+INSERT INTO expenses (date, expense_name, cost, category, user_id) VALUES ('2022-02-21', 'Clothes', '265', 'Personal', '3');
+INSERT INTO expenses (date, expense_name, cost, category, user_id) VALUES ('2022-04-01', 'test1', '65', 'HealthCare', '3');
+INSERT INTO expenses (date, expense_name, cost, category, user_id) VALUES ('2022-01-13', 'test2', '25', 'Food', '3');
+INSERT INTO expenses (date, expense_name, cost, category, user_id) VALUES ('2021-04-25', 'test3', '15', 'Food', '3');
+INSERT INTO expenses (date, expense_name, cost, category, user_id) VALUES ('2022-05-28', 'test4', '95', 'Utilities', '3');
+INSERT INTO expenses (date, expense_name, cost, category, user_id) VALUES ('2022-02-11', 'Clothes', '36', 'Housing', '3');
 
-insert into expenses (date, expense_name, cost, category, user_id) values ('2022-03-12', 'Coffee & Lunch', '25.99', 'Food', '2');
-insert into expenses (date, expense_name, cost, category, user_id) values ('2022-01-28', 'Gym membership', '59.99', 'Personal', '2');
-insert into expenses (date, expense_name, cost, category, user_id) values ('2022-05-01', 'Amazon Prime', '14.99', 'Utilities', '2');
-insert into expenses (date, expense_name, cost, category, user_id) values ('2022-02-05', 'Gasoline', '135.73', 'Transportation', '2');
-insert into expenses (date, expense_name, cost, category, user_id) values ('2022-04-18', 'Ice cream', '125.50', 'HealthCare', '2');
-insert into expenses (date, expense_name, cost, category, user_id) values ('2022-02-21', 'Rent', '499', 'Housing', '2');
+INSERT INTO savings (current_goal, current_goal_date, monthly_saving_amount, total_savings, user_id, user_saved_for_current_goal, goal_reached) VALUES('0.00', '2022-06', '0.00', '0.00', '2', '0.00', 0);
+INSERT INTO savings (current_goal, current_goal_date, monthly_saving_amount, total_savings, user_id, user_saved_for_current_goal, goal_reached) VALUES('0.00', '2022-06', '0.00', '0.00', '3', '0.00', 0);
 
-insert into expenses (date, expense_name, cost, category, user_id) values ('2022-02-21', 'Clothes', '265', 'Personal', '3');
-insert into expenses (date, expense_name, cost, category, user_id) values ('2022-04-01', 'test1', '65', 'HealthCare', '3');
-insert into expenses (date, expense_name, cost, category, user_id) values ('2022-01-13', 'test2', '25', 'Food', '3');
-insert into expenses (date, expense_name, cost, category, user_id) values ('2021-04-25', 'test3', '15', 'Food', '3');
-insert into expenses (date, expense_name, cost, category, user_id) values ('2022-05-28', 'test4', '95', 'Utilities', '3');
-insert into expenses (date, expense_name, cost, category, user_id) values ('2022-02-11', 'Clothes', '36', 'Housing', '3');
-
-insert into savings (current_goal, current_goal_date, monthly_saving_amount, total_savings, user_id, user_saved_for_current_goal, goal_reached) values('0.00', '2022-06', '0.00', '0.00', '2', '0.00', 0);
-insert into savings (current_goal, current_goal_date, monthly_saving_amount, total_savings, user_id, user_saved_for_current_goal, goal_reached) values('0.00', '2022-06', '0.00', '0.00', '3', '0.00', 0);
 ```
 
 ## Future features
