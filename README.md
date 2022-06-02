@@ -32,7 +32,7 @@
   10. Open your browser and go to 'localhost:8080'
   11. From here you may log in as one of the default normal users, or as an admin using the given login parameters.
 
-## Environmental Variables
+## How To Set up the Environmental Variables
   1. While your IDE (InteliJ) is open, go to the 'Run' tab and select the 'Edit Configurations' option
   2. While using the naming convention of the variables listed below change the url, username, and password for your MySQL database connection
   
@@ -44,7 +44,7 @@
   
   ```
 
-### MySQL Schema
+## MySQL Schema
 ```
 USE finance_manager;
 
