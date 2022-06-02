@@ -21,15 +21,28 @@
 
 ## How To Run The Application
   1. Copy the repository
-  2. In your IDE run the following command in the terminal: 'mvn package' 
-  3. After the code has finished compiling make sure all of the required dependencies are downloaded
-  4. After completing steps 1-3 run the main method from the 'DenariusApplication.class' 
-  5. After the application starts open MySQL Workbench and create the Schema finance_manager
-  6. Create all of the tables and perform all of the INSERTS within the Schema (Refer to Schema in the readme.md for reference)
-  7. Restart the application by running the main method from the 'DenariusApplication.class'
-  8. You are set to use the web app
-  9. Open your browser and go to 'localhost:8080'
-  10. From here you may log in as one of the default normal users, or as an admin using the given login parameters.
+  2. Create environmental variables for the database connection (Refer to 'Environmental Variables' in the readme.md for reference)
+  3. In your IDE run the following command in the terminal: 'mvn package' 
+  4. After the code has finished compiling make sure all of the required dependencies are downloaded
+  5. After completing steps 1-3 run the main method from the 'DenariusApplication.class' 
+  6. After the application starts open MySQL Workbench and create the Schema finance_manager
+  7. Create all of the tables and perform all of the INSERTS within the Schema (Refer to 'MySQL Schema' in the readme.md for reference)
+  8. Restart the application by running the main method from the 'DenariusApplication.class'
+  9. You are set to use the web app
+  10. Open your browser and go to 'localhost:8080'
+  11. From here you may log in as one of the default normal users, or as an admin using the given login parameters.
+
+## Environmental Variables
+  1. While your IDE (InteliJ) is open, go to the 'Run' tab and select the 'Edit Configurations' option
+  2. While using the naming convention of the variables listed below change the url, username, and password for your MySQL database connection
+  
+  ### Environmental variables
+  ```
+  MYSQL_DATASOURCE_URL= jdbc:mysql://localhost:3306/finance_manager;
+  MYSQL_DATASOURCE_USERNAME= username;
+  MYSQL_DATASOURCE_PASSWORD= password
+  
+  ```
 
 ## MySQL Schema
 ```
