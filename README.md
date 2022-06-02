@@ -1,7 +1,7 @@
 # DENARIUS - Personal Finance Manager
 
 ## Application Description
-  Denarius - The name of the web app originates from a silver coin used in ancient Rome. This web app assists its users in managing their finances. The client side of the application has the ability to setup saving goals they wish to achieve by a certain date and track their expenses, the backend then takes care of storing that data inside a relational database and performs all of the calculations upon a specific endpoint request call. That data is then presented to the user for their viewing. The webapp can also tracks the information of the top 20 trading Cryptocurrencies and updates the list every 2 minutes by pulling the data from coinmarketcap.com using the CoinMarketCap API.
+  Denarius - The name of the web app originates from a silver coin used in ancient Rome. This web app assists its users in managing their finances. The client-side of the app after logging into their account can set up saving goals they wish to achieve by a certain date and track their expenses. The backend then takes care of storing that data and performing all of the calculations upon a specific endpoint request callfor the user. That data is then presented to the client for their viewing. The web app can also track the information of the top 20 trading Cryptocurrencies and updates the list every 2 minutes by pulling the data from coinmarketcap.com using the CoinMarketCap API.
 
 ## User Features
   - Login into one of the premade accounts (Role-based authentication: normal user or admin user).
@@ -31,7 +31,7 @@
   9. Open your browser and go to 'localhost:8080'
   10. From here you may log in as one of the default normal users, or as an admin using the given login parameters.
 
-## Schema
+## MySQL Schema
 ```
 USE finance_manager;
 
