@@ -44,7 +44,7 @@
   
   ```
 
-## MySQL Schema
+### MySQL Schema
 ```
 USE finance_manager;
 
