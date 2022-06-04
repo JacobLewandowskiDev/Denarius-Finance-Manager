@@ -94,4 +94,4 @@ INSERT INTO savings (current_goal, current_goal_date, monthly_saving_amount, tot
 ```
 
 ## Future features
-- Implement new user method
+- Implement add new user method
