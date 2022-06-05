@@ -16,7 +16,7 @@ public class UserService implements UserDetailsService {
     private final UserRepository userRepository;
 
     @Autowired
-    public UserService(@Qualifier("heroku_77a5006925d50fe") UserRepository userRepository) {
+    public UserService(@Qualifier("finance_manager") UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
