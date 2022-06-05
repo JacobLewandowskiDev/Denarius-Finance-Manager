@@ -107,7 +107,6 @@ if(page == 'userinterface.html') {
 
   getTotals();
 
-  //TODO Add endpoint to get total savings and total expenses amount and populate appropriate html tags
   function getTotals() {
 
     // Get the total expenses amount
@@ -119,7 +118,7 @@ if(page == 'userinterface.html') {
       for(let i = 0; i < data.length; i ++) {
         interfaceTotalExpense += parseFloat(data[i]);
       }
-      // Store the total expensesamount in the html tag
+      // Store the total expenses amount in the html tag
       if(interfaceTotalExpense > 0) {
         document.getElementById('balance-overview').innerHTML = "-" + interfaceTotalExpense + " $";
         document.getElementById('balance-overview').style.color = "#FF3333";

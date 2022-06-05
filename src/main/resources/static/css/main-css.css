@@ -249,7 +249,7 @@ h4 {
 }
 
 /* Sign in button properties */
-#sign-in-button {
+.submit-button {
     cursor: pointer;
     font-size: 2em;
     margin-top: 40px;
@@ -263,7 +263,7 @@ h4 {
 }
 
 /* Sign in button hover properties */
-#sign-in-button:hover {
+.submit-button:hover {
     background-color: #ffbf35;
     color:rgb(23, 135, 204);
 }

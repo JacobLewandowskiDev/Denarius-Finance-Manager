@@ -4,7 +4,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/index")
 public class UserLoginController {
 
     @GetMapping("user-login")
