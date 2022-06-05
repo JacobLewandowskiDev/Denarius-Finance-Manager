@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-@Repository(value = "finance_manager")
+@Repository(value = "heroku_77a5006925d50fe")
 public interface UserRepository extends JpaRepository<User, Integer> {
 
     Optional<User> findByUsername(String username);
