@@ -34,7 +34,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/", "/test/**", "/index", "/error/**", "/css/**", "/js/**", "/images/**").permitAll() // Allow all users to freely access <index.html> page
+                .antMatchers("/", "/index", "/error/**", "/css/**", "/js/**", "/images/**").permitAll() // Allow all users to freely access <index.html> page
                 .antMatchers("/userinterface.html", "/css/interface.css", "/js/userinterface-js.js").hasAnyAuthority("USER") // Allow users with role USER to access these files
                 .antMatchers("/admininterface.html", "/css/admin-interface.css", "/js/admininterface-js.js").hasAnyAuthority("ADMIN")// Allow users with role ADMIN to access these files
             .and()
