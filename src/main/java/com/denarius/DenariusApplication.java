@@ -9,6 +9,5 @@ public class DenariusApplication implements WebMvcConfigurer {
 
 	public static void main(String[] args) {
 		SpringApplication.run(DenariusApplication.class, args);
-//testing
 	}
 }

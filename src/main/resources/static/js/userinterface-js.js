@@ -134,7 +134,8 @@ if(page == 'userinterface.html') {
       // Store the savings total in the html tag
       interfaceTotalSaving = parseFloat(totalSavings);
       if(interfaceTotalSaving > 0) {
-        document.getElementById('savings-overview').innerHTML = interfaceTotalSaving + " $";
+        var roundedSavings = Math.round(interfaceTotalSaving * 100) / 100;
+        document.getElementById('savings-overview').innerHTML = roundedSavings + " $";
       }
     })
   }
@@ -644,7 +645,21 @@ if(page == 'saving-goals.html') {
   // Fetch savings info for the user using fetch GET method --> Fills currentGoal, currentGoalDate, userSavedForCurrentGoal, goalReached
   getUserSavingsInfo();
 
+  function checkGoalReach() {
+    const steps1To3 = document.querySelectorAll('.savings-form-inner-container');
 
+    if(!goalReached) {
+      steps1To3.forEach(element => {
+        element.style.display = 'none';
+        console.log("Changed to none");
+      });
+    } else {
+      steps1To3.forEach(element => {
+        element.style.display = 'flex';
+        console.log("Changed to flex");
+      });
+    }
+  }
 
 
   // Update the slider text value upon change
@@ -678,7 +693,6 @@ if(page == 'saving-goals.html') {
   // This function calculates the amount of money the user must save up in order to reach his/her saving goal
   function setSavingGoalAndDate() {
     if(goalReached == true) {
-
       // Set a new current savings goal to be reached
       currentGoal = sliderValue.value;
       document.getElementById('current-goal').innerHTML = currentGoal;
@@ -745,22 +759,24 @@ if(page == 'saving-goals.html') {
 
       // Grab the amount added by the user to the total
       addedAmount = document.getElementById('addedSavingValue').value;
-      console.log("User added amount: " + addedAmount);
+      var roundedAmount = Math.round(addedAmount * 100) / 100;
+
+      console.log("User added amount: " + roundedAmount);
 
       // Check if the added amount is not a negative number or not equals to 0
-      if(addedAmount > 0) {
+      if(roundedAmount > 0) {
 
         // Add the users added amount to a pool of the current goal savings total
-        userSavedForCurrentGoal += parseFloat(addedAmount);
-        document.getElementById('current-savings').innerHTML = userSavedForCurrentGoal;
-        console.log("userSavedForCurrentGoal: " +  userSavedForCurrentGoal);
+        userSavedForCurrentGoal += parseFloat(roundedAmount);
+        document.getElementById('current-savings').innerHTML = Math.round(userSavedForCurrentGoal * 100) / 100;
+        console.log("userSavedForCurrentGoal: " +  (Math.round(userSavedForCurrentGoal * 100) / 100));
 
         // Add the users added amount to a grand total of all of his savings
-        totalSavings += parseFloat(addedAmount);
+        totalSavings += parseFloat(roundedAmount);
         console.log("totalSavings: " +  totalSavings);
 
         // Calculate what the added amounts percentage is of the current goal
-        addedPercentageOfGoal = Math.round((addedAmount / currentGoal) * 10000) / 100;
+        addedPercentageOfGoal = Math.round((roundedAmount / currentGoal) * 10000) / 100;
         console.log("addedPercentageOfGoal: " +  addedPercentageOfGoal);
 
         // Grab the current percentage of the goal achievement displayed to the user
@@ -794,6 +810,7 @@ if(page == 'saving-goals.html') {
           alert("You have reached your goal");
 
           // Set the percentage to 100% and lock it so that it cant be changed untill a new goal has been set
+          document.getElementById('current-goal').innerHTML = 0;
           document.getElementById('current-saving-percentage').innerHTML = 100;
         }
         // Update all of the users savings information in the servers database
@@ -801,6 +818,7 @@ if(page == 'saving-goals.html') {
       }
    } 
    else {
+    checkGoalReach();
     // Reset the percentage and saving amounts
     currentPercentage = document.getElementById('current-saving-percentage').innerText = 0;
     console.log("currentPercentage: " + currentPercentage);
@@ -827,8 +845,8 @@ if(page == 'saving-goals.html') {
         'currentGoal': parseFloat(currentGoal),
         'currentGoalDate': currentGoalDate,
         'monthlySavingAmount': parseFloat(monthlySavingAmount),
-        'userSavedForCurrentGoal': parseFloat(userSavedForCurrentGoal),
-        'totalSavings': parseFloat(totalSavings),
+        'userSavedForCurrentGoal': parseFloat(Math.round(userSavedForCurrentGoal * 100) / 100),
+        'totalSavings': parseFloat(Math.round(totalSavings * 100) / 100),
         'goalReached': goalReached
       };
 
@@ -867,7 +885,7 @@ function getUserSavingsInfo() {
       currentGoal = data.currentGoal;
       currentGoalDate = data.currentGoalDate;
       monthlySavingAmount = data.monthlySavingAmount;
-      userSavedForCurrentGoal = data.userSavedForCurrentGoal;
+      userSavedForCurrentGoal = Math.round(data.userSavedForCurrentGoal * 100) / 100;
       goalReached = data.goalReached;
       totalSavings = data.totalSavings;
       savingsId = data.id;
