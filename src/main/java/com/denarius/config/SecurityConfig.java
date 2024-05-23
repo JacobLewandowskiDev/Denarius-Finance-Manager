@@ -46,7 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/user-login")    // Change default login page to custom login popup on <index.html>
                 .permitAll()
                 .successHandler(customSuccessHandler) // Set up a custom success handler for all user role types after a correct login attempt
-                .failureForwardUrl("/index.html") // In case of an invalid username or password redirect back to <index.html>
+                .failureUrl("/index.html") // In case of an invalid username or password redirect back to <index.html>
                 .usernameParameter("username")
                 .passwordParameter("password")
             .and()

@@ -22,6 +22,7 @@ public class SavingsService {
         long userId = id;
         System.out.println("getUserSavingsInfo call: Returned the users saving info for userId: " + userId);
         Optional<Savings> savings = this.savingsRepository.getUserSavingsInfo(userId);
+        System.out.println("User savings: " + savings);
         return savings;
     }
 

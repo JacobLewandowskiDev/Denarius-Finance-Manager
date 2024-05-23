@@ -7,15 +7,15 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/")
 public class UserLoginController {
 
-    @GetMapping("user-login")
+    @GetMapping("/user-login")
     public ModelAndView loginView() {
         System.out.println("There was a login attempt");
-        return new ModelAndView("user-login");
+        return new ModelAndView("denarius/user-login");
     }
 
-    @GetMapping("go-back")
+    @GetMapping("/logout")
     public ModelAndView logout() {
         System.out.println("Rerouting back to home page");
-        return new ModelAndView("index");
+        return new ModelAndView("denarius/index.html");
     }
 }

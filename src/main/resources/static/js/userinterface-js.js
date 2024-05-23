@@ -120,6 +120,7 @@ if(page == 'userinterface.html') {
       }
       // Store the total expenses amount in the html tag
       if(interfaceTotalExpense > 0) {
+        interfaceTotalExpense = Math.round(interfaceTotalExpense * 100) / 100;
         document.getElementById('balance-overview').innerHTML = "-" + interfaceTotalExpense + " $";
         document.getElementById('balance-overview').style.color = "#FF3333";
       }
@@ -260,7 +261,7 @@ if(page == 'expenses.html') {
 
         // Insert Expense Cost data cell to appropriate row
         tableData = document.createElement('td'); 
-        tableData.innerHTML = parseFloat(`${expense.cost}`);
+        tableData.innerHTML = Math.round(parseFloat(`${expense.cost}`) * 100) / 100;
         tableRow.appendChild(tableData);
 
         // Insert Expense Category data cell to appropriate row
@@ -348,9 +349,6 @@ if(page == 'expenses.html') {
     }
   }
 
-
-    
-
     // Each category of expenses total
     let housingTotal;
     let transportationTotal;
@@ -425,9 +423,6 @@ if(page == 'expenses.html') {
   }
 
 
-
-
-
   // Add expense view status
   let addExpenseOpen = false;
 
@@ -451,8 +446,6 @@ if(page == 'expenses.html') {
       console.log('Add expense view closed');
     }
   }
-
-
 
 
   // Edit expense view status
@@ -622,7 +615,7 @@ if(page == 'saving-goals.html') {
   // This is the amount the user must save up monthly to reach his goal
   let monthlySavingAmount;
   // This is the amount of all the savings the user has ever collected 
-  let totalSavings = 0;
+  let totalSavings;
   // This is the new percentage that has been reached after adding a certain money amount to the pool of savings.
   let newPercentage;
   // This is the current amount of the saving goal collected by the user 
@@ -632,7 +625,7 @@ if(page == 'saving-goals.html') {
   // The current percentage of the savings goal by the user - value display
   let currentPercentage;
   // The added percentage to the savings goal calculated based on the added amount and the set current goal
-  let addedPercentageOfGoal;   
+  let addedPercentageOfGoal;
   // If this variable is set to false allow the function to execute once per page load
   let executed = false;
   // Set the slider <p> tag value to whatever the sliders range indicates
@@ -670,6 +663,7 @@ if(page == 'saving-goals.html') {
   // Input type date - set min value to today's month and year
   let dateControl = document.getElementById('saving-goal-date');
   let today = new Date();
+  console.log("Today is: " + today);
   let month = today.getMonth() + 2;
   let year = today.getFullYear();
   
@@ -718,12 +712,12 @@ if(page == 'saving-goals.html') {
 
       // If the month is less then October (10) and is greater than 0 then append a '0' before the number of the month
       if(goalMonth < 10 && goalMonth > 0) {
-        currentGoalDate = goalYear +"-0" + goalMonth; 
+        currentGoalDate = goalYear +"-0" + goalMonth + '-01';
       }
 
       // If else keep the goal reach date as is
       else {
-        currentGoalDate = goalYear +"-" + goalMonth; 
+        currentGoalDate = goalYear +"-" + goalMonth + '-01';
       }
 
       // If the current goal value is greater than 0 -> show the goal reach div and put the users saving goal amount and goal reach date in it

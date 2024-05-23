@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:latest
+    container_name: denarius_db
+    environment:
+      - MYSQL_ROOT_PASSWORD=1234
+      - MYSQL_DATABASE=finance_manager
+      - MYSQL_USER=user
+      - MYSQL_PASSWORD=1234
+    ports:
+      - 3307:3306
+    networks:
+      - denarius-net
+    volumes:
+      - ./src/resources/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+
+  spring-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: denarius_app
+    ports:
+      - 8880:8080
+    depends_on:
+      - mysql
+    networks:
+      - denarius-net
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysql:3306/finance_manager
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=1234
+    restart: on-failure
+
+networks:
+  denarius-net:
+    driver: bridge

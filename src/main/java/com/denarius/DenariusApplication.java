@@ -8,6 +8,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class DenariusApplication implements WebMvcConfigurer {
 
 	public static void main(String[] args) {
+		System.setProperty("server.servlet.context-path", "/denarius");
 		SpringApplication.run(DenariusApplication.class, args);
 	}
 }

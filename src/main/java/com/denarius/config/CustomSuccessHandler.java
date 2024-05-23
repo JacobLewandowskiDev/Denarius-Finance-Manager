@@ -20,11 +20,11 @@ public class CustomSuccessHandler extends SavedRequestAwareAuthenticationSuccess
         String redirectURL = request.getContextPath();
 
         if (userDetails.hasRole("ADMIN")) {
-            redirectURL = "/admininterface.html";
+            redirectURL = "admininterface.html";
         } else if (userDetails.hasRole("USER")) {
-            redirectURL = "/userinterface.html";
+            redirectURL = "userinterface.html";
         } else {
-            redirectURL = "/index.html";
+            redirectURL = "index.html";
         }
 
         response.sendRedirect(redirectURL);
